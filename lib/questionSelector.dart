@@ -15,138 +15,138 @@ void findrow() {
   int i, j, c;
   // '~/' used instead of count()/2.toInt. Random dart sh!t
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].hostel == ptr[i].hostel) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].hostel == dataList[i].hostel) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "hostel" &&
-        lastvalue == ptr[i].hostel &&
+        lastvalue == dataList[i].hostel &&
         nhostel != 0) {
       max = (half - c).abs();
       row = "hostel";
-      value = ptr[i].hostel;
+      value = dataList[i].hostel;
     }
   }
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].house == ptr[i].house) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].house == dataList[i].house) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "house" &&
-        lastvalue == ptr[i].house &&
+        lastvalue == dataList[i].house &&
         nhouse != 0) {
       max = (half - c).abs();
       row = "house";
-      value = ptr[i].house;
+      value = dataList[i].house;
     }
   }
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].clas == ptr[i].clas) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].clas == dataList[i].clas) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "clas" &&
-        lastvalue == ptr[i].clas &&
+        lastvalue == dataList[i].clas &&
         nclas != 0) {
       max = (half - c).abs();
       row = "clas";
-      value = ptr[i].clas;
+      value = dataList[i].clas;
     }
   }
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].gen == ptr[i].gen) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].gen == dataList[i].gen) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "gen" &&
-        lastvalue == ptr[i].gen &&
+        lastvalue == dataList[i].gen &&
         ngen != 0) {
       max = (half - c).abs();
       row = "gen";
-      value = ptr[i].gen;
+      value = dataList[i].gen;
     }
   }  
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].region == ptr[i].region) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].region == dataList[i].region) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "region" &&
-        lastvalue == ptr[i].region &&
+        lastvalue == dataList[i].region &&
         nclas != 0) {
       max = (half - c).abs();
       row = "region";
-      value = ptr[i].region;
+      value = dataList[i].region;
     }
   }
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].ds == ptr[i].ds) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].ds == dataList[i].ds) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "ds" &&
-        lastvalue == ptr[i].ds &&
+        lastvalue == dataList[i].ds &&
         nclas != 0) {
       max = (half - c).abs();
       row = "ds";
-      value = ptr[i].ds;
+      value = dataList[i].ds;
     }
   }
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].rel == ptr[i].rel) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].rel == dataList[i].rel) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "rel" &&
-        lastvalue == ptr[i].rel &&
+        lastvalue == dataList[i].rel &&
         nclas != 0) {
       max = (half - c).abs();
       row = "rel";
-      value = ptr[i].rel;
+      value = dataList[i].rel;
     }
   }
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].rep == ptr[i].rep) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].rep == dataList[i].rep) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "rep" &&
-        lastvalue == ptr[i].rep &&
+        lastvalue == dataList[i].rep &&
         nclas != 0) {
       max = (half - c).abs();
       row = "rep";
-      value = ptr[i].rep;
+      value = dataList[i].rep;
     }
   }
 
-  for (i = 0; i < ptr.length; i++) {
+  for (i = 0; i < dataList.length; i++) {
     c = 0;
-    for (j = 0; j < pp.length; j++) {
-      if (pp[j].place == ptr[i].place) c++;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].place == dataList[i].place) c++;
     }
     if (((half - c).abs() <= max) &&
         lastrow == "place" &&
-        lastvalue == ptr[i].place &&
+        lastvalue == dataList[i].place &&
         nclas != 0) {
       max = (half - c).abs();
       row = "place";
-      value = ptr[i].place;
+      value = dataList[i].place;
     }
   }
 
@@ -157,6 +157,18 @@ void findrow() {
 
   lastrow = row;
   lastvalue = value;
+}
+
+initialiser(){
+  nrep=1;
+  nhostel=1;
+  nds=1;
+  nplace=1;
+  nregion=1;
+  nhouse=1;
+  nclas=0;
+  ngen=1;
+  nrel=1;
 }
 
 String firstQuestion(){

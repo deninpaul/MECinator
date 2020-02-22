@@ -67,8 +67,6 @@ Future<Null> getDataFromOnline() async {
 
   //Importing data from localDB to dataList, ptr, pp
   dataListImporter();
-  ptr = dataList;
-  pp = dataList;
 }
 
 dataListImporter(){
