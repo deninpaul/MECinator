@@ -60,8 +60,8 @@ Future<Null> getDataFromOnline() async {
           Person per = new Person();
           per.name = dataList[i]['name'];
           per.hostel = dataList[i]['hostel'];
-          per.clas = dataList[i]['clas'];
           per.gen = dataList[i]['gen'];
+          per.clas = dataList[i]['clas'];          
           per.place = dataList[i]['place'];
           per.rep = dataList[i]['rep'];
           per.house = dataList[i]['house'];

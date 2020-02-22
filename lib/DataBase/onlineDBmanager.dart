@@ -129,7 +129,7 @@ void addDb() async{
   addRow("Farhath Sulthana Jamal","NIL","F","CSB","Ernakulam","y","D","muslim","y");
 }
 
-void addRow(String name, String hostel, String clas, String gen, String place, String rep, String house, String ds, String rel){
+void addRow(String name, String hostel, String gen, String clas, String place, String rep, String house, String ds, String rel){
   var url = "https://projectinterference.000webhostapp.com/AddRow.php";
 
   http.post(url, body: {

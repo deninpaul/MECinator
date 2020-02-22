@@ -10,14 +10,14 @@ class Person {
   String ds;
   String rel;
 
-  Person({this.name, this.hostel, this.clas, this.gen, this.place, this.rep, this.house, this.ds, this.rel});
+  Person({this.name, this.hostel, this.gen, this.clas, this.place, this.rep, this.house, this.ds, this.rel});
 
   Map<String, dynamic> toMap() {
     return {
       "name": name,
       "hostel": hostel,
-      "clas": clas,
       "gen": gen,
+      "clas": clas,      
       "place": place,
       "rep": rep,
       "house": house,
@@ -29,8 +29,8 @@ class Person {
   Person.fromMapObject(Map<String, dynamic> map) {
     this.name = map['name'];
     this.hostel = map['hostel'];
-    this.clas = map['clas'];
     this.gen = map['gen'];
+    this.clas = map['clas'];    
     this.place = map['place'];
     this.rep = map['rep'];
     this.house = map['house'];

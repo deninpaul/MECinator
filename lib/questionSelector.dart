@@ -2,7 +2,7 @@ import 'package:interference/model.dart';
 import 'global.dart';
 import 'dart:math';
 
-void rmp(Person per) {
+rmp(Person per) {
   dataList.remove(per);
 }
 
@@ -184,20 +184,34 @@ String firstQuestion() {
 }
 
 firstQuestionEvaluator(String answer) {
-  if (firstQuestionCSA) {
-    for (int i = 0; i < dataList.length; i++) {
-      if (answer == "y") {
-        if (dataList[i].clas == "CSB") rmp(dataList[i]);
-      } else {
-        if (dataList[i].clas == "CSA") rmp(dataList[i]);
+  int i;
+  print("$firstQuestionCSA");
+  if (firstQuestionCSA == true) {
+    if (answer == "y") {
+      for (i = 0; i < dataList.length; i++) {
+        if (dataList[i].clas == "CSB") {
+          rmp(dataList[i]);
+        }
+      }
+    } else {
+      for (i = 0; i < dataList.length; i++) {
+        if (dataList[i].clas == "CSA") {
+          rmp(dataList[i]);
+        }
       }
     }
-  } else {
-    for (int i = 0; i < dataList.length; i++) {
-      if (answer == "y") {
-        if (dataList[i].clas == "CSA") rmp(dataList[i]);
-      } else {
-        if (dataList[i].clas == "CSB") rmp(dataList[i]);
+  } else if (firstQuestionCSA == false) {
+    if (answer == "y") {
+      for (i = 0; i < dataList.length; i++) {
+        if (dataList[i].clas == "CSA") {
+          rmp(dataList[i]);
+        }
+      }
+    } else {
+      for (i = 0; i < dataList.length; i++) {
+        if (dataList[i].clas == "CSB") {
+          rmp(dataList[i]);
+        }
       }
     }
   }
@@ -205,14 +219,9 @@ firstQuestionEvaluator(String answer) {
 
 String otherQuestion() {
   findrow();
-  //output shortlisted in console
-  for (int i = 0; i < dataList.length; i++) {
-    print("${dataList[i].name} \n");
-  }
+
   //question framing
-  if (row == "done")
-    return "break";
-  else if (row == "clas")
+  if (row == "clas")
     return "Does $da stay at $value ?";
   else if (row == "gen") {
     if (value == "M") {

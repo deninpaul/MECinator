@@ -28,6 +28,11 @@ class QuestionGenerator extends StatefulWidget {
 }
 
 class QuestionGeneratorState extends State<QuestionGenerator> {
+  void initState() {
+    super.initState();
+    isFirstQuestion = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,50 +44,108 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         Container(
           color: Colors.blue,
         ),
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Container(
-            margin: EdgeInsets.only(bottom: 150),
-            height: 150,
-            width: 50,
-            child: Center(
-              child: Text("No"),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: Container(
-            margin: EdgeInsets.only(bottom: 150),
-            height: 150,
-            width: 50,
-            child: Center(
-              child: Text("Yes"),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            height: 50,
-            width: 250,
-            child: Center(
-              child: Text("Don't Know"),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-          ),
-        ),
+        noDragTarget(),
+        yesDragTarget(),
+        dontKnowDragTarget(),
         QuestionCard()
       ]),
     );
+  }
+
+  Widget noDragTarget() {
+    return Align(
+        alignment: Alignment.bottomLeft,
+        child: DragTarget<String>(
+          builder:
+              (BuildContext context, List<String> incoming, List rejected) {
+            return Container(
+              margin: EdgeInsets.only(bottom: 150),
+              height: 150,
+              width: 100,
+              child: Center(
+                child: Text("No"),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+            );
+          },
+          onWillAccept: (data) {
+            return true;
+          },
+          onAccept: (data) {
+            setState(() {
+              if (isFirstQuestion == true) {
+                firstQuestionEvaluator("n");
+                isFirstQuestion = false;
+              } else {
+                otherQuestionEvaluation("n");
+              }
+
+              print("${dataList.length}");
+
+              if (dataList.length != 1) {
+                question = otherQuestion() == null ? "null" : otherQuestion();
+                print(question);
+              } else {
+                print("You guessed ${dataList[0].name}");
+              }
+            });
+          },
+        ));
+  }
+
+  Widget yesDragTarget() {
+    return Align(
+        alignment: Alignment.bottomRight,
+        child: DragTarget<String>(
+          builder:
+              (BuildContext context, List<String> incoming, List rejected) {
+            return Container(
+              margin: EdgeInsets.only(bottom: 150),
+              height: 150,
+              width: 100,
+              child: Center(
+                child: Text("Yes"),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+            );
+          },
+          onWillAccept: (data) {
+            return true;
+          },
+          onAccept: (data) {
+            print("Accepted in Yes");
+          },
+        ));
+  }
+
+  Widget dontKnowDragTarget() {
+    return Align(
+        alignment: Alignment.bottomCenter,
+        child: DragTarget<String>(
+          builder:
+              (BuildContext context, List<String> incoming, List rejected) {
+            return Container(
+              height: 100,
+              width: 250,
+              child: Center(
+                child: Text("Don't Know"),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+            );
+          },
+          onWillAccept: (data) {
+            return true;
+          },
+          onAccept: (data) {
+            print("Accepted in Don't Know");
+          },
+        ));
   }
 }
 
@@ -92,10 +155,13 @@ class QuestionCard extends StatefulWidget {
 }
 
 class QuestionCardState extends State<QuestionCard> {
+  bool isAccepted;
+
   @protected
   void initState() {
     super.initState();
     setState(() {
+      isAccepted = false;
       if (isFirstQuestion == true) {
         initialiser();
         question = firstQuestion();
@@ -106,18 +172,28 @@ class QuestionCardState extends State<QuestionCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.blue,
-      child: Align(
-        alignment: Alignment.center,
-        heightFactor: 2,
-        child: Draggable(
-          child: card(question),
-          feedback: card(question),
-          childWhenDragging: Container(width: 0, height: 0),
+    if (!isAccepted) {
+      return Material(
+        color: Colors.blue,
+        child: Align(
+          alignment: Alignment.center,
+          heightFactor: 2,
+          child: Draggable(
+            data: "Question",
+            onDragCompleted: () {
+              setState(() {
+                isAccepted = true;
+              });
+            },
+            child: card(question),
+            feedback: card(question),
+            childWhenDragging: Container(width: 0, height: 0),
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return QuestionCard();
+    }
   }
 
   Widget card(String question) {
@@ -134,5 +210,11 @@ class QuestionCardState extends State<QuestionCard> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    print("i died");
+    super.dispose();
   }
 }
