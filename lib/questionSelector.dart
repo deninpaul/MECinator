@@ -169,16 +169,17 @@ initialiser() {
   nclas = 0;
   ngen = 1;
   nrel = 1;
+  da = "the person you are thinking of";
 }
 
 String firstQuestion() {
   final _random = new Random();
   if (_random.nextInt(2) == 0) {
     firstQuestionCSA = true;
-    return "Does $da study in CSA";
+    return "Does $da study in CSA ?";
   } else {
     firstQuestionCSA = false;
-    return "Does $da study in CSB";
+    return "Does $da study in CSB ?";
   }
 }
 
@@ -204,22 +205,23 @@ firstQuestionEvaluator(String answer) {
 
 String otherQuestion() {
   findrow();
-
   //output shortlisted in console
   for (int i = 0; i < dataList.length; i++) {
     print("${dataList[i].name} \n");
   }
-
   //question framing
   if (row == "done")
     return "break";
   else if (row == "clas")
     return "Does $da stay at $value ?";
   else if (row == "gen") {
-    if (value == "M")
+    if (value == "M") {
       regg = "Male";
-    else
+      da = "he";
+    } else {
       regg = "Female";
+      da = "she";
+    }
     return "Is $da a $regg ?";
   } else if (row == "hostel") {
     if (value == "Some other PG") value = "any PG other than RR";
@@ -253,6 +255,123 @@ String otherQuestion() {
   else if (row == "ds") return "Is $da a Day Scholar ?";
 }
 
-otherQuestionEvaluation(){
-  
+otherQuestionEvaluation(String answer) {
+  if (row == "clas") {
+    if (answer == 'y') {
+      nclas = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].clas != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].clas == value) rmp(dataList[i]);
+      }
+    } else {
+      nclas = 0;
+    }
+  } else if (row == "gen") {
+    if (answer == 'y') {
+      ngen = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].gen != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].gen == value) rmp(dataList[i]);
+      }
+    } else {
+      ngen = 0;
+    }
+  } else if (row == "hostel") {
+    if (answer == 'y') {
+      nhostel = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].hostel != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].hostel == value) rmp(dataList[i]);
+      }
+    } else {
+      nhostel = 0;
+    }
+  } else if (row == "rel") {
+    if (answer == 'y') {
+      nrel = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].rel != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].rel == value) rmp(dataList[i]);
+      }
+    } else {
+      nrel = 0;
+    }
+  } else if (row == "place") {
+    if (answer == 'y') {
+      nplace = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].place != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].place == value) rmp(dataList[i]);
+      }
+    } else {
+      nplace = 0;
+    }
+  } else if (row == "region") {
+    if (answer == 'y') {
+      nregion = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].region != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].region == value) rmp(dataList[i]);
+      }
+    } else {
+      nregion = 0;
+    }
+  } else if (row == "house") {
+    if (answer == 'y') {
+      nhouse = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].house != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].house == value) rmp(dataList[i]);
+      }
+    } else {
+      nhouse = 0;
+    }
+  } else if (row == "rep") {
+    if (answer == 'y') {
+      nrep = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].rep != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].rep == value) rmp(dataList[i]);
+      }
+    } else {
+      nrep = 0;
+    }
+  } else if (row == "ds") {
+    if (answer == 'y') {
+      nds = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].ds != value) rmp(dataList[i]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].ds == value) rmp(dataList[i]);
+      }
+    } else {
+      nds = 0;
+    }
+  }
 }

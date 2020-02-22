@@ -7,6 +7,22 @@ import 'package:sqflite/sqflite.dart';
 import 'package:interference/model.dart';
 import 'package:interference/DataBase/database_helper.dart';
 
+Future<Null> dataListImporter() async{
+  DatabaseHelper helper = DatabaseHelper();
+  if (dataList == null) {
+    dataList = List<Person>();
+    final Future<Database> dbFuture = helper.initializeDatabase();
+    dbFuture.then((database) {
+      Future<List<Person>> dataListFuture = helper.getDataList();
+      dataListFuture.then((list) {
+        dataList = list;
+        print(dataList[0].name);
+      });
+    });
+  }
+}
+
+
 Future<Null> getDataFromOnline() async {
   int result;
   DatabaseHelper helper = DatabaseHelper();
@@ -52,8 +68,22 @@ Future<Null> getDataFromOnline() async {
           per.ds = dataList[i]['ds'];
           per.rel = dataList[i]['rel'];
 
+          if (per.place == "Kasargode" ||
+              per.place == "Kannur" ||
+              per.place == "Kozhikode" ||
+              per.place == "Wayanad" ||
+              per.place == "Malapuram" ||
+              per.place == "Palakad") per.region = "N";
+          if (per.place == "Thrissur" ||
+              per.place == "Ernakulam" ||
+              per.place == "Idukki" ||
+              per.place == "Kottayam" ||
+              per.place == "Alapuzha" ||
+              per.place == "Pathanamthitaa") per.region = "M";
+          if (per.place == "Kollam" || per.place == "Thiruvananthapuram")
+            per.region = "S";
+
           result = await helper.insertNote(per);
-          print(per.region);
         }
       }
 
@@ -66,11 +96,6 @@ Future<Null> getDataFromOnline() async {
   }
 
   //Importing data from localDB to dataList]
-  dataListImporter();
-}
-
-dataListImporter(){
-  DatabaseHelper helper;
   if (dataList == null) {
     dataList = List<Person>();
     final Future<Database> dbFuture = helper.initializeDatabase();
@@ -78,7 +103,9 @@ dataListImporter(){
       Future<List<Person>> dataListFuture = helper.getDataList();
       dataListFuture.then((list) {
         dataList = list;
+        print(dataList.length);
       });
     });
   }
 }
+

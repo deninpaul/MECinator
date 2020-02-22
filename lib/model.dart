@@ -10,14 +10,7 @@ class Person {
   String ds;
   String rel;
 
-  Person({this.name, this.hostel, this.clas, this.gen, this.place, this.rep, this.house, this.ds, this.rel}){
-    if(this.place=="Kasargode" || this.place=="Kannur" || this.place=="Kozhikode" || this.place == "Wayanad" || this.place == "Malapuram" || this.place =="Palakad")
-        region = "N";
-    if(place == "Thrissur"||place == "Ernakulam" || place == "Idukki" || place == "Kottayam" || place == "Alapuzha" || place == "Pathanamthitaa" )
-         region = "M";
-    if(place == "Kollam" || place == "Thiruvananthapuram" )
-         region="S";
-  }
+  Person({this.name, this.hostel, this.clas, this.gen, this.place, this.rep, this.house, this.ds, this.rel});
 
   Map<String, dynamic> toMap() {
     return {
