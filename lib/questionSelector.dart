@@ -73,7 +73,7 @@ void findrow() {
       row = "gen";
       value = dataList[i].gen;
     }
-  }  
+  }
 
   for (i = 0; i < dataList.length; i++) {
     c = 0;
@@ -150,7 +150,7 @@ void findrow() {
     }
   }
 
-  if(lastrow==row && lastvalue==value){
+  if (lastrow == row && lastvalue == value) {
     print("Insufficient Data \n");
     row = "done";
   }
@@ -159,18 +159,100 @@ void findrow() {
   lastvalue = value;
 }
 
-initialiser(){
-  nrep=1;
-  nhostel=1;
-  nds=1;
-  nplace=1;
-  nregion=1;
-  nhouse=1;
-  nclas=0;
-  ngen=1;
-  nrel=1;
+initialiser() {
+  nrep = 1;
+  nhostel = 1;
+  nds = 1;
+  nplace = 1;
+  nregion = 1;
+  nhouse = 1;
+  nclas = 0;
+  ngen = 1;
+  nrel = 1;
 }
 
-String firstQuestion(){
+String firstQuestion() {
+  final _random = new Random();
+  if (_random.nextInt(2) == 0) {
+    firstQuestionCSA = true;
+    return "Does $da study in CSA";
+  } else {
+    firstQuestionCSA = false;
+    return "Does $da study in CSB";
+  }
+}
 
+firstQuestionEvaluator(String answer) {
+  if (firstQuestionCSA) {
+    for (int i = 0; i < dataList.length; i++) {
+      if (answer == "y") {
+        if (dataList[i].clas == "CSB") rmp(dataList[i]);
+      } else {
+        if (dataList[i].clas == "CSA") rmp(dataList[i]);
+      }
+    }
+  } else {
+    for (int i = 0; i < dataList.length; i++) {
+      if (answer == "y") {
+        if (dataList[i].clas == "CSA") rmp(dataList[i]);
+      } else {
+        if (dataList[i].clas == "CSB") rmp(dataList[i]);
+      }
+    }
+  }
+}
+
+String otherQuestion() {
+  findrow();
+
+  //output shortlisted in console
+  for (int i = 0; i < dataList.length; i++) {
+    print("${dataList[i].name} \n");
+  }
+
+  //question framing
+  if (row == "done")
+    return "break";
+  else if (row == "clas")
+    return "Does $da stay at $value ?";
+  else if (row == "gen") {
+    if (value == "M")
+      regg = "Male";
+    else
+      regg = "Female";
+    return "Is $da a $regg ?";
+  } else if (row == "hostel") {
+    if (value == "Some other PG") value = "any PG other than RR";
+    return "Does $da stay at $value ?";
+  } else if (row == "rel")
+    return "Is $da a $value ?";
+  else if (row == "place")
+    return "Is $da from $value ?";
+  else if (row == "region") {
+    if (value == "M")
+      regg = "Middle";
+    else if (value == "N")
+      regg = "North";
+    else
+      regg = "South";
+    return "Is $da from $regg Kerala?";
+  } else if (row == "house") {
+    if (value == "T")
+      regg = "Thandava";
+    else if (value == "S")
+      regg = "Samhara";
+    else if (value == "R")
+      regg = "Rakshasa";
+    else if (value == "D")
+      regg = "Dhruva";
+    else
+      regg = "Aryans";
+    return "Is $da a member of $regg House ?";
+  } else if (row == "rep")
+    return "Is $da a Repeater ?";
+  else if (row == "ds") return "Is $da a Day Scholar ?";
+}
+
+otherQuestionEvaluation(){
+  
 }

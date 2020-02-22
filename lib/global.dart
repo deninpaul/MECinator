@@ -2,6 +2,7 @@ import 'package:interference/model.dart';
 
 bool connectedToNet = false;
 bool shouldConnectToNet = true;
+bool firstQuestionCSA;
 List<Person> dataList;
 
 int nrep, nhostel, nplace, nregion, nhouse, nrel, ngen, nclas, nds;
