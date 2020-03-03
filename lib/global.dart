@@ -4,6 +4,7 @@ bool connectedToNet = false;
 bool shouldConnectToNet = true;
 bool isFirstQuestion = true;
 bool firstQuestionCSA;
+bool finished = false;
 List<Person> dataList;
 
 int nrep, nhostel, nplace, nregion, nhouse, nrel, ngen, nclas, nds;

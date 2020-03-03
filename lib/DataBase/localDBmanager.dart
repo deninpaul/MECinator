@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:interference/model.dart';
 import 'package:interference/DataBase/database_helper.dart';
 
-Future<Null> dataListImporter() async{
+Future<Null> dataListImporter() async {
   DatabaseHelper helper = DatabaseHelper();
   if (dataList == null) {
     dataList = List<Person>();
@@ -21,7 +21,6 @@ Future<Null> dataListImporter() async{
     });
   }
 }
-
 
 Future<Null> getDataFromOnline() async {
   int result;
@@ -45,56 +44,64 @@ Future<Null> getDataFromOnline() async {
         "https://projectinterference.000webhostapp.com/SelectAllData.php";
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      {
-        final map = json.decode(response.body);
-        final dataList = map["result"];
-        int count = dataList.length;
+      try {
+        {
+          final map = json.decode(response.body);
+          final dataList = map["result"];
+          int count = dataList.length;
 
-        //deleting existing data and replacing with new
-        Database db = await helper.database;
-        var deleteresult = await db.delete('dataTable');
-        print('Delete Result: $deleteresult');
+          //deleting existing data and replacing with new
+          Database db = await helper.database;
+          var deleteresult = await db.delete('dataTable');
+          print('Delete Result: $deleteresult');
 
-        //entering
-        for (int i = 0; i < count; i++) {
-          Person per = new Person();
-          per.name = dataList[i]['name'];
-          per.hostel = dataList[i]['hostel'];
-          per.gen = dataList[i]['gen'];
-          per.clas = dataList[i]['clas'];          
-          per.place = dataList[i]['place'];
-          per.rep = dataList[i]['rep'];
-          per.house = dataList[i]['house'];
-          per.ds = dataList[i]['ds'];
-          per.rel = dataList[i]['rel'];
+          //entering
+          for (int i = 0; i < count; i++) {
+            Person per = new Person();
+            per.name = dataList[i]['name'];
+            per.hostel = dataList[i]['hostel'];
+            per.gen = dataList[i]['gen'];
+            per.clas = dataList[i]['clas'];
+            per.place = dataList[i]['place'];
+            per.rep = dataList[i]['rep'];
+            per.house = dataList[i]['house'];
+            per.ds = dataList[i]['ds'];
+            per.rel = dataList[i]['rel'];
+            per.school = dataList[i]['school'];
+            per.specs = dataList[i]['specs'];
+            per.singer = dataList[i]['singer'];
+            per.dancer = dataList[i]['dancer'];
+            per.programmer = dataList[i]['programmer'];
 
-          if (per.place == "Kasargode" ||
-              per.place == "Kannur" ||
-              per.place == "Kozhikode" ||
-              per.place == "Wayanad" ||
-              per.place == "Malapuram" ||
-              per.place == "Palakad") per.region = "N";
-          if (per.place == "Thrissur" ||
-              per.place == "Ernakulam" ||
-              per.place == "Idukki" ||
-              per.place == "Kottayam" ||
-              per.place == "Alapuzha" ||
-              per.place == "Pathanamthitaa") per.region = "M";
-          if (per.place == "Kollam" || per.place == "Thiruvananthapuram")
-            per.region = "S";
+            if (per.place == "Kasargode" ||
+                per.place == "Kannur" ||
+                per.place == "Kozhikode" ||
+                per.place == "Wayanad" ||
+                per.place == "Malapuram" ||
+                per.place == "Palakad") per.region = "N";
+            if (per.place == "Thrissur" ||
+                per.place == "Ernakulam" ||
+                per.place == "Idukki" ||
+                per.place == "Kottayam" ||
+                per.place == "Alapuzha" ||
+                per.place == "Pathanamthitaa") per.region = "M";
+            if (per.place == "Kollam" || per.place == "Thiruvananthapuram")
+              per.region = "S";
 
-          result = await helper.insertNote(per);
+            result = await helper.insertNote(per);
+          }
         }
-      }
 
-      if (result != 0) {
-        print("Successfully added to dataTable");
-      } else {
-        print("Add failed to dataTable");
+        if (result != 0) {
+          print("Successfully added to dataTable");
+        } else {
+          print("Add failed to dataTable");
+        }
+      } on Exception catch (e) {
+        print("Bad Internet Connection");
       }
     }
   }
-
   //Importing data from localDB to dataList]
   if (dataList == null) {
     dataList = List<Person>();
@@ -108,4 +115,3 @@ Future<Null> getDataFromOnline() async {
     });
   }
 }
-

@@ -3,6 +3,7 @@ import 'package:flutter/semantics.dart';
 import 'package:interference/global.dart';
 import 'DataBase/localDBmanager.dart';
 import 'questionSelector.dart';
+import 'dart:async';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,8 +75,10 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
             return true;
           },
           onAccept: (data) {
+            print("It falled in no");
             setState(() {
               if (isFirstQuestion == true) {
+                firstQuestionEvaluator("n");
                 firstQuestionEvaluator("n");
                 isFirstQuestion = false;
               } else {
@@ -88,6 +91,8 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                 question = otherQuestion() == null ? "null" : otherQuestion();
                 print(question);
               } else {
+                question = dataList[0].name;
+                finished = true;
                 print("You guessed ${dataList[0].name}");
               }
             });
@@ -117,35 +122,81 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
             return true;
           },
           onAccept: (data) {
-            print("Accepted in Yes");
+            print("It falled in yes");
+            setState(() {
+              if (isFirstQuestion == true) {
+                firstQuestionEvaluator("y");
+                firstQuestionEvaluator("y");
+                isFirstQuestion = false;
+              } else {
+                otherQuestionEvaluation("y");
+              }
+
+              print("${dataList.length}");
+
+              if (dataList.length != 1) {
+                question = otherQuestion() == null ? "null" : otherQuestion();
+                print(question);
+              } else {
+                question = dataList[0].name;
+                finished = true;
+                print("You guessed ${dataList[0].name}");
+              }
+            });
           },
         ));
   }
 
   Widget dontKnowDragTarget() {
-    return Align(
-        alignment: Alignment.bottomCenter,
-        child: DragTarget<String>(
-          builder:
-              (BuildContext context, List<String> incoming, List rejected) {
-            return Container(
-              height: 100,
-              width: 250,
-              child: Center(
-                child: Text("Don't Know"),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-            );
-          },
-          onWillAccept: (data) {
-            return true;
-          },
-          onAccept: (data) {
-            print("Accepted in Don't Know");
-          },
-        ));
+    if (isFirstQuestion == false) {
+      return Align(
+          alignment: Alignment.bottomCenter,
+          child: DragTarget<String>(
+            builder:
+                (BuildContext context, List<String> incoming, List rejected) {
+              return Container(
+                height: 100,
+                width: 250,
+                child: Center(
+                  child: Text("Don't Know"),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+              );
+            },
+            onWillAccept: (data) {
+              return true;
+            },
+            onAccept: (data) {
+              print("It falled in don't know");
+              setState(() {
+                if (isFirstQuestion == true) {
+                  firstQuestionEvaluator("d");
+                  firstQuestionEvaluator("d");
+                  //because it works...
+                  isFirstQuestion = false;
+                } else {
+                  otherQuestionEvaluation("d");
+                }
+
+                print("${dataList.length}");
+
+                if (dataList.length > 1) {
+                  question = otherQuestion();
+                  // question = question == null ? "Nope" : question;
+                  print(question);
+                } else {
+                  question = dataList[0].name;
+                  finished = true;
+                  print(question);
+                }
+              });
+            },
+          ));
+    } else {
+      return Container(height: 0, width: 0);
+    }
   }
 }
 
@@ -162,12 +213,13 @@ class QuestionCardState extends State<QuestionCard> {
     super.initState();
     setState(() {
       isAccepted = false;
+
       if (isFirstQuestion == true) {
         initialiser();
         question = firstQuestion();
+        print(question);
       }
     });
-    print(question);
   }
 
   @override
@@ -210,6 +262,10 @@ class QuestionCardState extends State<QuestionCard> {
         ),
       ),
     );
+  }
+
+  newCard() async {
+    await new Future.delayed(const Duration(seconds: 1));
   }
 
   @override

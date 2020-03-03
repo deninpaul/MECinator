@@ -2,7 +2,7 @@ import 'package:interference/model.dart';
 import 'global.dart';
 import 'dart:math';
 
-rmp(Person per) {
+void rmp(Person per) {
   dataList.remove(per);
 }
 
@@ -10,7 +10,7 @@ int count() {
   return dataList.length;
 }
 
-void findrow() {
+findrow() {
   int max = 10000, half = count() ~/ 2;
   int i, j, c;
   // '~/' used instead of count()/2.toInt. Random dart sh!t
@@ -21,9 +21,7 @@ void findrow() {
       if (dataList[j].hostel == dataList[i].hostel) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "hostel" &&
-        lastvalue == dataList[i].hostel &&
-        nhostel != 0) {
+        nhostel != 0 && dataList[i].hostel != "NIL") {
       max = (half - c).abs();
       row = "hostel";
       value = dataList[i].hostel;
@@ -36,8 +34,6 @@ void findrow() {
       if (dataList[j].house == dataList[i].house) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "house" &&
-        lastvalue == dataList[i].house &&
         nhouse != 0) {
       max = (half - c).abs();
       row = "house";
@@ -51,8 +47,6 @@ void findrow() {
       if (dataList[j].clas == dataList[i].clas) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "clas" &&
-        lastvalue == dataList[i].clas &&
         nclas != 0) {
       max = (half - c).abs();
       row = "clas";
@@ -66,8 +60,6 @@ void findrow() {
       if (dataList[j].gen == dataList[i].gen) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "gen" &&
-        lastvalue == dataList[i].gen &&
         ngen != 0) {
       max = (half - c).abs();
       row = "gen";
@@ -81,9 +73,7 @@ void findrow() {
       if (dataList[j].region == dataList[i].region) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "region" &&
-        lastvalue == dataList[i].region &&
-        nclas != 0) {
+        nregion != 0) {
       max = (half - c).abs();
       row = "region";
       value = dataList[i].region;
@@ -96,9 +86,7 @@ void findrow() {
       if (dataList[j].ds == dataList[i].ds) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "ds" &&
-        lastvalue == dataList[i].ds &&
-        nclas != 0) {
+        nds != 0) {
       max = (half - c).abs();
       row = "ds";
       value = dataList[i].ds;
@@ -111,9 +99,7 @@ void findrow() {
       if (dataList[j].rel == dataList[i].rel) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "rel" &&
-        lastvalue == dataList[i].rel &&
-        nclas != 0) {
+        nrel != 0) {
       max = (half - c).abs();
       row = "rel";
       value = dataList[i].rel;
@@ -126,9 +112,7 @@ void findrow() {
       if (dataList[j].rep == dataList[i].rep) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "rep" &&
-        lastvalue == dataList[i].rep &&
-        nclas != 0) {
+        nrep != 0) {
       max = (half - c).abs();
       row = "rep";
       value = dataList[i].rep;
@@ -141,22 +125,22 @@ void findrow() {
       if (dataList[j].place == dataList[i].place) c++;
     }
     if (((half - c).abs() <= max) &&
-        lastrow == "place" &&
-        lastvalue == dataList[i].place &&
-        nclas != 0) {
+        nplace != 0) {
       max = (half - c).abs();
       row = "place";
       value = dataList[i].place;
     }
   }
 
-  if (lastrow == row && lastvalue == value) {
-    print("Insufficient Data \n");
-    row = "done";
-  }
+  // if (lastrow == row && lastvalue == value) {
+  //   print("Insufficient Data \n");
+  //   row = "done";
+  // }
 
-  lastrow = row;
-  lastvalue = value;
+  // lastrow = row;
+  // lastvalue = value;
+  print(half);
+  print("Max: $max");
 }
 
 initialiser() {
@@ -164,11 +148,14 @@ initialiser() {
   nhostel = 1;
   nds = 1;
   nplace = 1;
-  nregion = 1;
   nhouse = 1;
-  nclas = 0;
+  nclas = 1;
   ngen = 1;
   nrel = 1;
+  row = "abc";
+  lastrow = "xyz";
+  lastvalue = "qwe";
+  value = "zxc";
   da = "the person you are thinking of";
 }
 
@@ -185,17 +172,19 @@ String firstQuestion() {
 
 firstQuestionEvaluator(String answer) {
   int i;
-  print("$firstQuestionCSA");
+  int flag=1;
   if (firstQuestionCSA == true) {
     if (answer == "y") {
       for (i = 0; i < dataList.length; i++) {
         if (dataList[i].clas == "CSB") {
+          print("${flag++}");
           rmp(dataList[i]);
         }
       }
     } else {
       for (i = 0; i < dataList.length; i++) {
         if (dataList[i].clas == "CSA") {
+          print("${flag++}");
           rmp(dataList[i]);
         }
       }
@@ -204,16 +193,21 @@ firstQuestionEvaluator(String answer) {
     if (answer == "y") {
       for (i = 0; i < dataList.length; i++) {
         if (dataList[i].clas == "CSA") {
+          print("${flag++}");
           rmp(dataList[i]);
         }
       }
     } else {
       for (i = 0; i < dataList.length; i++) {
         if (dataList[i].clas == "CSB") {
+          print("${flag++}");
           rmp(dataList[i]);
         }
       }
     }
+  }
+  for(i=0;i<dataList.length;i++){
+    print("${dataList[i].name} - ${dataList[i].clas} \n" );
   }
 }
 
@@ -223,6 +217,7 @@ String otherQuestion() {
   //question framing
   if (row == "clas")
     return "Does $da stay at $value ?";
+  
   else if (row == "gen") {
     if (value == "M") {
       regg = "Male";
@@ -232,13 +227,21 @@ String otherQuestion() {
       da = "she";
     }
     return "Is $da a $regg ?";
-  } else if (row == "hostel") {
+  } 
+  
+  else if (row == "hostel") {
     if (value == "Some other PG") value = "any PG other than RR";
     return "Does $da stay at $value ?";
-  } else if (row == "rel")
+  } 
+  
+  else if (row == "rel")
     return "Is $da a $value ?";
+  
+  
   else if (row == "place")
     return "Is $da from $value ?";
+  
+  
   else if (row == "region") {
     if (value == "M")
       regg = "Middle";
@@ -247,7 +250,9 @@ String otherQuestion() {
     else
       regg = "South";
     return "Is $da from $regg Kerala?";
-  } else if (row == "house") {
+  } 
+  
+  else if (row == "house") {
     if (value == "T")
       regg = "Thandava";
     else if (value == "S")
@@ -259,10 +264,15 @@ String otherQuestion() {
     else
       regg = "Aryans";
     return "Is $da a member of $regg House ?";
-  } else if (row == "rep")
+  } 
+  
+  else if (row == "rep")
     return "Is $da a Repeater ?";
+  
   else if (row == "ds") return "Is $da a Day Scholar ?";
 }
+
+
 
 otherQuestionEvaluation(String answer) {
   if (row == "clas") {
@@ -278,20 +288,26 @@ otherQuestionEvaluation(String answer) {
     } else {
       nclas = 0;
     }
-  } else if (row == "gen") {
+  } 
+  
+  else if (row == "gen") {
+    
     if (answer == 'y') {
       ngen = 0;
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].gen != value) rmp(dataList[i]);
       }
     } else if (answer == 'n') {
+      ngen = 0;
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].gen == value) rmp(dataList[i]);
       }
     } else {
       ngen = 0;
     }
-  } else if (row == "hostel") {
+  } 
+  
+  else if (row == "hostel") {
     if (answer == 'y') {
       nhostel = 0;
       for (int i = 0; i < dataList.length; i++) {
@@ -304,7 +320,9 @@ otherQuestionEvaluation(String answer) {
     } else {
       nhostel = 0;
     }
-  } else if (row == "rel") {
+  } 
+  
+  else if (row == "rel") {
     if (answer == 'y') {
       nrel = 0;
       for (int i = 0; i < dataList.length; i++) {
@@ -317,7 +335,9 @@ otherQuestionEvaluation(String answer) {
     } else {
       nrel = 0;
     }
-  } else if (row == "place") {
+  } 
+  
+  else if (row == "place") {
     if (answer == 'y') {
       nplace = 0;
       for (int i = 0; i < dataList.length; i++) {
@@ -330,7 +350,9 @@ otherQuestionEvaluation(String answer) {
     } else {
       nplace = 0;
     }
-  } else if (row == "region") {
+  } 
+  
+  else if (row == "region") {
     if (answer == 'y') {
       nregion = 0;
       for (int i = 0; i < dataList.length; i++) {
@@ -343,7 +365,9 @@ otherQuestionEvaluation(String answer) {
     } else {
       nregion = 0;
     }
-  } else if (row == "house") {
+  } 
+  
+  else if (row == "house") {
     if (answer == 'y') {
       nhouse = 0;
       for (int i = 0; i < dataList.length; i++) {
@@ -356,31 +380,42 @@ otherQuestionEvaluation(String answer) {
     } else {
       nhouse = 0;
     }
-  } else if (row == "rep") {
+  } 
+  
+  else if (row == "rep") {
     if (answer == 'y') {
       nrep = 0;
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].rep != value) rmp(dataList[i]);
       }
     } else if (answer == 'n') {
+      nrep = 0;
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].rep == value) rmp(dataList[i]);
       }
     } else {
       nrep = 0;
     }
-  } else if (row == "ds") {
+  } 
+  
+  else if (row == "ds") {
     if (answer == 'y') {
       nds = 0;
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].ds != value) rmp(dataList[i]);
       }
     } else if (answer == 'n') {
+      nds = 0;
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].ds == value) rmp(dataList[i]);
       }
     } else {
       nds = 0;
     }
+  }
+  
+  
+  for(int i=0;i<dataList.length;i++){
+    print("${dataList[i].name} - ${dataList[i].clas} \n" );
   }
 }

@@ -9,20 +9,30 @@ class Person {
   String region;
   String ds;
   String rel;
+  String school;
+  String specs;
+  String singer;
+  String dancer;
+  String programmer;
 
-  Person({this.name, this.hostel, this.gen, this.clas, this.place, this.rep, this.house, this.ds, this.rel});
+  Person({this.name, this.hostel, this.gen, this.clas, this.place, this.rep, this.house, this.rel, this.school, this.ds, this.specs, this.singer, this.dancer, this.programmer});
 
   Map<String, dynamic> toMap() {
     return {
-      "name": name,
-      "hostel": hostel,
-      "gen": gen,
-      "clas": clas,      
-      "place": place,
-      "rep": rep,
-      "house": house,
-      "ds": ds,
-      "rel": rel
+      "name" : name,
+      "hostel" : hostel,
+      "clas" : clas,
+      "gen" : gen,
+      "place" : place,
+      "rep" : rep,
+      "house" : house,
+      "rel" : rel,
+      "school": school,
+      "ds" : ds,
+      "specs": specs,
+      "singer": singer,
+      "dancer": dancer,
+      "programmer": programmer
     };
   }
 
@@ -36,5 +46,10 @@ class Person {
     this.house = map['house'];
     this.ds = map['ds'];
     this.rel = map['rel'];
+    this.school = map['school'];
+    this.specs = map['specs'];
+    this.singer = map['singer'];
+    this.dancer= map['dancer'];
+    this.programmer = map['programmer'];
   }
 }
