@@ -1,11 +1,101 @@
 import 'package:interference/model.dart';
+import 'package:flutter/material.dart';
 
 bool connectedToNet = false;
 bool shouldConnectToNet = true;
 bool isFirstQuestion = true;
 bool firstQuestionCSA;
 bool finished = false;
+bool isflipped = false;
+int battery = 3;
 List<Person> dataList;
+List<String> idk;
+String player = "Denin";
 
-int nrep, nhostel, nplace, nregion, nhouse, nrel, ngen, nclas, nds;
-String row, rowitem, value, lastrow, lastvalue, da, regg, question;
+int nrep,
+    nhostel,
+    nplace,
+    nregion,
+    nhouse,
+    nschool,
+    nrel,
+    ngen,
+    nclas,
+    nds,
+    nspecs,
+    nsinger,
+    ndancer,
+    nprogrammer,
+    fcount;
+String row, lastrow, lastvalue, value, da, regg, question;
+
+Color primaryColor = new Color(0xff380e7f);
+Color paccentColor = new Color(0xff6915cf);
+Color secondaryColor = new Color(0xffd62196);
+
+Widget loadingScreen() {
+  return Container(
+      color: primaryColor,
+      child: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+            Stack(children: <Widget>[
+              Container(
+                height: 200,
+                color: paccentColor,
+              ),
+              Container(
+                height: 200,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/loading.gif'),
+                        fit: BoxFit.fitHeight)),
+              )
+            ]),
+            Padding(padding: EdgeInsets.symmetric(vertical: 16)),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              Container(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Colors.pink[200]))),
+              Container(
+                child: Text("  Loading",
+                    style: TextStyle(
+                        color: Colors.pink[200],
+                        fontFamily: 'poppins',
+                        fontSize: 20)),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+              )
+            ])
+          ])));
+}
+
+class SlideLeftRoute extends PageRouteBuilder {
+  final Widget page;
+  SlideLeftRoute({this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        );
+}

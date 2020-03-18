@@ -19,20 +19,20 @@ class Person {
 
   Map<String, dynamic> toMap() {
     return {
-      "name" : name,
-      "hostel" : hostel,
-      "clas" : clas,
-      "gen" : gen,
-      "place" : place,
-      "rep" : rep,
-      "house" : house,
-      "rel" : rel,
-      "school": school,
-      "ds" : ds,
-      "specs": specs,
-      "singer": singer,
-      "dancer": dancer,
-      "programmer": programmer
+      'name' : name,
+      'hostel' : hostel,
+      'clas' : clas,
+      'gen' : gen,
+      'place' : place,
+      'rep' : rep,
+      'house' : house,
+      'rel' : rel,
+      'school': school,
+      'ds' : ds,
+      'specs': specs,
+      'singer': singer,
+      'dancer': dancer,
+      'programmer': programmer
     };
   }
 
@@ -52,4 +52,7 @@ class Person {
     this.dancer= map['dancer'];
     this.programmer = map['programmer'];
   }
+
+  
+
 }
