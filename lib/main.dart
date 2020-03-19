@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:interference/endScreen.dart';
+import 'package:interference/game.dart';
 import 'DataBase/localDBmanager.dart';
 import 'home.dart';
 import 'global.dart';

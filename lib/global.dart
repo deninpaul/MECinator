@@ -1,6 +1,8 @@
 import 'package:interference/model.dart';
 import 'package:flutter/material.dart';
 
+import 'home.dart';
+
 bool connectedToNet = false;
 bool shouldConnectToNet = true;
 bool isFirstQuestion = true;
@@ -98,4 +100,29 @@ class SlideLeftRoute extends PageRouteBuilder {
             child: child,
           ),
         );
+}
+
+
+class GoHome extends StatefulWidget {
+  @override
+  GoHomeState createState() => GoHomeState();
+}
+
+class GoHomeState extends State<GoHome> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 3)).then((_) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      appBar: PreferredSize(child: AppBar(), preferredSize: Size.fromHeight(0)),
+      body: Container(child: loadingScreen(), color: primaryColor,),
+    );
+  }
 }

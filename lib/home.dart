@@ -96,7 +96,7 @@ class HomeState extends State<Home> {
                         image: DecorationImage(
                             image: AssetImage('assets/title.png'),
                             fit: BoxFit.fitHeight))),
-              )
+              ),
             ]),
           ),
         ),
@@ -127,8 +127,7 @@ class HomeState extends State<Home> {
                                   fontFamily: 'poppins',
                                   fontWeight: FontWeight.w700)),
                           onPressed: () {
-                            Navigator.push(
-                                context,
+                            Navigator.push(context,
                                 SlideLeftRoute(page: QuestionGenerator()));
                           },
                         )),

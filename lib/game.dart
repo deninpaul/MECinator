@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:interference/DataBase/localDBmanager.dart';
+import 'package:interference/endScreen.dart';
 import 'package:interference/global.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'questionSelector.dart';
@@ -15,7 +17,7 @@ class QuestionGenerator extends StatefulWidget {
 }
 
 class QuestionGeneratorState extends State<QuestionGenerator> {
-  Widget pauseIcon, correctIcon, wrongIcon, dontknowIcon;
+  Widget correctIcon, wrongIcon, dontknowIcon;
   bool isLoaded;
   bool isLoaded2 = false;
   bool specialAnimation = false;
@@ -27,14 +29,10 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
     isFirstQuestion = true;
     isLoaded = false;
     loading();
-    setState(() {
-      pauseIcon = SvgPicture.asset('assets/pause.svg', fit: BoxFit.fitHeight);
-      correctIcon =
-          SvgPicture.asset('assets/correct.svg', fit: BoxFit.fitHeight);
-      wrongIcon = SvgPicture.asset('assets/wrong.svg', fit: BoxFit.fitHeight);
-      dontknowIcon =
-          SvgPicture.asset('assets/dontknow.svg', fit: BoxFit.fitWidth);
-    });
+    correctIcon = SvgPicture.asset('assets/correct.svg', fit: BoxFit.fitHeight);
+    wrongIcon = SvgPicture.asset('assets/wrong.svg', fit: BoxFit.fitHeight);
+    dontknowIcon =
+        SvgPicture.asset('assets/dontknow.svg', fit: BoxFit.fitWidth);
     initialListSize = dataList.length;
   }
 
@@ -69,12 +67,19 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 300),
                     child: QuestionCard()),
-                Container(
-                    height: 28,
-                    width: 28,
-                    margin: EdgeInsets.all(16),
-                    alignment: AlignmentDirectional.topStart,
-                    child: pauseIcon),
+                Card(
+                  margin: EdgeInsets.all(16),
+                  color: primaryColor,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  child: IconButton(
+                        onPressed: () {
+                          pauseDialog(context);
+                        },
+                        padding: EdgeInsets.fromLTRB(0, 0, 8, 8),
+                        icon: Icon(Icons.pause,
+                            size: 48, color: secondaryColor))),
+
+                // ),
                 linePercentageIndicator(),
                 charAnimation(),
               ])
@@ -116,11 +121,54 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
               margin: EdgeInsets.only(bottom: 220),
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: specialAnimation? AssetImage('assets/alerted.gif'): AssetImage('assets/idle.gif'),
+                      image: specialAnimation
+                          ? AssetImage('assets/alerted.gif')
+                          : AssetImage('assets/idle.gif'),
                       fit: BoxFit.fitWidth)),
             ))
       ],
     );
+  }
+
+  pauseDialog(BuildContext context) {
+    return showDialog(
+        context: this.context,
+        barrierDismissible: false,
+        child: Center(
+            child: Container(
+          height: 300,
+          width: 300,
+          decoration: BoxDecoration(
+              color: secondaryColor, borderRadius: BorderRadius.circular(32)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Card(
+                  color: secondaryColor,
+                  elevation: 0,
+                  child: IconButton(
+                      iconSize: 80,
+                      color: primaryColor,
+                      icon: Icon(Icons.play_circle_outline),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      })),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
+              Card(
+                  color: secondaryColor,
+                  elevation: 0,
+                  child: IconButton(
+                      iconSize: 80,
+                      color: primaryColor,
+                      icon: Icon(Icons.home),
+                      onPressed: () {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => GoHome()));
+                      })),
+            ],
+          ),
+        )));
   }
 
   Widget linePercentageIndicator() {
@@ -177,6 +225,8 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                   question = dataList[0].name;
                   finished = true;
                   print("You guessed ${dataList[0].name}");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => EndScreen()));
                 }
               });
               specialAnimationSetter();
@@ -221,6 +271,8 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                       question = dataList[0].name;
                       finished = true;
                       print("You guessed ${dataList[0].name}");
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => EndScreen()));
                     }
                   });
                   specialAnimationSetter();
@@ -266,7 +318,9 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                   } else {
                     question = dataList[0].name;
                     finished = true;
-                    print(question);
+                    print("You guessed ${dataList[0].name}");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => EndScreen()));
                   }
                 });
                 specialAnimationSetter();
@@ -318,22 +372,22 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
     );
   }
 
-  specialAnimationSetter() async{
+  specialAnimationSetter() async {
     var rng = Random();
-    if(rng.nextInt(1) == 0){
+    if (rng.nextInt(2) == 0) {
       setState(() {
         specialAnimation = true;
       });
-      Future.delayed(Duration(seconds: 3)).then((_){
+      Future.delayed(Duration(seconds: 3)).then((_) {
         setState(() {
-        specialAnimation = false;
+          specialAnimation = false;
+        });
       });
-      });
-      
     }
   }
 
   loading() async {
+    dataListImporter();
     Future.delayed(Duration(seconds: 4)).then((_) {
       setState(() {
         isLoaded = true;
