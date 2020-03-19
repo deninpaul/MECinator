@@ -7,7 +7,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:interference/model.dart';
 import 'package:interference/DataBase/database_helper.dart';
 
-Future<Null> dataListImporter() async {
+dataListImporter() async{
+  dataList = null;
   DatabaseHelper helper = DatabaseHelper();
   if (dataList == null) {
     dataList = List<Person>();
@@ -16,7 +17,7 @@ Future<Null> dataListImporter() async {
       Future<List<Person>> dataListFuture = helper.getDataList();
       dataListFuture.then((list) {
         dataList = list;
-        print(dataList.length);
+        print("Updated dataList variable from local databse. Length: ${dataList.length}");
       });
     });
   }

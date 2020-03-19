@@ -52,7 +52,7 @@ Widget loadingScreen() {
                 height: 200,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/loading.gif'),
+                        image: AssetImage('assets/running.gif'),
                         fit: BoxFit.fitHeight)),
               )
             ]),

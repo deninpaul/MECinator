@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Interference',
-      theme: ThemeData(primaryColor: primaryColor),
+      theme: ThemeData(primaryColor: primaryColor, scaffoldBackgroundColor: primaryColor),
       home: Home(),
 
       //Uncomment below for Updating Database

@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:interference/DataBase/localDBmanager.dart';
 import 'package:interference/home.dart';
 import 'package:scratcher/scratcher.dart';
 
@@ -63,7 +64,22 @@ class EndScreenState extends State<EndScreen>
           child: callActionButtons(),
           duration: Duration(milliseconds: 500),
           opacity: isScratchOver ? 1 : 0,
-        )
+        ),
+        Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              margin: EdgeInsets.only(top: 80),
+              height: 44,
+              width: 280,
+              color: paccentColor,
+              child: Text(isScratchOver? "Did You Guess?": "Scratch the Card",
+              textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.pink[200],
+                              fontSize: 28,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w700)),
+            ))
       ]),
     );
   }
@@ -216,4 +232,3 @@ class EndScreenState extends State<EndScreen>
         )));
   }
 }
-

@@ -17,7 +17,6 @@ class QuestionGenerator extends StatefulWidget {
 }
 
 class QuestionGeneratorState extends State<QuestionGenerator> {
-  Widget correctIcon, wrongIcon, dontknowIcon;
   bool isLoaded;
   bool isLoaded2 = false;
   bool specialAnimation = false;
@@ -26,14 +25,10 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
   @override
   void initState() {
     super.initState();
+    dataListImporter();
     isFirstQuestion = true;
     isLoaded = false;
     loading();
-    correctIcon = SvgPicture.asset('assets/correct.svg', fit: BoxFit.fitHeight);
-    wrongIcon = SvgPicture.asset('assets/wrong.svg', fit: BoxFit.fitHeight);
-    dontknowIcon =
-        SvgPicture.asset('assets/dontknow.svg', fit: BoxFit.fitWidth);
-    initialListSize = dataList.length;
   }
 
   @override
@@ -68,10 +63,11 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                     margin: EdgeInsets.only(top: 300),
                     child: QuestionCard()),
                 Card(
-                  margin: EdgeInsets.all(16),
-                  color: primaryColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  child: IconButton(
+                    margin: EdgeInsets.all(16),
+                    color: primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: IconButton(
                         onPressed: () {
                           pauseDialog(context);
                         },
@@ -117,14 +113,16 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
             alignment: Alignment.center,
             child: Container(
               height: 240,
-              width: 360,
-              margin: EdgeInsets.only(bottom: 220),
+              width: specialAnimation? 390: 360,
+              margin: EdgeInsets.fromLTRB(specialAnimation? 16:0,0,0,specialAnimation?210:220),
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: specialAnimation
-                          ? AssetImage('assets/alerted.gif')
-                          : AssetImage('assets/idle.gif'),
-                      fit: BoxFit.fitWidth)),
+                  image: specialAnimation
+                      ? DecorationImage(
+                          image: AssetImage('assets/alerted.gif'),
+                          fit: BoxFit.fitWidth)
+                      : DecorationImage(
+                          image: AssetImage('assets/idle.gif'),
+                          fit: BoxFit.fitWidth)),
             ))
       ],
     );
@@ -194,43 +192,50 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         duration: Duration(milliseconds: 700),
         child: Align(
           alignment: Alignment.bottomLeft,
-          child: DragTarget<String>(
-            builder:
-                (BuildContext context, List<String> incoming, List rejected) {
-              return Container(
-                height: 240,
-                child: wrongIcon,
-              );
-            },
-            onWillAccept: (data) {
-              return true;
-            },
-            onAccept: (data) {
-              print("It falled in no");
-              setState(() {
-                if (isFirstQuestion == true) {
-                  firstQuestionEvaluator("n");
-                  firstQuestionEvaluator("n");
-                  isFirstQuestion = false;
-                } else {
-                  otherQuestionEvaluator("n");
-                }
+          child: Container(
+            margin: EdgeInsets.only(right: 328.5),
+            child: DragTarget<String>(
+              builder:
+                  (BuildContext context, List<String> incoming, List rejected) {
+                return Container(
+                  height: 240,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/wrong.png'),
+                          fit: BoxFit.fitHeight)),
+                );
+              },
+              onWillAccept: (data) {
+                return true;
+              },
+              onAccept: (data) {
+                print("It falled in no");
+                setState(() {
+                  if (isFirstQuestion == true) {
+                    firstQuestionEvaluator("n");
+                    firstQuestionEvaluator("n");
+                    isFirstQuestion = false;
+                  } else {
+                    otherQuestionEvaluator("n");
+                  }
 
-                print("${dataList.length}");
+                  print("${dataList.length}");
 
-                if (dataList.length != 1) {
-                  question = otherQuestion() == null ? "null" : otherQuestion();
-                  print(question);
-                } else {
-                  question = dataList[0].name;
-                  finished = true;
-                  print("You guessed ${dataList[0].name}");
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EndScreen()));
-                }
-              });
-              specialAnimationSetter();
-            },
+                  if (dataList.length != 1) {
+                    question =
+                        otherQuestion() == null ? "null" : otherQuestion();
+                    print(question);
+                  } else {
+                    question = dataList[0].name;
+                    finished = true;
+                    print("You guessed ${dataList[0].name}");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => EndScreen()));
+                  }
+                });
+                specialAnimationSetter();
+              },
+            ),
           ),
         ));
   }
@@ -242,10 +247,17 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
             alignment: Alignment.bottomRight,
             child: Container(
+              margin: EdgeInsets.only(left: 328.5),
               child: DragTarget<String>(
                 builder: (BuildContext context, List<String> incoming,
                     List rejected) {
-                  return Container(height: 240, child: correctIcon);
+                  return Container(
+                      height: 240,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/correct.png'),
+                              fit: BoxFit.fitHeight)));
                 },
                 onWillAccept: (data) {
                   return true;
@@ -292,7 +304,13 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
             child: DragTarget<String>(
               builder:
                   (BuildContext context, List<String> incoming, List rejected) {
-                return Container(width: 280, height: 78, child: dontknowIcon);
+                return Container(
+                    width: 280,
+                    height: 77,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/dontknow.png'),
+                            fit: BoxFit.fitWidth)));
               },
               onWillAccept: (data) {
                 return true;
@@ -374,11 +392,11 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
 
   specialAnimationSetter() async {
     var rng = Random();
-    if (rng.nextInt(2) == 0) {
+    if (rng.nextInt(1) == 0) {
       setState(() {
         specialAnimation = true;
       });
-      Future.delayed(Duration(seconds: 3)).then((_) {
+      Future.delayed(Duration(seconds: 4)).then((_) {
         setState(() {
           specialAnimation = false;
         });
@@ -387,14 +405,14 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
   }
 
   loading() async {
-    dataListImporter();
     Future.delayed(Duration(seconds: 4)).then((_) {
       setState(() {
         isLoaded = true;
       });
     });
-    Future.delayed(Duration(seconds: 3, milliseconds: 700)).then((_) {
+    Future.delayed(Duration(seconds: 3)).then((_) {
       setState(() {
+        initialListSize = dataList.length;
         isLoaded2 = true;
       });
     });
