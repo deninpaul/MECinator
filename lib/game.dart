@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:interference/DataBase/localDBmanager.dart';
 import 'package:interference/endScreen.dart';
 import 'package:interference/global.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'questionSelector.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/animation.dart';
@@ -113,8 +112,8 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
             alignment: Alignment.center,
             child: Container(
               height: 240,
-              width: specialAnimation? 390: 360,
-              margin: EdgeInsets.fromLTRB(specialAnimation? 16:0,0,0,specialAnimation?210:220),
+              width: 360,
+              margin: EdgeInsets.only(bottom: 220),
               decoration: BoxDecoration(
                   image: specialAnimation
                       ? DecorationImage(
@@ -193,7 +192,7 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
           alignment: Alignment.bottomLeft,
           child: Container(
-            margin: EdgeInsets.only(right: 328.5),
+            margin: EdgeInsets.only(right: 332),
             child: DragTarget<String>(
               builder:
                   (BuildContext context, List<String> incoming, List rejected) {
@@ -202,7 +201,8 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/wrong.png'),
-                          fit: BoxFit.fitHeight)),
+                          fit: BoxFit.fitHeight,
+                          alignment: Alignment.centerRight)),
                 );
               },
               onWillAccept: (data) {
@@ -247,49 +247,50 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
             alignment: Alignment.bottomRight,
             child: Container(
-              margin: EdgeInsets.only(left: 328.5),
-              child: DragTarget<String>(
-                builder: (BuildContext context, List<String> incoming,
-                    List rejected) {
-                  return Container(
-                      height: 240,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/correct.png'),
-                              fit: BoxFit.fitHeight)));
-                },
-                onWillAccept: (data) {
-                  return true;
-                },
-                onAccept: (data) {
-                  print("It falled in yes");
-                  setState(() {
-                    if (isFirstQuestion == true) {
-                      firstQuestionEvaluator("y");
-                      firstQuestionEvaluator("y");
-                      isFirstQuestion = false;
-                    } else {
-                      otherQuestionEvaluator("y");
-                    }
+                margin: EdgeInsets.only(left: 332),
+                child: DragTarget<String>(
+                  builder: (BuildContext context, List<String> incoming,
+                      List rejected) {
+                    return Container(
+                        height: 240,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/correct.png'),
+                                fit: BoxFit.fitHeight,
+                                alignment: Alignment.centerLeft)));
+                  },
+                  onWillAccept: (data) {
+                    return true;
+                  },
+                  onAccept: (data) {
+                    print("It falled in yes");
+                    setState(() {
+                      if (isFirstQuestion == true) {
+                        firstQuestionEvaluator("y");
+                        firstQuestionEvaluator("y");
+                        isFirstQuestion = false;
+                      } else {
+                        otherQuestionEvaluator("y");
+                      }
 
-                    print("${dataList.length}");
+                      print("${dataList.length}");
 
-                    if (dataList.length != 1) {
-                      question =
-                          otherQuestion() == null ? "null" : otherQuestion();
-                      print(question);
-                    } else {
-                      question = dataList[0].name;
-                      finished = true;
-                      print("You guessed ${dataList[0].name}");
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => EndScreen()));
-                    }
-                  });
-                  specialAnimationSetter();
-                },
-              ),
+                      if (dataList.length != 1) {
+                        question =
+                            otherQuestion() == null ? "null" : otherQuestion();
+                        print(question);
+                      } else {
+                        question = dataList[0].name;
+                        finished = true;
+                        print("You guessed ${dataList[0].name}");
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => EndScreen()));
+                      }
+                    });
+                    specialAnimationSetter();
+                  },
+                ),
             )));
   }
 
@@ -392,7 +393,8 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
 
   specialAnimationSetter() async {
     var rng = Random();
-    if (rng.nextInt(1) == 0) {
+    var random = rng.nextInt(3);
+    if ( random== 0 || random==1) {
       setState(() {
         specialAnimation = true;
       });

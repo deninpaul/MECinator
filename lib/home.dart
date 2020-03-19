@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'DataBase/localDBmanager.dart';
 import 'game.dart';
 import 'global.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,36 +32,11 @@ class HomeState extends State<Home> {
 
         //AppBar
         Container(
-          height: 136,
+          height: 88,
           padding: EdgeInsets.all(10),
           color: primaryColor,
           child: Stack(
             children: <Widget>[
-              Row(children: <Widget>[
-                Container(
-                    width: 160,
-                    height: 48,
-                    padding: EdgeInsets.only(top: 8),
-                    child: energyIndicator()),
-                Container(
-                    height: 24,
-                    margin: EdgeInsets.only(top: 10),
-                    width: 40,
-                    child: SvgPicture.asset('assets/energy.svg')),
-              ]),
-              Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    "Welcome Back $player",
-                    style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.pink[200],
-                        fontFamily: 'quicksand'),
-                  ),
-                ),
-              ),
               Align(
                 alignment: AlignmentDirectional.topEnd,
                 child: Container(
@@ -152,21 +126,5 @@ class HomeState extends State<Home> {
                 )))
       ]),
     );
-  }
-
-  Widget energyIndicator() {
-    return Container(
-        child: SvgPicture.asset(
-      battery == 3
-          ? 'assets/battery4.svg'
-          : battery == 2
-              ? 'assets/battery3.svg'
-              : battery == 1
-                  ? 'assets/battery2.svg'
-                  : battery == 0
-                      ? 'assets/battery1.svg'
-                      : 'assets/battery5.svg',
-      fit: BoxFit.fitWidth,
-    ));
   }
 }

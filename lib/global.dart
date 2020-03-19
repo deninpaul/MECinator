@@ -1,6 +1,5 @@
 import 'package:interference/model.dart';
 import 'package:flutter/material.dart';
-
 import 'home.dart';
 
 bool connectedToNet = false;

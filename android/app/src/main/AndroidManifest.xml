@@ -8,8 +8,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Project Interference"
-        android:icon="@mipmap/ic_launcher">
+        android:label="MECinator"
+        android:icon="@drawable/logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

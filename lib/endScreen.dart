@@ -1,10 +1,6 @@
-import 'dart:async';
 import 'dart:math';
-
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:interference/DataBase/localDBmanager.dart';
-import 'package:interference/home.dart';
 import 'package:scratcher/scratcher.dart';
 
 import 'game.dart';
@@ -169,7 +165,7 @@ class EndScreenState extends State<EndScreen>
                           child: Scratcher(
                             color: secondaryColor,
                             brushSize: 70,
-                            threshold: 60,
+                            threshold: 50,
                             child: resultCard(),
                             onThreshold: () {
                               setState(() {
