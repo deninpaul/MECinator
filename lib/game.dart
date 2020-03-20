@@ -179,7 +179,7 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         animateFromLastPercent: true,
         progressColor: secondaryColor,
         backgroundColor: Colors.pink[200],
-        percent: 1 - (dataList.length / initialListSize),
+        percent: (-log(dataList.length / initialListSize))/7,
         lineHeight: 20,
         linearStrokeCap: LinearStrokeCap.roundAll,
       ),
