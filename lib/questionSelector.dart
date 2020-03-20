@@ -2,10 +2,21 @@ import 'package:interference/model.dart';
 import 'global.dart';
 import 'dart:math';
 
+int fleg=0;
+
 void rmp(Person per) {
   dataList.remove(per);
 }
 
+int randomFlag(){
+  if(fleg==0)
+  {
+    fleg=1;
+    return 1;
+  }
+  final flag = new Random();
+  return flag.nextInt(2);
+}
 int count() {
   return dataList.length;
 }
@@ -43,6 +54,7 @@ initialiser() {
 }
 
 void findrow(){
+  fleg=0;
   int i,j,half=count() ~/ 2, max=1000,c,delta;
   //Hostel
   for(i=0;i<dataList.length;i++)
@@ -55,12 +67,14 @@ void findrow(){
           //print(dataList[i].hostel);
       }}
     delta=(half-c).abs();
-    if(delta<max&&(!present(dataList[i].hostel))&&dataList[i].hostel!="NIL")
+    if(delta<=max&&(!present(dataList[i].hostel))&&dataList[i].hostel!="NIL")
     {
-      max=delta;
-      row="hostel";
-      value=dataList[i].hostel;
-      print("half=$half delta=$delta row=$row value=$value");
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="hostel";
+        value=dataList[i].hostel;
+        print("half=$half delta=$delta row=$row value=$value");
+      }
     }
   }
 
@@ -74,11 +88,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&(!present(dataList[i].school))&&dataList[i].school!="NIL"&&nschool!=0)
+    if(delta<=max&&(!present(dataList[i].school))&&dataList[i].school!="NIL"&&nschool!=0)
     {
-      max=delta;
-      row="school";
-      value=dataList[i].school;
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="school";
+        value=dataList[i].school;
+      }
     }
   }
 
@@ -92,11 +108,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&ngen!=0)
+    if(delta<=max&&ngen!=0)
     {
-      max=delta;
-      row="gen";
-      value=dataList[i].gen;
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="gen";
+        value=dataList[i].gen;
+      }
     }
   }
 
@@ -110,12 +128,14 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nregion!=0)
+    if(delta<=max&&nregion!=0)
     {
-      max=delta;
-      row="region";
-      value=dataList[i].region;
-    }
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="region";
+        value=dataList[i].region;
+      }
+   }
   }
 
   //ds
@@ -128,11 +148,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nds!=0)
+    if(delta<=max&&nds!=0)
     {
-      max=delta;
-      row="ds";
-      value=dataList[i].ds;
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="ds";
+        value=dataList[i].ds;
+      }
     }
   }
 //religion
@@ -145,11 +167,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nhouse!=0)
+    if(delta<=max&&nhouse!=0)
     {
-      max=delta;
-      row="house";
-      value=dataList[i].house;
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="house";
+        value=dataList[i].house;
+      }
     }
   }
   //rel
@@ -162,11 +186,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nrel!=0)
+    if(delta<=max&&nrel!=0)
     {
-      max=delta;
-      row="rel";
-      value=dataList[i].rel;
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="rel";
+        value=dataList[i].rel;
+      }
     }
   }
 
@@ -179,11 +205,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nrep!=0)
+    if(delta<=max&&nrep!=0)
     {
-      max=delta;
-      row="rep";
-      value="y";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="rep";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -192,11 +220,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nrep!=0)
+    if(delta<=max&&nrep!=0)
     {
-      max=delta;
-      row="rep";
-      value="n";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="rep";
+        value="n";
+      }
     }
   }
 
@@ -210,11 +240,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nplace!=0)
+    if(delta<=max&&nplace!=0)
     {
-      max=delta;
-      row="place";
-      value=dataList[i].place;
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="place";
+        value=dataList[i].place;
+      }
     }
   }
 
@@ -227,11 +259,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nspecs!=0)
+    if(delta<=max&&nspecs!=0)
     {
-      max=delta;
-      row="specs";
-      value="y";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="specs";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -242,9 +276,11 @@ void findrow(){
     delta=(half-c).abs();
     if(delta<max&&nspecs!=0)
     {
-      max=delta;
-      row="specs";
-      value="n";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="specs";
+        value="n";
+      }
     }
   }
 
@@ -257,11 +293,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nsinger!=0)
+    if(delta<=max&&nsinger!=0)
     {
-      max=delta;
-      row="singer";
-      value="y";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="singer";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -270,11 +308,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nsinger!=0)
+    if(delta<=max&&nsinger!=0)
     {
-      max=delta;
-      row="singer";
-      value="n";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="singer";
+        value="n";
+      }
     }
   }
 
@@ -287,11 +327,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&ndancer!=0)
+    if(delta<=max&&ndancer!=0)
     {
-      max=delta;
-      row="dancer";
-      value="y";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="dancer";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -300,11 +342,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&ndancer!=0)
+    if(delta<=max&&ndancer!=0)
     {
-      max=delta;
-      row="dancer";
-      value="n";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="dancer";
+        value="n";
+      }
     }
   }
 
@@ -317,11 +361,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nprogrammer!=0)
+    if(delta<=max&&nprogrammer!=0)
     {
-      max=delta;
-      row="programmer";
-      value="y";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="programmer";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -330,11 +376,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nprogrammer!=0)
+    if(delta<=max&&nprogrammer!=0)
     {
-      max=delta;
-      row="programmer";
-      value="n";
+      if(delt<max || randomFlag()){
+        max=delta;
+        row="programmer";
+        value="n";
+      }
     }
   }
   if(max+half==count())
