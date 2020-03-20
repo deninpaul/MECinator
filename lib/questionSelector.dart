@@ -29,6 +29,11 @@ initialiser() {
   nclas = 1;
   ngen = 1;
   nrel = 1;
+  nspecs=1;
+  nsinger=1;
+  ndancer=1;
+  nprogrammer=1;
+  nschool=1;
   row = "abc";
   lastrow = "xyz";
   lastvalue = "qwe";
@@ -495,11 +500,19 @@ otherQuestionEvaluator(String answer){
     
     if (answer == 'y') {
       ngen = 0;
+      if(value=="M")
+        da="he";
+      else
+        da="she";
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].gen != value) rmp(dataList[i--]);
       }
     } else if (answer == 'n') {
       ngen = 0;
+      if(value=="M")
+        da="she";
+      else
+        da="he";
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].gen == value) rmp(dataList[i--]);
       }
