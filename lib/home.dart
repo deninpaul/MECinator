@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'game.dart';
 import 'global.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,6 +8,8 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+
+
   double screenwidth;
   @override
   Widget build(BuildContext context) {
@@ -30,24 +31,6 @@ class HomeState extends State<Home> {
                     image: AssetImage('assets/bgm1.png'),
                     fit: BoxFit.fitWidth))),
 
-        //AppBar
-        Container(
-          height: 88,
-          padding: EdgeInsets.all(10),
-          color: primaryColor,
-          child: Stack(
-            children: <Widget>[
-              Align(
-                alignment: AlignmentDirectional.topEnd,
-                child: Container(
-                    height: 36,
-                    margin: EdgeInsets.fromLTRB(0, 8, 8, 0),
-                    width: 36,
-                    child: SvgPicture.asset('assets/settings.svg')),
-              )
-            ],
-          ),
-        ),
 
         //Body
         Align(
@@ -55,15 +38,8 @@ class HomeState extends State<Home> {
           child: Container(
             height: 240,
             width: 320,
-            margin: EdgeInsets.only(bottom: 160),
-            child: Stack(children: <Widget>[
-              Align(
-                  alignment: AlignmentDirectional.bottomCenter,
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(0, 24, 0, 16),
-                  )),
-              // child: SvgPicture.asset('assets/title back.svg'))),
-              Align(
+            margin: EdgeInsets.only(bottom: 280),
+            child: Align(
                 alignment: AlignmentDirectional.bottomCenter,
                 child: Container(
                     height: 280,
@@ -72,7 +48,6 @@ class HomeState extends State<Home> {
                             image: AssetImage('assets/title.png'),
                             fit: BoxFit.fitHeight))),
               ),
-            ]),
           ),
         ),
 
@@ -80,7 +55,7 @@ class HomeState extends State<Home> {
         Align(
             alignment: AlignmentDirectional.bottomCenter,
             child: Container(
-                height: 288,
+                height: 360,
                 width: 280,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,

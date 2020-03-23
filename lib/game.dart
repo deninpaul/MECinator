@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:interference/DataBase/localDBmanager.dart';
 import 'package:interference/endScreen.dart';
@@ -178,7 +177,7 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         animateFromLastPercent: true,
         progressColor: secondaryColor,
         backgroundColor: Colors.pink[200],
-        percent: (-log(dataList.length / initialListSize))/7,
+        percent: (-log(dataList.length / initialListSize))/4.69,
         lineHeight: 20,
         linearStrokeCap: LinearStrokeCap.roundAll,
       ),

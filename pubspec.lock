@@ -22,6 +22,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
+  audioplayers:
+    dependency: transitive
+    description:
+      name: audioplayers
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.14.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -29,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  box2d_flame:
+    dependency: transitive
+    description:
+      name: box2d_flame
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.5"
   charcode:
     dependency: transitive
     description:
@@ -113,6 +127,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+2"
+  flame:
+    dependency: "direct main"
+    description:
+      name: flame
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.18.1"
+  flare_dart:
+    dependency: transitive
+    description:
+      name: flare_dart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.3"
+  flare_flutter:
+    dependency: transitive
+    description:
+      name: flare_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   flip_card:
     dependency: "direct main"
     description:
@@ -126,7 +161,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_svg:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_svg
       url: "https://pub.dartlang.org"
@@ -184,6 +219,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.8"
+  ordered_set:
+    dependency: transitive
+    description:
+      name: ordered_set
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.5"
   path:
     dependency: "direct main"
     description:
@@ -211,7 +253,21 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.4"
+    version: "1.6.5"
+  path_provider_macos:
+    dependency: transitive
+    description:
+      name: path_provider_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
+  path_provider_platform_interface:
+    dependency: transitive
+    description:
+      name: path_provider_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   pedantic:
     dependency: transitive
     description:
@@ -322,6 +378,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.11"
+  tiled:
+    dependency: transitive
+    description:
+      name: tiled
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
   typed_data:
     dependency: transitive
     description:
@@ -329,6 +392,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   vector_math:
     dependency: transitive
     description:

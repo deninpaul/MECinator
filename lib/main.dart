@@ -1,24 +1,42 @@
+import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'DataBase/localDBmanager.dart';
+import 'bgm.dart';
 import 'home.dart';
 import 'global.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  getDataFromOnline().then((_) {
+  getDataFromOnline().then((_) async{
+    BGM.attachWidgetBindingListener();
+    await BGM.add('bgm.mp3');
     runApp(MyApp());
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  MyAppState createState() => new MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  @override
+  void initState(){
+    super.initState();
+    BGM.play(0);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
+    
 
     return MaterialApp(
       title: 'Interference',
-      theme: ThemeData(primaryColor: primaryColor, scaffoldBackgroundColor: primaryColor),
+      theme: ThemeData(
+          primaryColor: primaryColor, scaffoldBackgroundColor: primaryColor),
       home: Home(),
 
       //Uncomment below for Updating Database
@@ -34,7 +52,12 @@ class MyApp extends StatelessWidget {
       //         ),
       //       )),
       // ),
-
     );
+  }
+
+  @override
+  void dispose() async{
+    await BGM.stop();
+    super.dispose();
   }
 }
