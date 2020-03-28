@@ -195,12 +195,12 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
           alignment: Alignment.bottomLeft,
           child: Container(
-            margin: EdgeInsets.only(right: 338*wm),
+            margin: EdgeInsets.only(right: 338*wm, bottom: 32),
             child: DragTarget<String>(
               builder:
                   (BuildContext context, List<String> incoming, List rejected) {
                 return Container(
-                  height: 240*hm,
+                  height: 280*hm,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/wrong.png'),
@@ -250,12 +250,12 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
             alignment: Alignment.bottomRight,
             child: Container(
-              margin: EdgeInsets.only(left: 338*wm),
+              margin: EdgeInsets.only(left: 338*wm, bottom: 32),
               child: DragTarget<String>(
                 builder: (BuildContext context, List<String> incoming,
                     List rejected) {
                   return Container(
-                      height: 240*hm,
+                      height: 280*hm,
                       width: 200*wm,
                       decoration: BoxDecoration(
                           image: DecorationImage(
@@ -309,8 +309,8 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
               builder:
                   (BuildContext context, List<String> incoming, List rejected) {
                 return Container(
-                    width: 280*wm,
-                    height: 77*hm,
+                    width: 300*wm,
+                    height: 78*hm,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage('assets/dontknow.png'),
