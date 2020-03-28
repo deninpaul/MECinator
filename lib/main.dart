@@ -31,7 +31,6 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
-    
 
     return MaterialApp(
       title: 'Interference',

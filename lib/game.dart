@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:interference/DataBase/localDBmanager.dart';
 import 'package:interference/endScreen.dart';
 import 'package:interference/global.dart';
+import 'global.dart';
+import 'global.dart';
+import 'global.dart';
+import 'global.dart';
 import 'questionSelector.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/animation.dart';
@@ -54,11 +58,11 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                 dontKnowDragTarget(),
                 Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 300),
+                    margin: EdgeInsets.only(top: 300*hm),
                     child: fakeStackCards()),
                 Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 300),
+                    margin: EdgeInsets.only(top: 300*hm),
                     child: QuestionCard()),
                 Card(
                     margin: EdgeInsets.all(16),
@@ -99,9 +103,9 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         Align(
             alignment: Alignment.center,
             child: Container(
-              height: 240,
-              width: 240,
-              margin: EdgeInsets.fromLTRB(12, 0, 0, 240),
+              height: 240*hm,
+              width: 240*wm,
+              margin: EdgeInsets.fromLTRB(12, 0, 0, 240*hm),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.pink[200],
@@ -110,9 +114,9 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         Align(
             alignment: Alignment.center,
             child: Container(
-              height: 240,
-              width: 360,
-              margin: EdgeInsets.only(bottom: 220),
+              height: 240*hm,
+              width: 360*wm,
+              margin: EdgeInsets.only(bottom: 220*hm),
               decoration: BoxDecoration(
                   image: specialAnimation
                       ? DecorationImage(
@@ -132,10 +136,10 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         barrierDismissible: false,
         child: Center(
             child: Container(
-          height: 300,
-          width: 300,
+          height: 300*hm,
+          width: 300*wm,
           decoration: BoxDecoration(
-              color: secondaryColor, borderRadius: BorderRadius.circular(32)),
+              color: secondaryColor, borderRadius: BorderRadius.circular(32*wm)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,16 +172,16 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
   }
 
   Widget linePercentageIndicator() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 100),
+    return Container(
+      padding: const EdgeInsets.only(top: 90*0.8),
       child: LinearPercentIndicator(
-        padding: EdgeInsets.symmetric(horizontal: 48),
+        padding: EdgeInsets.symmetric(horizontal: 48*wm),
         animation: true,
         animationDuration: 500,
         animateFromLastPercent: true,
         progressColor: secondaryColor,
         backgroundColor: Colors.pink[200],
-        percent: (-log(dataList.length / initialListSize))/4.69,
+        percent: (-log(dataList.length / initialListSize)) / 4.69,
         lineHeight: 20,
         linearStrokeCap: LinearStrokeCap.roundAll,
       ),
@@ -191,12 +195,12 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
           alignment: Alignment.bottomLeft,
           child: Container(
-            margin: EdgeInsets.only(right: 332),
+            margin: EdgeInsets.only(right: 338*wm),
             child: DragTarget<String>(
               builder:
                   (BuildContext context, List<String> incoming, List rejected) {
                 return Container(
-                  height: 240,
+                  height: 240*hm,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/wrong.png'),
@@ -246,50 +250,50 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
             alignment: Alignment.bottomRight,
             child: Container(
-                margin: EdgeInsets.only(left: 332),
-                child: DragTarget<String>(
-                  builder: (BuildContext context, List<String> incoming,
-                      List rejected) {
-                    return Container(
-                        height: 240,
-                        width: 200,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/correct.png'),
-                                fit: BoxFit.fitHeight,
-                                alignment: Alignment.centerLeft)));
-                  },
-                  onWillAccept: (data) {
-                    return true;
-                  },
-                  onAccept: (data) {
-                    print("It falled in yes");
-                    setState(() {
-                      if (isFirstQuestion == true) {
-                        firstQuestionEvaluator("y");
-                        firstQuestionEvaluator("y");
-                        isFirstQuestion = false;
-                      } else {
-                        otherQuestionEvaluator("y");
-                      }
+              margin: EdgeInsets.only(left: 338*wm),
+              child: DragTarget<String>(
+                builder: (BuildContext context, List<String> incoming,
+                    List rejected) {
+                  return Container(
+                      height: 240*hm,
+                      width: 200*wm,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/correct.png'),
+                              fit: BoxFit.fitHeight,
+                              alignment: Alignment.centerLeft)));
+                },
+                onWillAccept: (data) {
+                  return true;
+                },
+                onAccept: (data) {
+                  print("It falled in yes");
+                  setState(() {
+                    if (isFirstQuestion == true) {
+                      firstQuestionEvaluator("y");
+                      firstQuestionEvaluator("y");
+                      isFirstQuestion = false;
+                    } else {
+                      otherQuestionEvaluator("y");
+                    }
 
-                      print("${dataList.length}");
+                    print("${dataList.length}");
 
-                      if (dataList.length != 1) {
-                        question =
-                            otherQuestion() == null ? "null" : otherQuestion();
-                        print(question);
-                      } else {
-                        question = dataList[0].name;
-                        finished = true;
-                        print("You guessed ${dataList[0].name}");
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => EndScreen()));
-                      }
-                    });
-                    specialAnimationSetter();
-                  },
-                ),
+                    if (dataList.length != 1) {
+                      question =
+                          otherQuestion() == null ? "null" : otherQuestion();
+                      print(question);
+                    } else {
+                      question = dataList[0].name;
+                      finished = true;
+                      print("You guessed ${dataList[0].name}");
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => EndScreen()));
+                    }
+                  });
+                  specialAnimationSetter();
+                },
+              ),
             )));
   }
 
@@ -300,13 +304,13 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
       child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin: EdgeInsets.only(top: 140),
+            margin: EdgeInsets.only(top: 140*hm),
             child: DragTarget<String>(
               builder:
                   (BuildContext context, List<String> incoming, List rejected) {
                 return Container(
-                    width: 280,
-                    height: 77,
+                    width: 280*wm,
+                    height: 77*hm,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage('assets/dontknow.png'),
@@ -356,33 +360,33 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
           Card(
             elevation: 20,
             color: secondaryColor,
-            margin: EdgeInsets.only(top: 64),
+            margin: EdgeInsets.only(top: 64*hm),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20*wm)),
             child: Container(
-              width: 190,
-              height: 180,
+              width: 190*wm,
+              height: 180*hm,
             ),
           ),
           Card(
             elevation: 20,
             color: secondaryColor,
-            margin: EdgeInsets.only(top: 32),
+            margin: EdgeInsets.only(top: 32*hm),
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20*wm)),
             child: Container(
-              width: 200,
-              height: 190,
+              width: 200*wm,
+              height: 190*hm,
             ),
           ),
           Card(
             elevation: 20,
             color: secondaryColor,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20*wm)),
             child: Container(
-              width: 210,
-              height: 200,
+              width: 210*wm,
+              height: 200*hm,
             ),
           ),
         ],
@@ -393,7 +397,7 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
   specialAnimationSetter() async {
     var rng = Random();
     var random = rng.nextInt(3);
-    if ( random== 0 || random==1) {
+    if (random == 0 || random == 1) {
       setState(() {
         specialAnimation = true;
       });
@@ -486,35 +490,36 @@ class QuestionCardState extends State<QuestionCard>
           ..rotateX(pi * _animation.value),
         child: _animation.value >= 0.3
             ? Container(
-                width: 220,
-                height: 210,
-                margin: EdgeInsets.only(bottom: 36),
+                width: 220*wm,
+                height: 210*hm,
+                margin: EdgeInsets.only(bottom: 36*hm),
                 child: Card(
                   elevation: 20,
                   color: secondaryColor,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
+                      borderRadius: BorderRadius.circular(20*wm)),
                 ))
             : Container(
-                width: 220,
-                height: 210,
-                margin: EdgeInsets.only(bottom: 36),
+                width: 220*wm,
+                height: 210*hm,
+                margin: EdgeInsets.only(bottom: 36*hm),
                 child: Card(
                     elevation: 20,
                     color: secondaryColor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                        borderRadius: BorderRadius.circular(20*wm)),
                     child: Container(
                       padding: EdgeInsets.all(4),
                       child: Card(
                         color: Colors.pink[200],
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(20*wm)),
                         child: Center(
                           child: Container(
                               padding: EdgeInsets.all(20),
                               child: Text(
                                 question,
+                                textScaleFactor: wm,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 18,

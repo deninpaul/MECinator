@@ -8,11 +8,10 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-
-
-  double screenwidth;
   @override
   Widget build(BuildContext context) {
+    wm = MediaQuery.of(context).size.width / 411;
+    hm = MediaQuery.of(context).size.height / 822;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: PreferredSize(
@@ -31,23 +30,22 @@ class HomeState extends State<Home> {
                     image: AssetImage('assets/bgm1.png'),
                     fit: BoxFit.fitWidth))),
 
-
         //Body
         Align(
           alignment: AlignmentDirectional.center,
           child: Container(
-            height: 240,
-            width: 320,
-            margin: EdgeInsets.only(bottom: 280),
+            height: 240*hm,
+            width: 320*wm,
+            margin: EdgeInsets.only(bottom: 280*hm),
             child: Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: Container(
-                    height: 280,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/title.png'),
-                            fit: BoxFit.fitHeight))),
-              ),
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Container(
+                  height: 280*hm,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/title.png'),
+                          fit: BoxFit.fitHeight))),
+            ),
           ),
         ),
 
@@ -55,22 +53,23 @@ class HomeState extends State<Home> {
         Align(
             alignment: AlignmentDirectional.bottomCenter,
             child: Container(
-                height: 360,
-                width: 280,
+                height: 360*hm,
+                width: 280*wm,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Container(
-                        height: 80,
-                        width: 260,
+                        height: 80*hm,
+                        width: 260*wm,
                         child: RaisedButton(
                           color: secondaryColor,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
+                            borderRadius: BorderRadius.circular(24*wm),
                           ),
                           child: Text("Play Now",
+                          textScaleFactor: wm,
                               style: TextStyle(
                                   color: primaryColor,
                                   fontSize: 28,
@@ -81,16 +80,17 @@ class HomeState extends State<Home> {
                                 SlideLeftRoute(page: QuestionGenerator()));
                           },
                         )),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 8*hm)),
                     Container(
-                        height: 80,
-                        width: 260,
+                        height: 80*hm,
+                        width: 260*wm,
                         child: RaisedButton(
                           color: paccentColor,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
+                            borderRadius: BorderRadius.circular(24*wm),
                           ),
                           child: Text("LeaderBoards",
+                              textScaleFactor: wm,
                               style: TextStyle(
                                   color: Colors.pink[200],
                                   fontSize: 26,

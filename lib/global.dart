@@ -8,7 +8,12 @@ bool isFirstQuestion = true;
 bool firstQuestionCSA;
 bool finished = false;
 bool isflipped = false;
+
+double wm;
+double hm;
 int battery = 3;
+
+
 List<Person> dataList;
 List<String> idk;
 String player = "Denin";
@@ -101,7 +106,6 @@ class SlideLeftRoute extends PageRouteBuilder {
         );
 }
 
-
 class GoHome extends StatefulWidget {
   @override
   GoHomeState createState() => GoHomeState();
@@ -121,7 +125,10 @@ class GoHomeState extends State<GoHome> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: PreferredSize(child: AppBar(), preferredSize: Size.fromHeight(0)),
-      body: Container(child: loadingScreen(), color: primaryColor,),
+      body: Container(
+        child: loadingScreen(),
+        color: primaryColor,
+      ),
     );
   }
 }

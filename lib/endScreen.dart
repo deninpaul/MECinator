@@ -38,45 +38,52 @@ class EndScreenState extends State<EndScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(0),
-        child: AppBar(),
+    return WillPopScope(
+      child: Scaffold(
+        resizeToAvoidBottomPadding: false,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: AppBar(),
+        ),
+        body: Stack(children: <Widget>[
+          Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/bgm2.png'),
+                      fit: BoxFit.fitWidth))),
+          Align(
+            child: scratchCard(),
+            alignment: Alignment.center,
+          ),
+          AnimatedOpacity(
+            child: callActionButtons(),
+            duration: Duration(milliseconds: 500),
+            opacity: isScratchOver ? 1 : 0,
+          ),
+          Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                margin: EdgeInsets.only(top: 80 * hm),
+                height: 44 * hm,
+                width: 280 * wm,
+                color: paccentColor,
+                child: Text(
+                    isScratchOver ? "Did You Guess?" : "Scratch the Card",
+                    textAlign: TextAlign.center,
+                    textScaleFactor: wm,
+                    style: TextStyle(
+                        color: Colors.pink[200],
+                        fontSize: 28,
+                        fontFamily: 'poppins',
+                        fontWeight: FontWeight.w700)),
+              ))
+        ]),
       ),
-      body: Stack(children: <Widget>[
-        Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/bgm2.png'),
-                    fit: BoxFit.fitWidth))),
-        Align(
-          child: scratchCard(),
-          alignment: Alignment.center,
-        ),
-        AnimatedOpacity(
-          child: callActionButtons(),
-          duration: Duration(milliseconds: 500),
-          opacity: isScratchOver ? 1 : 0,
-        ),
-        Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              margin: EdgeInsets.only(top: 80),
-              height: 44,
-              width: 280,
-              color: paccentColor,
-              child: Text(isScratchOver? "Did You Guess?": "Scratch the Card",
-              textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.pink[200],
-                              fontSize: 28,
-                              fontFamily: 'poppins',
-                              fontWeight: FontWeight.w700)),
-            ))
-      ]),
+      onWillPop: () async {
+        return false;
+      },
     );
   }
 
@@ -84,22 +91,23 @@ class EndScreenState extends State<EndScreen>
     return Align(
         alignment: AlignmentDirectional.bottomCenter,
         child: Container(
-            height: 260,
-            width: 280,
+            height: 260 * hm,
+            width: 280 * wm,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Container(
-                    height: 72,
-                    width: 260,
+                    height: 72 * hm,
+                    width: 260 * wm,
                     child: RaisedButton(
                       color: secondaryColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24 * wm),
                       ),
                       child: Text("Play Again",
+                          textScaleFactor: wm,
                           style: TextStyle(
                               color: primaryColor,
                               fontSize: 28,
@@ -112,14 +120,15 @@ class EndScreenState extends State<EndScreen>
                     )),
                 Padding(padding: EdgeInsets.symmetric(vertical: 8)),
                 Container(
-                    height: 72,
-                    width: 260,
+                    height: 72 * hm,
+                    width: 260 * wm,
                     child: RaisedButton(
                       color: paccentColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24 * wm),
                       ),
                       child: Text("Return To Menu",
+                          textScaleFactor: wm,
                           style: TextStyle(
                               color: Colors.pink[200],
                               fontSize: 26,
@@ -140,17 +149,17 @@ class EndScreenState extends State<EndScreen>
           ..rotateX(pi * _animation.value),
         child: _animation.value >= 0.3
             ? Container(
-                width: 220,
-                height: 210,
-                margin: EdgeInsets.only(bottom: 140),
+                width: 220 * wm,
+                height: 210 * hm,
+                margin: EdgeInsets.only(bottom: 140 * hm),
                 child: Card(
                   elevation: 20,
                   color: secondaryColor,
                 ))
             : Container(
-                width: 280,
-                height: 360,
-                margin: EdgeInsets.only(bottom: 140),
+                width: 280 * wm,
+                height: 360 * hm,
+                margin: EdgeInsets.only(bottom: 140 * hm),
                 child: Card(
                     elevation: 20,
                     color: secondaryColor,
@@ -185,9 +194,10 @@ class EndScreenState extends State<EndScreen>
   Widget resultCard() {
     return Container(
       padding: EdgeInsets.all(4),
-      width: 300,
+      width: 300 * wm,
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20 * wm)),
         margin: EdgeInsets.all(10),
         color: Colors.pink[200],
         child: Column(
@@ -198,12 +208,13 @@ class EndScreenState extends State<EndScreen>
               backgroundColor: primaryColor,
               maxRadius: 88,
             ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            Padding(padding: EdgeInsets.symmetric(vertical: 10 * hm)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 32),
+              padding: EdgeInsets.symmetric(horizontal: 32*wm),
               child: Text(dataList[0].name,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 5,
+                  textScaleFactor: wm,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: primaryColor,
