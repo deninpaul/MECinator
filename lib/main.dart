@@ -42,17 +42,17 @@ class MyAppState extends State<MyApp> {
 
       //Uncomment below for Updating Database
 
-      //   home: Scaffold(
-      //     body: Container(
-      //         color: Colors.white,
-      //         child: Center(
-      //           child: RaisedButton(
-      //             onPressed: () => OnlineDataBaseHandler(),
-      //             color: Colors.blue,
-      //             child: Text("Update online database"),
-      //           ),
-      //         )),
-      //   ),
+        // home: Scaffold(
+        //   body: Container(
+        //       color: Colors.white,
+        //       child: Center(
+        //         child: RaisedButton(
+        //           onPressed: () => onlineDataBaseHandler(),
+        //           color: Colors.blue,
+        //           child: Text("Update online database"),
+        //         ),
+        //       )),
+        // ),
     );
   }
 
