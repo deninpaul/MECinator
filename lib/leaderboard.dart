@@ -24,7 +24,7 @@ class LeaderBoard extends StatelessWidget {
                       fit: BoxFit.fitWidth))),
           homeButton(context),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 32 * wm),
+            padding: EdgeInsets.symmetric(horizontal: 8 * wm),
             child: Column(
               children: <Widget>[
                 title(),
@@ -44,7 +44,7 @@ class LeaderBoard extends StatelessWidget {
           Navigator.pop(context);
         },
         padding: EdgeInsets.fromLTRB(16 * wm, 16 * hm, 8 * wm, 8 * hm),
-        icon: Icon(Icons.home, size: 42 * wm, color: secondaryColor));
+        icon: Icon(Icons.arrow_back_ios, size: 42 * wm, color: secondaryColor));
   }
 
   title() {
@@ -109,7 +109,7 @@ class LeaderBoardListState extends State<LeaderBoardList> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container(
-              height: 500 * hm,
+              height: (550) * hm,
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
                   overscroll.disallowGlow();
@@ -123,7 +123,7 @@ class LeaderBoardListState extends State<LeaderBoardList> {
                             borderRadius: BorderRadius.circular(16 * wm)),
                         color: Color(0xcc210c45),
                         margin:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         child: Container(
                           padding: EdgeInsets.fromLTRB(
                               24 * wm, 16 * hm, 28 * wm, 16 * hm),
@@ -132,9 +132,9 @@ class LeaderBoardListState extends State<LeaderBoardList> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Container(
-                                width: 200 * wm,
+                                width: 240 * wm,
                                 child: Text(
-                                  "${index + 1}. ${snapshot.data.documents[index].data['name']}",
+                                  " ${snapshot.data.documents[index].data['name']}",
                                   overflow: TextOverflow.ellipsis,
                                   textScaleFactor: wm,
                                   style: TextStyle(
