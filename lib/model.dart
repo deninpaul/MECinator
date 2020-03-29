@@ -14,8 +14,9 @@ class Person {
   String singer;
   String dancer;
   String programmer;
+  String sports;
 
-  Person({this.name, this.hostel, this.gen, this.clas, this.place, this.rep, this.house, this.rel, this.school, this.ds, this.specs, this.singer, this.dancer, this.programmer});
+  Person({this.name, this.hostel, this.gen, this.clas, this.place, this.rep, this.house, this.rel, this.school, this.ds, this.specs, this.singer, this.dancer, this.programmer, this.sports});
 
   Map<String, dynamic> toMap() {
     return {
@@ -32,7 +33,8 @@ class Person {
       'specs': specs,
       'singer': singer,
       'dancer': dancer,
-      'programmer': programmer
+      'programmer': programmer,
+      'sports' : sports
     };
   }
 
@@ -51,6 +53,7 @@ class Person {
     this.singer = map['singer'];
     this.dancer= map['dancer'];
     this.programmer = map['programmer'];
+    this.sports= map['sports'];
   }
 
   
