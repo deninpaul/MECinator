@@ -4,9 +4,6 @@ import 'package:interference/DataBase/localDBmanager.dart';
 import 'package:interference/endScreen.dart';
 import 'package:interference/global.dart';
 import 'global.dart';
-import 'global.dart';
-import 'global.dart';
-import 'global.dart';
 import 'questionSelector.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/animation.dart';
@@ -35,66 +32,71 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomPadding: false,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: AppBar(
-            backgroundColor: primaryColor,
-            elevation: 0,
+    return WillPopScope(
+      child: Scaffold(
+          resizeToAvoidBottomPadding: false,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar(
+              backgroundColor: primaryColor,
+              elevation: 0,
+            ),
           ),
-        ),
-        body: isLoaded
-            ? Stack(children: <Widget>[
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/bgm2.png'),
-                            fit: BoxFit.fitWidth))),
-                noDragTarget(),
-                yesDragTarget(),
-                dontKnowDragTarget(),
-                Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 300*hm),
-                    child: fakeStackCards()),
-                Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 300*hm),
-                    child: QuestionCard()),
-                Card(
-                    margin: EdgeInsets.all(16),
-                    color: primaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: IconButton(
-                        onPressed: () {
-                          pauseDialog(context);
-                        },
-                        padding: EdgeInsets.fromLTRB(0, 0, 8, 8),
-                        icon: Icon(Icons.pause,
-                            size: 48, color: secondaryColor))),
+          body: isLoaded
+              ? Stack(children: <Widget>[
+                  Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/bgm2.png'),
+                              fit: BoxFit.fitWidth))),
+                  noDragTarget(),
+                  yesDragTarget(),
+                  dontKnowDragTarget(),
+                  Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 300 * hm),
+                      child: fakeStackCards()),
+                  Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 300 * hm),
+                      child: QuestionCard()),
+                  Card(
+                      margin: EdgeInsets.all(16),
+                      color: primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: IconButton(
+                          onPressed: () {
+                            pauseDialog(context);
+                          },
+                          padding: EdgeInsets.fromLTRB(0, 0, 8, 8),
+                          icon: Icon(Icons.pause,
+                              size: 48*wm, color: secondaryColor))),
 
-                // ),
-                linePercentageIndicator(),
-                charAnimation(),
-              ])
-            : Stack(children: <Widget>[
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/bgm2.png'),
-                            fit: BoxFit.fitWidth))),
-                AnimatedOpacity(
-                  child: loadingScreen(),
-                  duration: Duration(milliseconds: 400),
-                  opacity: !isLoaded2 ? 1 : 0,
-                ),
-              ]));
+                  // ),
+                  linePercentageIndicator(),
+                  charAnimation(),
+                ])
+              : Stack(children: <Widget>[
+                  Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/bgm2.png'),
+                              fit: BoxFit.fitWidth))),
+                  AnimatedOpacity(
+                    child: loadingScreen(),
+                    duration: Duration(milliseconds: 400),
+                    opacity: !isLoaded2 ? 1 : 0,
+                  ),
+                ])),
+      onWillPop: () async {
+        return false;
+      },
+    );
   }
 
   Widget charAnimation() {
@@ -103,9 +105,9 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         Align(
             alignment: Alignment.center,
             child: Container(
-              height: 240*hm,
-              width: 240*wm,
-              margin: EdgeInsets.fromLTRB(12, 0, 0, 240*hm),
+              height: 240 * hm,
+              width: 240 * wm,
+              margin: EdgeInsets.fromLTRB(12, 0, 0, 240 * hm),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.pink[200],
@@ -114,9 +116,9 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         Align(
             alignment: Alignment.center,
             child: Container(
-              height: 240*hm,
-              width: 360*wm,
-              margin: EdgeInsets.only(bottom: 220*hm),
+              height: 240 * hm,
+              width: 360 * wm,
+              margin: EdgeInsets.only(bottom: 220 * hm),
               decoration: BoxDecoration(
                   image: specialAnimation
                       ? DecorationImage(
@@ -136,31 +138,32 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         barrierDismissible: false,
         child: Center(
             child: Container(
-          height: 300*hm,
-          width: 300*wm,
+          height: 300 * hm,
+          width: 300 * wm,
           decoration: BoxDecoration(
-              color: secondaryColor, borderRadius: BorderRadius.circular(32*wm)),
+              color: primaryColor,
+              borderRadius: BorderRadius.circular(32 * wm)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Card(
-                  color: secondaryColor,
+                  color: primaryColor,
                   elevation: 0,
                   child: IconButton(
                       iconSize: 80,
-                      color: primaryColor,
+                      color: secondaryColor,
                       icon: Icon(Icons.play_circle_outline),
                       onPressed: () {
                         Navigator.pop(context);
                       })),
               Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
               Card(
-                  color: secondaryColor,
+                  color: primaryColor,
                   elevation: 0,
                   child: IconButton(
                       iconSize: 80,
-                      color: primaryColor,
+                      color: secondaryColor,
                       icon: Icon(Icons.home),
                       onPressed: () {
                         Navigator.pushReplacement(context,
@@ -173,9 +176,9 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
 
   Widget linePercentageIndicator() {
     return Container(
-      padding: const EdgeInsets.only(top: 90*0.8),
+      padding: EdgeInsets.only(top: 90 * hm),
       child: LinearPercentIndicator(
-        padding: EdgeInsets.symmetric(horizontal: 48*wm),
+        padding: EdgeInsets.symmetric(horizontal: 48 * wm),
         animation: true,
         animationDuration: 500,
         animateFromLastPercent: true,
@@ -195,12 +198,12 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
           alignment: Alignment.bottomLeft,
           child: Container(
-            margin: EdgeInsets.only(right: 338*wm, bottom: 32),
+            margin: EdgeInsets.only(right: 338 * wm, bottom: 32),
             child: DragTarget<String>(
               builder:
                   (BuildContext context, List<String> incoming, List rejected) {
                 return Container(
-                  height: 280*hm,
+                  height: 280 * hm,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/wrong.png'),
@@ -228,6 +231,12 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                     question =
                         otherQuestion() == null ? "null" : otherQuestion();
                     print(question);
+                    if (question == "Insufficient Data") {
+                      finished = true;
+                      insufficientData = true;
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => EndScreen()));
+                    }
                   } else {
                     question = dataList[0].name;
                     finished = true;
@@ -250,13 +259,13 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         child: Align(
             alignment: Alignment.bottomRight,
             child: Container(
-              margin: EdgeInsets.only(left: 338*wm, bottom: 32),
+              margin: EdgeInsets.only(left: 338 * wm, bottom: 32),
               child: DragTarget<String>(
                 builder: (BuildContext context, List<String> incoming,
                     List rejected) {
                   return Container(
-                      height: 280*hm,
-                      width: 200*wm,
+                      height: 280 * hm,
+                      width: 200 * wm,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage('assets/correct.png'),
@@ -283,6 +292,14 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                       question =
                           otherQuestion() == null ? "null" : otherQuestion();
                       print(question);
+                      if (question == "Insufficient Data") {
+                        finished = true;
+                        insufficientData = true;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EndScreen()));
+                      }
                     } else {
                       question = dataList[0].name;
                       finished = true;
@@ -304,13 +321,13 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
       child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin: EdgeInsets.only(top: 140*hm),
+            margin: EdgeInsets.only(top: 140 * hm),
             child: DragTarget<String>(
               builder:
                   (BuildContext context, List<String> incoming, List rejected) {
                 return Container(
-                    width: 300*wm,
-                    height: 78*hm,
+                    width: 300 * wm,
+                    height: 78 * hm,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage('assets/dontknow.png'),
@@ -333,10 +350,16 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
 
                   print("${dataList.length}");
 
-                  if (dataList.length > 1) {
-                    question = otherQuestion();
-                    // question = question == null ? "Nope" : question;
+                  if (dataList.length != 1) {
+                    question =
+                        otherQuestion() == null ? "null" : otherQuestion();
                     print(question);
+                    if (question == "Insufficient Data") {
+                      finished = true;
+                      insufficientData = true;
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => EndScreen()));
+                    }
                   } else {
                     question = dataList[0].name;
                     finished = true;
@@ -360,33 +383,33 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
           Card(
             elevation: 20,
             color: secondaryColor,
-            margin: EdgeInsets.only(top: 64*hm),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20*wm)),
+            margin: EdgeInsets.only(top: 64 * hm),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20 * wm)),
             child: Container(
-              width: 190*wm,
-              height: 180*hm,
+              width: 190 * wm,
+              height: 180 * hm,
             ),
           ),
           Card(
             elevation: 20,
             color: secondaryColor,
-            margin: EdgeInsets.only(top: 32*hm),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20*wm)),
+            margin: EdgeInsets.only(top: 32 * hm),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20 * wm)),
             child: Container(
-              width: 200*wm,
-              height: 190*hm,
+              width: 200 * wm,
+              height: 190 * hm,
             ),
           ),
           Card(
             elevation: 20,
             color: secondaryColor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20*wm)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20 * wm)),
             child: Container(
-              width: 210*wm,
-              height: 200*hm,
+              width: 210 * wm,
+              height: 200 * hm,
             ),
           ),
         ],
@@ -490,30 +513,30 @@ class QuestionCardState extends State<QuestionCard>
           ..rotateX(pi * _animation.value),
         child: _animation.value >= 0.3
             ? Container(
-                width: 220*wm,
-                height: 210*hm,
-                margin: EdgeInsets.only(bottom: 36*hm),
+                width: 220 * wm,
+                height: 210 * hm,
+                margin: EdgeInsets.only(bottom: 36 * hm),
                 child: Card(
                   elevation: 20,
                   color: secondaryColor,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20*wm)),
+                      borderRadius: BorderRadius.circular(20 * wm)),
                 ))
             : Container(
-                width: 220*wm,
-                height: 210*hm,
-                margin: EdgeInsets.only(bottom: 36*hm),
+                width: 220 * wm,
+                height: 210 * hm,
+                margin: EdgeInsets.only(bottom: 36 * hm),
                 child: Card(
                     elevation: 20,
                     color: secondaryColor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20*wm)),
+                        borderRadius: BorderRadius.circular(20 * wm)),
                     child: Container(
                       padding: EdgeInsets.all(4),
                       child: Card(
                         color: Colors.pink[200],
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20*wm)),
+                            borderRadius: BorderRadius.circular(20 * wm)),
                         child: Center(
                           child: Container(
                               padding: EdgeInsets.all(20),

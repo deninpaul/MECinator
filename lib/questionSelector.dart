@@ -2,6 +2,8 @@ import 'package:interference/model.dart';
 import 'global.dart';
 import 'dart:math';
 
+import 'global.dart';
+
 int fleg=0;
 
 void rmp(Person per) {
@@ -20,6 +22,8 @@ bool randomFlag(){
   else
     return false;
 }
+
+
 int count() {
   return dataList.length;
 }
@@ -33,6 +37,13 @@ bool present(var x)
       return false;
   }
 
+bool ifcA(String x) //if counted already
+{
+  for(int i=0;i<cA.length;i++)
+        if(cA[i]==x)
+          return true;
+      return false;
+}
 
 initialiser() {
   nrep = 1;
@@ -52,6 +63,7 @@ initialiser() {
   lastrow = "xyz";
   lastvalue = "qwe";
   value = "zxc";
+  insufficientData = false;
   da = "the person you are thinking of";
   idk  = List<String>();
 }
@@ -59,10 +71,39 @@ initialiser() {
 void findrow(){
   fleg=0;
   int i,j,half=count() ~/ 2, max=1000,c,delta;
+
+  //class
+cA = List<String>();
+for(i=0;i<dataList.length;i++)
+  {
+      c=0;
+      if(ifcA(dataList[i].clas))
+        continue;
+      cA.add(dataList[i].clas);
+      for(j=0;j<dataList.length;j++)
+      {
+        if(dataList[i].clas==dataList[j].clas){
+          c++;
+          //print(dataList[i].hostel);
+      }}
+    delta=(half-c).abs();
+    if(delta<max|| randomFlag())
+    {
+      max=delta;
+      row="clas";
+      value=dataList[i].clas;
+      print("half=$half delta=$delta row=$row value=$value");
+    }
+  }
+
   //Hostel
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].hostel))
+        continue;
+      cA.add(dataList[i].hostel);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].hostel==dataList[j].hostel){
@@ -82,9 +123,13 @@ void findrow(){
   }
 
   //school
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].school))
+        continue;
+      cA.add(dataList[i].school);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].school==dataList[j].school)
@@ -102,9 +147,13 @@ void findrow(){
   }
 
   //gen
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].gen))
+        continue;
+      cA.add(dataList[i].gen);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].gen==dataList[j].gen)
@@ -122,9 +171,13 @@ void findrow(){
   }
 
    //region
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].region))
+        continue;
+      cA.add(dataList[i].region);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].region==dataList[j].region)
@@ -142,9 +195,13 @@ void findrow(){
   }
 
   //ds
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].ds))
+        continue;
+      cA.add(dataList[i].ds);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].ds==dataList[j].ds)
@@ -160,19 +217,23 @@ void findrow(){
       }
     }
   }
-//religion
+//house
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].house))
+        continue;
+      cA.add(dataList[i].house);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].house==dataList[j].house)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nhouse!=0)
+    if( delta<=max && nhouse!=0)
     {
-      if(delta<max || randomFlag()){
+      if(delta<max && randomFlag()){
         max=delta;
         row="house";
         value=dataList[i].house;
@@ -180,15 +241,20 @@ void findrow(){
     }
   }
   //rel
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].rel))
+        continue;
+      cA.add(dataList[i].rel);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].rel==dataList[j].rel)
           c++;
       }
     delta=(half-c).abs();
+    print("delta of rel:$delta but max rn is $max");
     if(delta<=max&&nrel!=0)
     {
       if(delta<max || randomFlag()){
@@ -234,9 +300,13 @@ void findrow(){
   }
 
   //place
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].place))
+        continue;
+      cA.add(dataList[i].place);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].place==dataList[j].place)
@@ -392,6 +462,8 @@ void findrow(){
     row="insufff";
   if(max==half)
     row="insufff";
+
+  print("row:$row\nvalue:$value\ndelta:$delta\n");
 
 }
 
