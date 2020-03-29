@@ -66,6 +66,7 @@ Future<Null> getDataFromOnline() async {
       per.singer = queryresult.documents[i].data['singer'];
       per.dancer = queryresult.documents[i].data['dancer'];
       per.programmer = queryresult.documents[i].data['programmer'];
+      per.sports = queryresult.documents[i].data['sports'];
 
       if (per.place == "Kasargode" ||
           per.place == "Kannur" ||
@@ -78,7 +79,7 @@ Future<Null> getDataFromOnline() async {
           per.place == "Idukki" ||
           per.place == "Kottayam" ||
           per.place == "Alapuzha" ||
-          per.place == "Pathanamthitaa") per.region = "M";
+          per.place == "Pathanamthitta") per.region = "M";
       if (per.place == "Kollam" || per.place == "Thiruvananthapuram")
         per.region = "S";
 
