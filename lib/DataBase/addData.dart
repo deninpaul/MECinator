@@ -6,6 +6,7 @@ class OnlineDataBaseHandler{
   OnlineDataBaseHandler();
 
   Future init() async{
+    print("Started");
     deleteCollection().then((_) => addDb());
   }
 
@@ -57,7 +58,7 @@ class OnlineDataBaseHandler{
     addRow("Jerin Tom", "RR", "M", "CSA", "Kottayam", "n", "T", "christian","Placid", "n", "n", "n", "n", "n");
     addRow("Anjana Sudevan", "YMCA", "F", "CSA", "Kozhikode", "n", "S", "hindu","Silver Hills", "n", "y", "n", "n", "n");
     addRow("Nihitha  S", "Nava Jyoti", "F", "CSA", "Idukki", "n", "T", "hindu","Vimala", "n", "n", "n", "n", "n");
-    addRow("Meghana O P", "Nava Jyoti", "F", "CSB", "Ernakulam", "n", "T", "hindu","SNMHSS, Moothakunnam", "n", "n", "n", "y", "y");
+    addRow("Meghana O P", "Nava Jyoti", "F", "CSB", "Ernakulam", "n", "T", "hindu","SNMHSS, Moothakunnam", "n", "n", "n", "y", "n");
     addRow("Jagath Jijo", "Sky Blue", "M", "CSB", "Kottayam", "n", "T", "hindu","Chavara", "n", "y", "n", "n", "y");
     addRow("Faheem P P ", "Shamla", "M", "CSA", "Malapuram", "n", "D", "muslim","Hyderabad", "n", "n", "n", "n", "n");
     addRow("Ashwin Girish", "MH", "M", "CSA", "Pathanamthitaa", "y", "A", "hindu","Syrian Christian Seminary", "n", "n", "n", "n", "n");

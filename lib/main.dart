@@ -1,6 +1,7 @@
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'DataBase/addData.dart';
 import 'DataBase/localDBmanager.dart';
 import 'bgm.dart';
 import 'home.dart';
@@ -8,7 +9,7 @@ import 'global.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  getDataFromOnline().then((_) async{
+  getDataFromOnline().then((_) async {
     BGM.attachWidgetBindingListener();
     await BGM.add('bgm.mp3');
     runApp(MyApp());
@@ -22,11 +23,10 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
     BGM.play(0);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,27 +35,29 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Interference',
       theme: ThemeData(
-          primaryColor: primaryColor, scaffoldBackgroundColor: primaryColor),
+          primarySwatch: Colors.pink,
+          primaryColor: primaryColor,
+          scaffoldBackgroundColor: primaryColor),
       home: Home(),
 
       //Uncomment below for Updating Database
 
-      // home: Scaffold(
-      //   body: Container(
-      //       color: Colors.white,
-      //       child: Center(
-      //         child: RaisedButton(
-      //           onPressed: () => OnlineDataBaseHandler(),
-      //           color: Colors.blue,
-      //           child: Text("Update online database"),
-      //         ),
-      //       )),
-      // ),
+      //   home: Scaffold(
+      //     body: Container(
+      //         color: Colors.white,
+      //         child: Center(
+      //           child: RaisedButton(
+      //             onPressed: () => OnlineDataBaseHandler(),
+      //             color: Colors.blue,
+      //             child: Text("Update online database"),
+      //           ),
+      //         )),
+      //   ),
     );
   }
 
   @override
-  void dispose() async{
+  void dispose() async {
     await BGM.stop();
     super.dispose();
   }

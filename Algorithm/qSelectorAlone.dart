@@ -9,6 +9,21 @@ bool firstQuestionCSA;
 List<Person> dataList;
 List<String> idk;
 
+int fleg =0;
+
+bool randomFlag(){
+  if(fleg==0)
+  {
+    fleg=1;
+    return true;
+  }
+  final flag = new Random();
+  if(flag.nextInt(2)==1)
+    return true;
+  else
+    return false;
+}
+
 class Person {
   String name;
   String hostel;
@@ -46,6 +61,16 @@ class Person {
   }
 }
 
+List<String> cA; //Counted Already
+
+bool ifcA(String x) //if counted already
+{
+  for(int i=0;i<cA.length;i++)
+        if(cA[i]==x)
+          return true;
+      return false;
+}
+
 
 void main(){
 initialiser();
@@ -53,11 +78,12 @@ fcount=1;
 addDb();
 
 String ques;
-ques = firstQuestion();
-print(ques);
-String ans= stdin.readLineSync();
-firstQuestionEvaluator(ans);
-firstQuestionEvaluator(ans);
+// ques = firstQuestion();
+// print(ques);
+// String ans= stdin.readLineSync();
+// firstQuestionEvaluator(ans);
+// firstQuestionEvaluator(ans);
+String ans;
 
 while(dataList.length>1){
   ques = otherQuestion();
@@ -73,7 +99,7 @@ print("Person thinking of: ${dataList[0].name}");
 
 
 void addDb() {
-addRow("Deon Joshy", "Aneeta", "M", "CSA", "Ernakulam", "n", "T", "christian","St.George HSS", "n", "n", "y", "y", "n");
+    addRow("Deon Joshy", "Aneeta", "M", "CSA", "Ernakulam", "n", "T", "christian","St.George HSS", "n", "n", "y", "y", "n");
     addRow("Tom Vempala", "Aneeta", "M", "CSA", "Kottayam", "n", "T", "christian","Kendriya Vidyalaya", "n", "n", "n", "n", "y");
     addRow("Karthika R", "Vimala", "F", "CSA", "Kottayam", "n", "R", "hindu","SFS Public School", "n", "n", "n", "n", "n");
     addRow("Poorab Shenoy", "MH", "M", "CSA", "Kannur", "n", "A", "hindu","Chinmaya Vidyalaya", "n", "n", "n", "n", "n");
@@ -235,12 +261,44 @@ bool present(var x)
 
 
 
+
+
 void findrow(){
+  fleg=0;
   int i,j,half=count() ~/ 2, max=1000,c,delta;
+
+  //class
+cA = List<String>();
+for(i=0;i<dataList.length;i++)
+  {
+      c=0;
+      if(ifcA(dataList[i].clas))
+        continue;
+      cA.add(dataList[i].clas);
+      for(j=0;j<dataList.length;j++)
+      {
+        if(dataList[i].clas==dataList[j].clas){
+          c++;
+          //print(dataList[i].hostel);
+      }}
+    delta=(half-c).abs();
+    if(delta<max|| randomFlag())
+    {
+      max=delta;
+      row="clas";
+      value=dataList[i].clas;
+      print("half=$half delta=$delta row=$row value=$value");
+    }
+  }
+
   //Hostel
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].hostel))
+        continue;
+      cA.add(dataList[i].hostel);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].hostel==dataList[j].hostel){
@@ -248,118 +306,157 @@ void findrow(){
           //print(dataList[i].hostel);
       }}
     delta=(half-c).abs();
-    if(delta<max&&(!present(dataList[i].hostel))&&dataList[i].hostel!="NIL")
+    if(delta<=max&&(!present(dataList[i].hostel))&&dataList[i].hostel!="NIL")
     {
-      max=delta;
-      row="hostel";
-      value=dataList[i].hostel;
-      print("half=$half delta=$delta row=$row value=$value");
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="hostel";
+        value=dataList[i].hostel;
+        print("half=$half delta=$delta row=$row value=$value");
+      }
     }
   }
 
   //school
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].school))
+        continue;
+      cA.add(dataList[i].school);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].school==dataList[j].school)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&(!present(dataList[i].school))&&dataList[i].school!="NIL"&&nschool!=0)
+    if(delta<=max&&(!present(dataList[i].school))&&dataList[i].school!="NIL"&&nschool!=0)
     {
-      max=delta;
-      row="school";
-      value=dataList[i].school;
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="school";
+        value=dataList[i].school;
+      }
     }
   }
 
   //gen
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].gen))
+        continue;
+      cA.add(dataList[i].gen);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].gen==dataList[j].gen)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&ngen!=0)
+    if(delta<=max&&ngen!=0)
     {
-      max=delta;
-      row="gen";
-      value=dataList[i].gen;
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="gen";
+        value=dataList[i].gen;
+      }
     }
   }
 
    //region
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].region))
+        continue;
+      cA.add(dataList[i].region);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].region==dataList[j].region)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nregion!=0)
+    if(delta<=max&&nregion!=0)
     {
-      max=delta;
-      row="region";
-      value=dataList[i].region;
-    }
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="region";
+        value=dataList[i].region;
+      }
+   }
   }
 
   //ds
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].ds))
+        continue;
+      cA.add(dataList[i].ds);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].ds==dataList[j].ds)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nds!=0)
+    if(delta<=max&&nds!=0)
     {
-      max=delta;
-      row="ds";
-      value=dataList[i].ds;
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="ds";
+        value=dataList[i].ds;
+      }
     }
   }
-//religion
+//house
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].house))
+        continue;
+      cA.add(dataList[i].house);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].house==dataList[j].house)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nhouse!=0)
+    if( delta<=max && nhouse!=0)
     {
-      max=delta;
-      row="house";
-      value=dataList[i].house;
+      if(delta<max && randomFlag()){
+        max=delta;
+        row="house";
+        value=dataList[i].house;
+      }
     }
   }
   //rel
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].rel))
+        continue;
+      cA.add(dataList[i].rel);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].rel==dataList[j].rel)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nrel!=0)
+    print("delta of rel:$delta but max rn is $max");
+    if(delta<=max&&nrel!=0)
     {
-      max=delta;
-      row="rel";
-      value=dataList[i].rel;
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="rel";
+        value=dataList[i].rel;
+      }
     }
   }
 
@@ -372,11 +469,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nrep!=0)
+    if(delta<=max&&nrep!=0)
     {
-      max=delta;
-      row="rep";
-      value="y";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="rep";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -385,29 +484,37 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nrep!=0)
+    if(delta<=max&&nrep!=0)
     {
-      max=delta;
-      row="rep";
-      value="n";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="rep";
+        value="n";
+      }
     }
   }
 
   //place
+cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
+      if(ifcA(dataList[i].place))
+        continue;
+      cA.add(dataList[i].place);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].place==dataList[j].place)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nplace!=0)
+    if(delta<=max&&nplace!=0)
     {
-      max=delta;
-      row="place";
-      value=dataList[i].place;
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="place";
+        value=dataList[i].place;
+      }
     }
   }
 
@@ -420,11 +527,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nspecs!=0)
+    if(delta<=max&&nspecs!=0)
     {
-      max=delta;
-      row="specs";
-      value="y";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="specs";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -435,9 +544,11 @@ void findrow(){
     delta=(half-c).abs();
     if(delta<max&&nspecs!=0)
     {
-      max=delta;
-      row="specs";
-      value="n";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="specs";
+        value="n";
+      }
     }
   }
 
@@ -450,11 +561,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nsinger!=0)
+    if(delta<=max&&nsinger!=0)
     {
-      max=delta;
-      row="singer";
-      value="y";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="singer";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -463,11 +576,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nsinger!=0)
+    if(delta<=max&&nsinger!=0)
     {
-      max=delta;
-      row="singer";
-      value="n";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="singer";
+        value="n";
+      }
     }
   }
 
@@ -480,11 +595,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&ndancer!=0)
+    if(delta<=max&&ndancer!=0)
     {
-      max=delta;
-      row="dancer";
-      value="y";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="dancer";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -493,11 +610,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&ndancer!=0)
+    if(delta<=max&&ndancer!=0)
     {
-      max=delta;
-      row="dancer";
-      value="n";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="dancer";
+        value="n";
+      }
     }
   }
 
@@ -510,11 +629,13 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nprogrammer!=0)
+    if(delta<=max&&nprogrammer!=0)
     {
-      max=delta;
-      row="programmer";
-      value="y";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="programmer";
+        value="y";
+      }
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -523,17 +644,21 @@ void findrow(){
           c++;
       }
     delta=(half-c).abs();
-    if(delta<max&&nprogrammer!=0)
+    if(delta<=max&&nprogrammer!=0)
     {
-      max=delta;
-      row="programmer";
-      value="n";
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="programmer";
+        value="n";
+      }
     }
   }
   if(max+half==count())
     row="insufff";
   if(max==half)
     row="insufff";
+
+  print("row:$row\nvalue:$value\ndelta:$delta\n");
 
 }
 
@@ -693,11 +818,19 @@ otherQuestionEvaluator(String answer){
     
     if (answer == 'y') {
       ngen = 0;
+      if(value=="M")
+        da="he";
+      else
+        da="she";
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].gen != value) rmp(dataList[i--]);
       }
     } else if (answer == 'n') {
       ngen = 0;
+      if(value=="M")
+        da="she";
+      else
+        da="he";
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].gen == value) rmp(dataList[i--]);
       }

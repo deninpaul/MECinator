@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interference/leaderboard.dart';
 import 'game.dart';
 import 'global.dart';
 
@@ -95,7 +96,10 @@ class HomeState extends State<Home> {
                                   color: Colors.pink[200],
                                   fontSize: 26,
                                   fontFamily: 'poppins')),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => LeaderBoard()));
+                          },
                         ))
                   ],
                 )))

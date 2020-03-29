@@ -8,7 +8,7 @@ bool isFirstQuestion = true;
 bool firstQuestionCSA;
 bool finished = false;
 bool isflipped = false;
-
+bool insufficientData = false;
 double wm;
 double hm;
 int battery = 3;
@@ -16,6 +16,7 @@ int battery = 3;
 
 List<Person> dataList;
 List<String> idk;
+List<String> cA; 
 String player = "Denin";
 
 int nrep,

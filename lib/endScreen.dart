@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:scratcher/scratcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'game.dart';
 import 'global.dart';
@@ -18,10 +20,15 @@ class EndScreenState extends State<EndScreen>
   Animation _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
   bool isScratchOver = false;
+  QuerySnapshot leaderboardSnap;
 
   @protected
   void initState() {
     super.initState();
+
+    if (!insufficientData) {
+      scoreUpdator();
+    }
 
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
@@ -192,6 +199,14 @@ class EndScreenState extends State<EndScreen>
   }
 
   Widget resultCard() {
+    var result;
+
+    if (insufficientData) {
+      result = "You gotta be more social, mahn.";
+    } else {
+      result = dataList[0].name;
+    }
+
     return Container(
       padding: EdgeInsets.all(4),
       width: 300 * wm,
@@ -210,8 +225,8 @@ class EndScreenState extends State<EndScreen>
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 10 * hm)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 32*wm),
-              child: Text(dataList[0].name,
+              padding: EdgeInsets.symmetric(horizontal: 32 * wm),
+              child: Text(result,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 5,
                   textScaleFactor: wm,
@@ -237,5 +252,75 @@ class EndScreenState extends State<EndScreen>
               PreferredSize(child: AppBar(), preferredSize: Size.fromHeight(0)),
           body: loadingScreen(),
         )));
+  }
+
+  scoreUpdator() async {
+    QuerySnapshot queryresult =
+        await Firestore.instance.collection('leaderboard').getDocuments();
+
+    for (int i = 0; i < queryresult.documents.length; i++) {
+      if (queryresult.documents[i].data['name'] == dataList[0].name) {
+        //Checking user did this before
+        var result = await localDataBaseCheck() ?? 1;
+        if (result == 0) return 0;
+        //updating to firebase collection
+        var score = queryresult.documents[i].data['score'];
+        if (score != null) {
+          Map<String, dynamic> newValues = {
+            'name': queryresult.documents[i].data['name'],
+            'score': score + 1
+          };
+          updateLeaderBoard(queryresult.documents[i].documentID, newValues);
+          return 0;
+        }
+      }
+    }
+
+    var result = await localDataBaseCheck() ?? 1;
+    if (result == 0) return 0;
+    //adding to firebase collection
+    Map<String, dynamic> newValues = {'name': dataList[0].name, 'score': 1};
+    createLeaderBoard(newValues);
+    return 0;
+  }
+
+  localDataBaseCheck() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> list;
+    int flag = 0;
+
+    list = prefs.getStringList("didBefore") ?? List<String>();
+    print(list.length);
+
+    for (int j = 0; j < list.length; j++) {
+      if (list[j] == dataList[0].name) {
+        flag++;
+      }
+    }
+    print(flag);
+
+    if (flag == 0) {
+      list.add(dataList[0].name);
+      print(list.length);
+      await prefs.setStringList("didBefore", list);
+    } else {
+      return 0;
+    }
+  }
+
+  updateLeaderBoard(selectedDoc, newValues) {
+    return Firestore.instance
+        .collection('leaderboard')
+        .document(selectedDoc)
+        .updateData(newValues)
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  createLeaderBoard(entryJson) {
+    Firestore.instance.collection('leaderboard').add(entryJson).catchError((e) {
+      print(e);
+    });
   }
 }
