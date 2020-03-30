@@ -33,6 +33,7 @@ int nrep,
     nsinger,
     ndancer,
     nprogrammer,
+    nsports,
     fcount;
 String row, lastrow, lastvalue, value, da, regg, question;
 

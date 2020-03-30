@@ -58,6 +58,7 @@ initialiser() {
   nsinger=1;
   ndancer=1;
   nprogrammer=1;
+  nsports=1;
   nschool=1;
   row = "abc";
   lastrow = "xyz";
@@ -458,6 +459,40 @@ cA = List<String>();
       }
     }
   }
+
+   //sports
+  {
+      c=0;
+      for(j=0;j<dataList.length;j++)
+      {
+        if(dataList[j].sports=="y")
+          c++;
+      }
+    delta=(half-c).abs();
+    if(delta<=max&&nsports!=0)
+    {
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="sports";
+        value="y";
+      }
+    }
+    c=0;
+      for(j=0;j<dataList.length;j++)
+      {
+        if(dataList[j].sports=="n")
+          c++;
+      }
+    delta=(half-c).abs();
+    if(delta<=max&&nsports!=0)
+    {
+      if(delta<max || randomFlag()){
+        max=delta;
+        row="sports";
+        value="n";
+      }
+    }
+  }
   if(max+half==count())
     row="insufff";
   if(max==half)
@@ -601,6 +636,9 @@ String otherQuestion(){
 
   else if (row == "dancer") 
     return "Is $da a good dancer ?";
+
+  else if (row == "sports") 
+    return "Is $da good in sports ?";
 }
 
 otherQuestionEvaluator(String answer){
@@ -820,6 +858,22 @@ otherQuestionEvaluator(String answer){
     }
   } 
   
+   else if (row == "sports") {
+    if (answer == 'y') {
+      nsports = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].sports != 'y') rmp(dataList[i--]);
+      }
+    } else if (answer == 'n') {
+      nrep = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].sports == 'y') rmp(dataList[i--]);
+      }
+    } else {
+      nsports = 0;
+    }
+  } 
+
   else if (row == "ds") {
     if (answer == 'y') {
       nds = 0;
