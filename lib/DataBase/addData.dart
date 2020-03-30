@@ -2,9 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:interference/model.dart';
 import 'dart:async';
 
+int count=1; int errors=1;
+
 onlineDataBaseHandler() async{
-print("Started");
-    addDb();
+  count=1;
+  print("Started");
+  await addDb();
+  print("Succesfully Added $count entries");
+  return 0;
 }
 
 
@@ -135,22 +140,20 @@ addDb(){
   addRow("Pradeesh Nair", "MH", "M", "CSB", "Pathanamthitta", "n", "A", "hindu","Kendriya Vidyalaya", "n", "n", "y", "n", "y", "n");
   addRow("Maria J Mathew", "NIL", "F", "CSB", "Ernakulam", "n", "R", "christian","Toc H", "y", "n", "n", "n", "n", "y");
   addRow("Reshma J Nair", "NIL", "F", "CSB", "Ernakulam", "n", "A", "hindu","Cochin Refineries School", "y", "n", "n", "n", "n", "n");
-   
-
-  if(!noerrors){
-    print("There has been an error in updating the databse");
-  } else{
-    print("Update database successful");
-  }
 } 
 
 Future<void> addRow(String name, String hostel, String gen, String clas, String place, String rep, String house, String rel, String school, String ds, String specs, String singer, String dancer, String programmer,String sports) async{
+  int temp=errors;
   Person entry = Person(name:name,hostel:hostel,gen:gen,clas:clas, place:place, rep:rep, house:house, rel:rel, school:school, ds:ds, specs:specs, singer:singer, dancer:dancer, programmer:programmer, sports:sports);
   var entryJson = entry.toMap();
   Firestore.instance.collection('list').add(entryJson).catchError((e){
     print(e);
-    noerrors=false;
+    errors ++;
+  }).then((_){
+    if(temp==errors) print("Added Entry: $count");
+    count++;
   });
+  
 }
 
 Future<void> deleteCollection() async{
