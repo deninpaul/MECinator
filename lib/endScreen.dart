@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
@@ -207,6 +208,8 @@ class EndScreenState extends State<EndScreen>
       result = dataList[0].name;
     }
 
+    String imageUrl = lowNoSpacedText(dataList[0].name);
+
     return Container(
       padding: EdgeInsets.all(4),
       width: 300 * wm,
@@ -220,8 +223,34 @@ class EndScreenState extends State<EndScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CircleAvatar(
-              backgroundColor: primaryColor,
-              maxRadius: 88,
+              backgroundColor: insufficientData ? paccentColor : primaryColor,
+              maxRadius: 88*wm,
+              child: CircleAvatar(
+                backgroundColor: primaryColor,
+                maxRadius: 80*wm,
+                child: !insufficientData
+                    ? CachedNetworkImage(
+                        imageUrl:
+                            "https://projectinterference.000webhostapp.com/$imageUrl.jpeg",
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => new Icon(
+                          Icons.error,
+                          size: 64,
+                        ),
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover)),
+                        ),
+                      )
+                    : Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage("assets/facepalm.png"),
+                                fit: BoxFit.contain))),
+              ),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 10 * hm)),
             Container(

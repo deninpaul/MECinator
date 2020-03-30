@@ -13,10 +13,9 @@ double wm;
 double hm;
 int battery = 3;
 
-
 List<Person> dataList;
 List<String> idk;
-List<String> cA; 
+List<String> cA;
 String player = "Denin";
 
 int nrep,
@@ -40,6 +39,16 @@ String row, lastrow, lastvalue, value, da, regg, question;
 Color primaryColor = new Color(0xff380e7f);
 Color paccentColor = new Color(0xff6915cf);
 Color secondaryColor = new Color(0xffd62196);
+
+String lowNoSpacedText(String text) {
+  List<String> splitText = text.split(" ");
+  String newText = splitText[0];
+  for (int i = 1; i < splitText.length; i++) {
+    newText = newText + splitText[i];
+  }
+  newText = newText.toLowerCase();
+  return newText;
+}
 
 Widget loadingScreen() {
   return Container(
