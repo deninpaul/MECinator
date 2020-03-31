@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:interference/model.dart';
+import '../Utils/model.dart';
 import 'dart:async';
 
 int count=1; int errors=1;
@@ -82,7 +82,7 @@ addDb(){
   addRow("Aneetta Mary Sajan", "NIL", "F", "CSA", "Ernakulam", "n", "R", "christian","Navy Children School ", "y", "y", "n", "n", "n", "y");
   addRow("Muhammed Abnan M S ", "NIL", "M", "CSA", "Ernakulam", "n", "T", "muslim","SAPS", "y", "y", "n", "n", "n", "y");
   addRow("Kevin Abraham", "NIL", "M", "CSA", "Ernakulam", "n", "R", "christian","Toc H", "y", "y", "n", "n", "n", "n");
-  addRow("Alan Phlipose N.V ", "NIL", "M", "CSA", "Ernakulam", "n", "R", "christian","RCJPS", "y", "n", "n", "n", "n", "n");
+  addRow("Alan Phlipose NV", "NIL", "M", "CSA", "Ernakulam", "n", "R", "christian","RCJPS", "y", "n", "n", "n", "n", "n");
   addRow("Anagha S Menon", "NIL", "F", "CSA", "Ernakulam", "n", "T", "hindu","Chinmaya Vidyalaya", "y", "n", "n", "n", "n", "n");
   addRow("Elizabeth Mary Mathew", "NIL", "F", "CSA", "Ernakulam", "n", "D", "christian","Chinmaya Vidyalaya", "y", "n", "n", "n", "y", "n");
   addRow("Ebin Bigi", "NIL", "M", "CSA", "Ernakulam", "n", "T", "christian","Chavara", "y", "y", "n", "n", "n", "n");
@@ -111,7 +111,7 @@ addDb(){
   addRow("Muhammed Razeen V", "NIL", "M", "CSB", "Ernakulam", "n", "R", "muslim","Bhavan's Vidya Mandir", "y", "n", "n", "n", "y", "n");
   addRow("Nevin Manoj", "NIL", "M", "CSB", "Ernakulam", "n", "R", "hindu","Greets Public School", "y", "n", "n", "n", "n", "n");
   addRow("V S Sreeram", "NIL", "M", "CSB", "Ernakulam", "y", "R", "hindu","Rajashree S M Memorial School ", "y", "n", "y", "n", "n", "n");
-  addRow("Pranav H. Nair ", "NIL", "M", "CSB", "Ernakulam", "n", "D", "hindu","RCJPS", "y", "y", "n", "n", "y", "n");
+  addRow("Pranav H Nair", "NIL", "M", "CSB", "Ernakulam", "n", "D", "hindu","RCJPS", "y", "y", "n", "n", "y", "n");
   addRow("Tony Augustine", "NIL", "M", "CSB", "Ernakulam", "y", "S", "christian","Co-operative Public School", "y", "n", "n", "n", "n", "n");
   addRow("Adithya Anilkumar", "NIL", "M", "CSB", "Ernakulam", "n", "A", "hindu","Bhavan's Vidya Mandir", "y", "y", "n", "n", "y", "n");
   addRow("Thomas John", "NIL", "M", "CSB", "Ernakulam", "n", "S", "christian","Peters Senior Secondary School", "y", "n", "n", "n", "n", "n");
@@ -121,9 +121,9 @@ addDb(){
   addRow("Krishnendu Nambiar", "NIL", "F", "CSB", "Ernakulam", "n", "T", "hindu","Navy Children School", "y", "n", "y", "y", "n", "n");
   addRow("Devanarayan J", "NIL", "M", "CSB", "Ernakulam", "n", "R", "hindu","Vidyodaya  ", "y", "n", "n", "n", "y", "n");
   addRow("Farhath Sulthana Jamal", "NIL", "F", "CSB", "Ernakulam", "y", "D", "muslim","St. Paul's Bethany Public School ", "y", "y", "n", "n", "n", "n");
-  addRow("Vishnu Vinod","NIL","M","CSA","Ernakulam","n","R","hindu","Saraswathi Vidyanikethan", "y", "n", "n", "n", "n", "y");
-  addRow("Dona Yeldo","NIL","F","CSA","Ernakulam","y","A","christian","MA, Puthenkurish", "y", "n", "n", "y", "n", "y");
-  addRow("Arti Bhatia","NIL","F","CSA","Ernakulam","n","T","hindu","Kendriya Vidyalaya", "y", "n", "n", "y", "y", "n");
+  addRow("Vishnu Vinod","NIL","M","CSA","Ernakulam","n","R","hindu","Saraswathi Vidyanikethan", "y", "n", "n", "n", "n", "n");
+  addRow("Dona Yeldo","NIL","F","CSA","Ernakulam","y","A","christian","MA, Puthenkurish", "y", "n", "n", "y", "n", "n");
+  addRow("Arti Bhatia","NIL","F","CSA","Ernakulam","n","T","hindu","Kendriya Vidyalaya", "y", "n", "n", "y", "y", "y");
   addRow("Thomas SJ","NIL","M","CSA","Ernakulam","n","R","christian","Saraswathi Vidyanikethan", "y", "y", "n", "n", "n", "n");
   addRow("Aneeta Mary Sajan","NIL","F","CSA","Ernakulam","n","R","christian","Navy Children School","y","y","n","n","y", "n");
   addRow("Maria Rachel Joseph","NIL","F","CSA","Ernakulam","n","D","christian","Toc H","y","n","n","n","n", "n");
@@ -138,8 +138,8 @@ addDb(){
   addRow("Karthik Unnikrishnan", "NIL", "M", "CSB", "Ernakulam", "n", "S", "hindu","Chinmaya Vidyalaya", "y", "n", "n", "n", "n", "n");
   addRow("Jyothis KB", "NIL", "F", "CSB", "Ernakulam", "n", "T", "hindu","Bhavan's Vidya Mandir", "y", "n", "y", "n", "n", "y");
   addRow("Pradeesh Nair", "MH", "M", "CSB", "Pathanamthitta", "n", "A", "hindu","Kendriya Vidyalaya", "n", "n", "y", "n", "y", "n");
-  addRow("Maria J Mathew", "NIL", "F", "CSB", "Ernakulam", "n", "R", "christian","Toc H", "y", "n", "n", "n", "n", "y");
-  addRow("Reshma J Nair", "NIL", "F", "CSB", "Ernakulam", "n", "A", "hindu","Cochin Refineries School", "y", "n", "n", "n", "n", "n");
+  addRow("Maria J Mathew", "NIL", "F", "CSB", "Ernakulam", "n", "R", "christian","Toc H", "y", "y", "n", "n", "n", "y");
+  addRow("Reshma J Nair", "NIL", "F", "CSB", "Ernakulam", "n", "A", "hindu","Cochin Refineries School", "y", "y", "n", "n", "n", "n");
 } 
 
 Future<void> addRow(String name, String hostel, String gen, String clas, String place, String rep, String house, String rel, String school, String ds, String specs, String singer, String dancer, String programmer,String sports) async{

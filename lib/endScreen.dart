@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,7 +8,8 @@ import 'package:scratcher/scratcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'game.dart';
-import 'global.dart';
+import 'Utils/global.dart';
+import 'services/connectivity_Handler.dart';
 
 class EndScreen extends StatefulWidget {
   @override
@@ -22,6 +24,7 @@ class EndScreenState extends State<EndScreen>
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
   bool isScratchOver = false;
   QuerySnapshot leaderboardSnap;
+  StreamSubscription _connectionChangeStream;
 
   @protected
   void initState() {
@@ -42,53 +45,66 @@ class EndScreenState extends State<EndScreen>
       });
 
     _animationController.forward();
+
+    ConnectionStatusSingleton connectionStatus =
+        ConnectionStatusSingleton.getInstance();
+    _connectionChangeStream =
+        connectionStatus.connectionChange.listen(connectionChanged);
+  }
+
+  void connectionChanged(dynamic hasConnection) {
+    setState(() {
+      isOffline = !hasConnection;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      child: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: AppBar(),
-        ),
-        body: Stack(children: <Widget>[
-          Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/bgm2.png'),
-                      fit: BoxFit.fitWidth))),
-          Align(
-            child: scratchCard(),
-            alignment: Alignment.center,
-          ),
-          AnimatedOpacity(
-            child: callActionButtons(),
-            duration: Duration(milliseconds: 500),
-            opacity: isScratchOver ? 1 : 0,
-          ),
-          Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                margin: EdgeInsets.only(top: 80 * hm),
-                height: 44 * hm,
-                width: 280 * wm,
-                color: paccentColor,
-                child: Text(
-                    isScratchOver ? "Did You Guess?" : "Scratch the Card",
-                    textAlign: TextAlign.center,
-                    textScaleFactor: wm,
-                    style: TextStyle(
-                        color: Colors.pink[200],
-                        fontSize: 28,
-                        fontFamily: 'poppins',
-                        fontWeight: FontWeight.w700)),
-              ))
-        ]),
-      ),
+      child: !isOffline
+          ? Scaffold(
+              resizeToAvoidBottomPadding: false,
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(0),
+                child: AppBar(),
+              ),
+              body: Stack(children: <Widget>[
+                Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/bgm2.png'),
+                            fit: BoxFit.fitWidth))),
+                Align(
+                  child: scratchCard(),
+                  alignment: Alignment.center,
+                ),
+                AnimatedOpacity(
+                  child: callActionButtons(),
+                  duration: Duration(milliseconds: 500),
+                  opacity: isScratchOver ? 1 : 0,
+                ),
+                Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      margin: EdgeInsets.only(top: 80 * hm),
+                      height: 44 * hm,
+                      width: 280 * wm,
+                      color: paccentColor,
+                      child: Text(
+                          isScratchOver ? "Did You Guess?" : "Scratch the Card",
+                          textAlign: TextAlign.center,
+                          textScaleFactor: wm,
+                          style: TextStyle(
+                              color: Colors.pink[200],
+                              fontSize: 28,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w700)),
+                    ))
+              ]),
+            )
+          : noNetwork(),
       onWillPop: () async {
         return false;
       },
@@ -181,8 +197,8 @@ class EndScreenState extends State<EndScreen>
                         AnimatedOpacity(
                           child: Scratcher(
                             color: secondaryColor,
-                            brushSize: 70,
-                            threshold: 50,
+                            brushSize: 60,
+                            threshold: 45,
                             child: resultCard(),
                             onThreshold: () {
                               setState(() {
@@ -224,10 +240,10 @@ class EndScreenState extends State<EndScreen>
           children: <Widget>[
             CircleAvatar(
               backgroundColor: insufficientData ? paccentColor : primaryColor,
-              maxRadius: 88*wm,
+              maxRadius: 88 * wm,
               child: CircleAvatar(
                 backgroundColor: primaryColor,
-                maxRadius: 80*wm,
+                maxRadius: 80 * wm,
                 child: !insufficientData
                     ? CachedNetworkImage(
                         imageUrl:
@@ -235,8 +251,8 @@ class EndScreenState extends State<EndScreen>
                         placeholder: (context, url) =>
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => new Icon(
-                          Icons.error,
-                          size: 64,
+                          Icons.person_outline,
+                          size: 80,
                         ),
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(

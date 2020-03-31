@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:interference/DataBase/localDBmanager.dart';
 import 'package:interference/endScreen.dart';
-import 'package:interference/global.dart';
-import 'global.dart';
-import 'questionSelector.dart';
+import 'Utils/global.dart';
+import 'services/connectivity_Handler.dart';
+import 'services/questionSelector.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/animation.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -21,78 +21,92 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
   bool specialAnimation = false;
   int initialListSize;
 
+  StreamSubscription _connectionChangeStream;
+
   @override
   void initState() {
     super.initState();
+    ConnectionStatusSingleton connectionStatus =
+        ConnectionStatusSingleton.getInstance();
+    _connectionChangeStream =
+        connectionStatus.connectionChange.listen(connectionChanged);
     dataListImporter();
     isFirstQuestion = true;
     isLoaded = false;
     loading();
   }
 
+  void connectionChanged(dynamic hasConnection) {
+    setState(() {
+      isOffline = !hasConnection;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      child: Scaffold(
-          resizeToAvoidBottomPadding: false,
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar(
-              backgroundColor: primaryColor,
-              elevation: 0,
-            ),
-          ),
-          body: isLoaded
-              ? Stack(children: <Widget>[
-                  Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/bgm2.png'),
-                              fit: BoxFit.fitWidth))),
-                  noDragTarget(),
-                  yesDragTarget(),
-                  dontKnowDragTarget(),
-                  Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(top: 300 * hm),
-                      child: fakeStackCards()),
-                  Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(top: 300 * hm),
-                      child: QuestionCard()),
-                  Card(
-                      margin: EdgeInsets.all(16),
-                      color: primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: IconButton(
-                          onPressed: () {
-                            pauseDialog(context);
-                          },
-                          padding: EdgeInsets.fromLTRB(0, 0, 8, 8),
-                          icon: Icon(Icons.pause,
-                              size: 48*wm, color: secondaryColor))),
+      child: !isOffline
+          ? Scaffold(
+              resizeToAvoidBottomPadding: false,
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(0),
+                child: AppBar(
+                  backgroundColor: primaryColor,
+                  elevation: 0,
+                ),
+              ),
+              body: isLoaded
+                  ? Stack(children: <Widget>[
+                      Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/bgm2.png'),
+                                  fit: BoxFit.fitWidth))),
+                      noDragTarget(),
+                      yesDragTarget(),
+                      dontKnowDragTarget(),
+                      Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(top: 300 * hm),
+                          child: fakeStackCards()),
+                      Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(top: 300 * hm),
+                          child: QuestionCard()),
+                      Card(
+                          margin: EdgeInsets.all(16),
+                          color: primaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: IconButton(
+                              onPressed: () {
+                                pauseDialog(context);
+                              },
+                              padding: EdgeInsets.fromLTRB(0, 0, 8, 8),
+                              icon: Icon(Icons.pause,
+                                  size: 48 * wm, color: secondaryColor))),
 
-                  // ),
-                  linePercentageIndicator(),
-                  charAnimation(),
-                ])
-              : Stack(children: <Widget>[
-                  Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/bgm2.png'),
-                              fit: BoxFit.fitWidth))),
-                  AnimatedOpacity(
-                    child: loadingScreen(),
-                    duration: Duration(milliseconds: 400),
-                    opacity: !isLoaded2 ? 1 : 0,
-                  ),
-                ])),
+                      // ),
+                      linePercentageIndicator(),
+                      charAnimation(),
+                    ])
+                  : Stack(children: <Widget>[
+                      Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/bgm2.png'),
+                                  fit: BoxFit.fitWidth))),
+                      AnimatedOpacity(
+                        child: loadingScreen(),
+                        duration: Duration(milliseconds: 400),
+                        opacity: !isLoaded2 ? 1 : 0,
+                      ),
+                    ]))
+          : noNetwork(),
       onWillPop: () async {
         return false;
       },
@@ -120,13 +134,9 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
               width: 360 * wm,
               margin: EdgeInsets.only(bottom: 220 * hm),
               decoration: BoxDecoration(
-                  image: specialAnimation
-                      ? DecorationImage(
-                          image: AssetImage('assets/alerted.gif'),
-                          fit: BoxFit.fitWidth)
-                      : DecorationImage(
-                          image: AssetImage('assets/idle.gif'),
-                          fit: BoxFit.fitWidth)),
+                  image: DecorationImage(
+                      image: AssetImage('assets/alerted.gif'),
+                      fit: BoxFit.fitWidth)),
             ))
       ],
     );
@@ -184,7 +194,8 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         animateFromLastPercent: true,
         progressColor: secondaryColor,
         backgroundColor: Colors.pink[200],
-        percent: (-log(dataList.length / initialListSize)) / log(initialListSize),
+        percent:
+            (-log(dataList.length / initialListSize)) / log(initialListSize),
         lineHeight: 20,
         linearStrokeCap: LinearStrokeCap.roundAll,
       ),
@@ -245,7 +256,6 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                         MaterialPageRoute(builder: (context) => EndScreen()));
                   }
                 });
-                specialAnimationSetter();
               },
             ),
           ),
@@ -308,7 +318,7 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                           MaterialPageRoute(builder: (context) => EndScreen()));
                     }
                   });
-                  specialAnimationSetter();
+                  // specialAnimationSetter();
                 },
               ),
             )));
@@ -368,7 +378,7 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                         MaterialPageRoute(builder: (context) => EndScreen()));
                   }
                 });
-                specialAnimationSetter();
+                // specialAnimationSetter();
               },
             ),
           )),
@@ -415,21 +425,6 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
         ],
       ),
     );
-  }
-
-  specialAnimationSetter() async {
-    var rng = Random();
-    var random = rng.nextInt(3);
-    if (random == 0 || random == 1) {
-      setState(() {
-        specialAnimation = true;
-      });
-      Future.delayed(Duration(seconds: 4)).then((_) {
-        setState(() {
-          specialAnimation = false;
-        });
-      });
-    }
   }
 
   loading() async {

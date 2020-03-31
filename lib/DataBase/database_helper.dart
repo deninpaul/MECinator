@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:core';
 import 'dart:io';
 import 'package:sqflite/sqflite.dart';
-import 'package:interference/model.dart';
+import '../Utils/model.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {

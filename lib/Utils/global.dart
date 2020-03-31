@@ -1,6 +1,6 @@
-import 'package:interference/model.dart';
+import '../Utils/model.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
+import '../home.dart';
 
 bool connectedToNet = false;
 bool shouldConnectToNet = true;
@@ -9,6 +9,7 @@ bool firstQuestionCSA;
 bool finished = false;
 bool isflipped = false;
 bool insufficientData = false;
+bool isOffline = false;
 double wm;
 double hm;
 int battery = 3;
@@ -33,7 +34,8 @@ int nrep,
     ndancer,
     nprogrammer,
     nsports,
-    fcount;
+    fcount,
+    chaar = 0;
 String row, lastrow, lastvalue, value, da, regg, question;
 
 Color primaryColor = new Color(0xff380e7f);
@@ -142,4 +144,83 @@ class GoHomeState extends State<GoHome> {
       ),
     );
   }
+}
+
+Widget noNetwork() {
+  return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: primaryColor,
+          elevation: 0,
+        ),
+      ),
+      body: Stack(children: <Widget>[
+        Container(
+            height: wm * 411,
+            width: hm * 822,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/bgm1.png'),
+                    fit: BoxFit.fitWidth))),
+        Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                height: 240,
+                width: 240,
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: paccentColor,
+                ),
+                child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/facepalm.png"),
+                            fit: BoxFit.contain))),
+              ),
+              Padding(
+                padding: EdgeInsets.all(20),
+              ),
+              Container(
+                height: 44 * hm,
+                width: 280 * wm,
+                color: secondaryColor,
+                child: Text("No NetWork Connection",
+                    textAlign: TextAlign.center,
+                    textScaleFactor: wm,
+                    style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 28,
+                        fontFamily: 'poppins',
+                        fontWeight: FontWeight.w700)),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8),
+              ),
+              Container(
+                width: 300,
+                child: Text(
+                  "Please have a proper Internet Connection to Continue",
+                  textAlign: TextAlign.center,
+                  textScaleFactor: wm,
+                  style: TextStyle(
+                      color: Colors.pink[200],
+                      fontFamily: "poppins",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8),
+              ),
+            ],
+          ),
+        )
+      ]));
 }

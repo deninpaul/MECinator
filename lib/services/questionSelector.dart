@@ -1,8 +1,6 @@
-import 'package:interference/model.dart';
-import 'global.dart';
+import '../Utils/model.dart';
 import 'dart:math';
-
-import 'global.dart';
+import '../Utils/global.dart';
 
 int fleg=0;
 
@@ -70,41 +68,17 @@ initialiser() {
 }
 
 void findrow(){
-  fleg=0;
   int i,j,half=count() ~/ 2, max=1000,c,delta;
-
-  //class
-cA = List<String>();
-for(i=0;i<dataList.length;i++)
-  {
-      c=0;
-      if(ifcA(dataList[i].clas))
-        continue;
-      cA.add(dataList[i].clas);
-      for(j=0;j<dataList.length;j++)
-      {
-        if(dataList[i].clas==dataList[j].clas){
-          c++;
-          //print(dataList[i].hostel);
-      }}
-    delta=(half-c).abs();
-    if(delta<max|| randomFlag())
-    {
-      max=delta;
-      row="clas";
-      value=dataList[i].clas;
-      print("half=$half delta=$delta row=$row value=$value");
-    }
-  }
-
+  //trick18 //don't forget to declare chaar globally (correction 1)
+  chaar=0; 
+  if(row=="insufff")
+    return;
+  //thatsall
+  
   //Hostel
-cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
-      if(ifcA(dataList[i].hostel))
-        continue;
-      cA.add(dataList[i].hostel);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].hostel==dataList[j].hostel){
@@ -112,157 +86,118 @@ cA = List<String>();
           //print(dataList[i].hostel);
       }}
     delta=(half-c).abs();
-    if(delta<=max&&(!present(dataList[i].hostel))&&dataList[i].hostel!="NIL")
+    if(delta<max&&(!present(dataList[i].hostel))&&dataList[i].hostel!="NIL")
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="hostel";
-        value=dataList[i].hostel;
-        print("half=$half delta=$delta row=$row value=$value");
-      }
+      max=delta;
+      row="hostel";
+      value=dataList[i].hostel;
+      print("half=$half delta=$delta row=$row value=$value");
     }
   }
 
   //school
-cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
-      if(ifcA(dataList[i].school))
-        continue;
-      cA.add(dataList[i].school);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].school==dataList[j].school)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&(!present(dataList[i].school))&&dataList[i].school!="NIL"&&nschool!=0)
+    if(delta<max&&(!present(dataList[i].school))&&dataList[i].school!="NIL"&&nschool!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="school";
-        value=dataList[i].school;
-      }
+      max=delta;
+      row="school";
+      value=dataList[i].school;
     }
   }
 
   //gen
-cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
-      if(ifcA(dataList[i].gen))
-        continue;
-      cA.add(dataList[i].gen);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].gen==dataList[j].gen)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&ngen!=0)
+    if(delta<max&&ngen!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="gen";
-        value=dataList[i].gen;
-      }
+      max=delta;
+      row="gen";
+      value=dataList[i].gen;
     }
   }
 
    //region
-cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
-      if(ifcA(dataList[i].region))
-        continue;
-      cA.add(dataList[i].region);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].region==dataList[j].region)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nregion!=0)
+    if(delta<max&&nregion!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="region";
-        value=dataList[i].region;
-      }
-   }
+      max=delta;
+      row="region";
+      value=dataList[i].region;
+    }
   }
 
   //ds
-cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
-      if(ifcA(dataList[i].ds))
-        continue;
-      cA.add(dataList[i].ds);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].ds==dataList[j].ds)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nds!=0)
+    if(delta<max&&nds!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="ds";
-        value=dataList[i].ds;
-      }
+      max=delta;
+      row="ds";
+      value=dataList[i].ds;
     }
   }
-//house
-cA = List<String>();
+//religion
   for(i=0;i<dataList.length;i++)
   {
       c=0;
-      if(ifcA(dataList[i].house))
-        continue;
-      cA.add(dataList[i].house);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].house==dataList[j].house)
           c++;
       }
     delta=(half-c).abs();
-    if( delta<=max && nhouse!=0)
+    if(delta<max&&nhouse!=0)
     {
-      if(delta<max && randomFlag()){
-        max=delta;
-        row="house";
-        value=dataList[i].house;
-      }
+      max=delta;
+      row="house";
+      value=dataList[i].house;
     }
   }
   //rel
-cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
-      if(ifcA(dataList[i].rel))
-        continue;
-      cA.add(dataList[i].rel);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].rel==dataList[j].rel)
           c++;
       }
     delta=(half-c).abs();
-    print("delta of rel:$delta but max rn is $max");
-    if(delta<=max&&nrel!=0)
+    if(delta<max&&nrel!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="rel";
-        value=dataList[i].rel;
-      }
+      max=delta;
+      row="rel";
+      value=dataList[i].rel;
     }
   }
 
@@ -275,13 +210,11 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nrep!=0)
+    if(delta<max&&nrep!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="rep";
-        value="y";
-      }
+      max=delta;
+      row="rep";
+      value="y";
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -290,37 +223,29 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nrep!=0)
+    if(delta<max&&nrep!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="rep";
-        value="n";
-      }
+      max=delta;
+      row="rep";
+      value="n";
     }
   }
 
   //place
-cA = List<String>();
   for(i=0;i<dataList.length;i++)
   {
       c=0;
-      if(ifcA(dataList[i].place))
-        continue;
-      cA.add(dataList[i].place);
       for(j=0;j<dataList.length;j++)
       {
         if(dataList[i].place==dataList[j].place)
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nplace!=0)
+    if(delta<max&&nplace!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="place";
-        value=dataList[i].place;
-      }
+      max=delta;
+      row="place";
+      value=dataList[i].place;
     }
   }
 
@@ -333,13 +258,11 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nspecs!=0)
+    if(delta<max&&nspecs!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="specs";
-        value="y";
-      }
+      max=delta;
+      row="specs";
+      value="y";
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -350,11 +273,9 @@ cA = List<String>();
     delta=(half-c).abs();
     if(delta<max&&nspecs!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="specs";
-        value="n";
-      }
+      max=delta;
+      row="specs";
+      value="n";
     }
   }
 
@@ -367,13 +288,11 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nsinger!=0)
+    if(delta<max&&nsinger!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="singer";
-        value="y";
-      }
+      max=delta;
+      row="singer";
+      value="y";
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -382,13 +301,11 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nsinger!=0)
+    if(delta<max&&nsinger!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="singer";
-        value="n";
-      }
+      max=delta;
+      row="singer";
+      value="n";
     }
   }
 
@@ -401,13 +318,11 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&ndancer!=0)
+    if(delta<max&&ndancer!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="dancer";
-        value="y";
-      }
+      max=delta;
+      row="dancer";
+      value="y";
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -416,13 +331,11 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&ndancer!=0)
+    if(delta<max&&ndancer!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="dancer";
-        value="n";
-      }
+      max=delta;
+      row="dancer";
+      value="n";
     }
   }
 
@@ -435,13 +348,11 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nprogrammer!=0)
+    if(delta<max&&nprogrammer!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="programmer";
-        value="y";
-      }
+      max=delta;
+      row="programmer";
+      value="y";
     }
     c=0;
       for(j=0;j<dataList.length;j++)
@@ -450,57 +361,57 @@ cA = List<String>();
           c++;
       }
     delta=(half-c).abs();
-    if(delta<=max&&nprogrammer!=0)
+    if(delta<max&&nprogrammer!=0)
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="programmer";
-        value="n";
-      }
+      max=delta;
+      row="programmer";
+      value="n";
     }
   }
 
-   //sports
+  //trick18 --- correct this two if statements (correction 2)
+
+  if(max+half==count())
+    while(!trick18())
+      chaar++;
+  if(max==half)
+    while(!trick18())
+      chaar++;
+
+}
+
+//trick18 (correction 3)
+
+bool trick18(){
+  int c,delta,i,j,half=count() ~/ 2, max=1000;
+  for(i=0;i<dataList.length;i++)
   {
       c=0;
       for(j=0;j<dataList.length;j++)
       {
-        if(dataList[j].sports=="y")
+        if(dataList[i].name[chaar]==dataList[j].name[chaar]){
           c++;
-      }
+          //print(dataList[i].hostel);
+      }}
     delta=(half-c).abs();
-    if(delta<=max&&nsports!=0)
+    if(delta<max&&(!present(dataList[i].hostel)))
     {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="sports";
-        value="y";
-      }
-    }
-    c=0;
-      for(j=0;j<dataList.length;j++)
-      {
-        if(dataList[j].sports=="n")
-          c++;
-      }
-    delta=(half-c).abs();
-    if(delta<=max&&nsports!=0)
-    {
-      if(delta<max || randomFlag()){
-        max=delta;
-        row="sports";
-        value="n";
-      }
+      max=delta;
+      row="char";
+      value="${dataList[i].name[chaar]}";
+      print("half=$half delta=$delta row=$row value=$value");
     }
   }
   if(max+half==count())
-    row="insufff";
+    return false;
   if(max==half)
-    row="insufff";
+    return false;
 
-  print("row:$row\nvalue:$value\ndelta:$delta\n");
+  return true;
 
 }
+
+//thatsall
 
 
 
@@ -637,8 +548,25 @@ String otherQuestion(){
   else if (row == "dancer") 
     return "Is $da a good dancer ?";
 
-  else if (row == "sports") 
-    return "Is $da good in sports ?";
+//trick18 (correction 4)
+
+  else if(row=="char")
+    {
+    int jjj=chaar+1;
+    String suffix;
+    if(jjj==1)
+      suffix="st";
+    else if(jjj==2)
+      suffix="nd";
+    else if(jjj==3)
+      suffix="rd";
+    else
+      suffix="th";
+    return "Is the $jjj$suffix letter of person's name $value?";  
+    }
+
+  //thats all
+    
 }
 
 otherQuestionEvaluator(String answer){
@@ -661,19 +589,11 @@ otherQuestionEvaluator(String answer){
     
     if (answer == 'y') {
       ngen = 0;
-      if(value=="M")
-        da="he";
-      else
-        da="she";
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].gen != value) rmp(dataList[i--]);
       }
     } else if (answer == 'n') {
       ngen = 0;
-      if(value=="M")
-        da="she";
-      else
-        da="he";
       for (int i = 0; i < dataList.length; i++) {
         if (dataList[i].gen == value) rmp(dataList[i--]);
       }
@@ -858,22 +778,6 @@ otherQuestionEvaluator(String answer){
     }
   } 
   
-   else if (row == "sports") {
-    if (answer == 'y') {
-      nsports = 0;
-      for (int i = 0; i < dataList.length; i++) {
-        if (dataList[i].sports != 'y') rmp(dataList[i--]);
-      }
-    } else if (answer == 'n') {
-      nrep = 0;
-      for (int i = 0; i < dataList.length; i++) {
-        if (dataList[i].sports == 'y') rmp(dataList[i--]);
-      }
-    } else {
-      nsports = 0;
-    }
-  } 
-
   else if (row == "ds") {
     if (answer == 'y') {
       nds = 0;
@@ -889,6 +793,25 @@ otherQuestionEvaluator(String answer){
       nds = 0;
     }
   }
+
+//trick18  (correction 5)
+
+  else if (row == "char") {
+    if (answer == 'y') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].name[chaar] != value[0]) rmp(dataList[i--]);
+      }
+    } else if (answer == 'n') {
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].name[chaar] == value[0]) rmp(dataList[i--]);
+      }
+    } else {
+      row="insufff";
+    }
+  }
+
+  //thats all
+
   for(int i=0;i<dataList.length;i++){
     print("${dataList[i].name} - ${dataList[i].clas} \n" );
   }

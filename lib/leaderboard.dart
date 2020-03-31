@@ -1,11 +1,37 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'global.dart';
+import 'Utils/global.dart';
+import 'services/connectivity_Handler.dart';
 
-class LeaderBoard extends StatelessWidget {
+class LeaderBoard extends StatefulWidget {
+  @override
+  LeaderBoardState createState() => new LeaderBoardState();
+}
+
+class LeaderBoardState extends State<LeaderBoard> {
+  StreamSubscription _connectionChangeStream;
+  bool isOffline = false;
+
+  @override
+  initState() {
+    super.initState();
+    ConnectionStatusSingleton connectionStatus =
+        ConnectionStatusSingleton.getInstance();
+    _connectionChangeStream =
+        connectionStatus.connectionChange.listen(connectionChanged);
+  }
+
+  void connectionChanged(dynamic hasConnection) {
+    setState(() {
+      isOffline = !hasConnection;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return !isOffline ? Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(0),
@@ -35,7 +61,7 @@ class LeaderBoard extends StatelessWidget {
               ],
             ),
           )
-        ]));
+        ])): noNetwork();
   }
 
   homeButton(BuildContext context) {

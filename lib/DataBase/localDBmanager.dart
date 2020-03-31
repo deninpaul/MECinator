@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
 import 'dart:async';
-import 'package:interference/global.dart';
+import '../Utils/global.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:interference/model.dart';
+import '../Utils/model.dart';
 import 'package:interference/DataBase/database_helper.dart';
 
 dataListImporter() async{
