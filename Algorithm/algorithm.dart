@@ -2,10 +2,8 @@
 import 'dart:math';
 import 'dart:io';
 
-<<<<<<< HEAD:Algorithm/algortihm.dart
 int nrep, nhostel, nplace, nregion, nhouse,nschool, nrel, ngen, nclas, nds, nspecs, nsinger, ndancer, nprogrammer,nsports;
 int fcount, chaar=0;
-=======
 int nrep, nhostel, nplace, nregion, nhouse,nschool, nrel, ngen, nclas, nds, nspecs, nsinger, ndancer, nprogrammer;
 int fcount,chaar=0;
 >>>>>>> c94b762f597c3cba6da5dc9caea33b9f594369b5:Algorithm/algorithm.dart
@@ -81,7 +79,7 @@ print("Person thinking of: ${dataList[0].name}");
 
 
 void addDb() {
-<<<<<<< HEAD:Algorithm/algortihm.dart
+
      addRow("Deon Joshy", "Aneeta", "M", "CSA", "Ernakulam", "n", "T", "christian","St.George HSS", "n", "n", "y", "y", "n", "y");
   addRow("Tom Vempala", "Aneeta", "M", "CSA", "Kottayam", "n", "T", "christian","Kendriya Vidyalaya", "n", "n", "n", "n", "y", "n");
   addRow("Karthika R", "Vimala", "F", "CSA", "Kottayam", "n", "R", "hindu","SFS Public School", "n", "n", "n", "n", "n", "n");
@@ -206,7 +204,6 @@ void addDb() {
   addRow("Maria J Mathew", "NIL", "F", "CSB", "Ernakulam", "n", "R", "christian","Toc H", "y", "n", "n", "n", "n", "y");
   addRow("Reshma J Nair", "NIL", "F", "CSB", "Ernakulam", "n", "A", "hindu","Cochin Refineries School", "y", "n", "n", "n", "n", "n");
    
-=======
 addRow("Deon Joshy", "Aneeta", "M", "CSA", "Ernakulam", "n", "T", "christian","St.George HSS", "n", "n", "y", "y", "n");
     addRow("Tom Vempala", "Aneeta", "M", "CSA", "Kottayam", "n", "T", "christian","Kendriya Vidyalaya", "n", "n", "n", "n", "y");
     addRow("Karthika R", "Vimala", "F", "CSA", "Kottayam", "n", "R", "hindu","SFS Public School", "n", "n", "n", "n", "n");
@@ -320,7 +317,6 @@ addRow("Deon Joshy", "Aneeta", "M", "CSA", "Ernakulam", "n", "T", "christian","S
     addRow("Arti Bhatia","NIL","F","CSA","Ernakulam","n","T","hindu","Kendriya Vidyalaya", "y", "n", "n", "y", "y");
     addRow("Thomas SJ","NIL","M","CSA","Ernakulam","n","R","christian","Saraswathi Vidyanikethan", "y", "y", "n", "n", "n");
 
->>>>>>> c94b762f597c3cba6da5dc9caea33b9f594369b5:Algorithm/algorithm.dart
 }
 
 addRow(name, hostel, gen, clas, place, rep, house, rel, school, ds, specs, singer, dancer, programmer, sports){
@@ -378,16 +374,14 @@ bool present(var x)
 
 void findrow(){
   int i,j,half=count() ~/ 2, max=1000,c,delta;
-<<<<<<< HEAD:Algorithm/algortihm.dart
+
  //trick18 //don't forget to declare chaar globally (correction 1)
-=======
-  //trick18 //don't forget to declare chaar globally (correction 1)
->>>>>>> c94b762f597c3cba6da5dc9caea33b9f594369b5:Algorithm/algorithm.dart
+
   chaar=0; 
   if(row=="insufff")
     return;
   //thatsall
-<<<<<<< HEAD:Algorithm/algortihm.dart
+
 
   //class
 cA = List<String>();
@@ -413,9 +407,6 @@ for(i=0;i<dataList.length;i++)
     }
   }
 
-=======
-  
->>>>>>> c94b762f597c3cba6da5dc9caea33b9f594369b5:Algorithm/algorithm.dart
   //Hostel
   for(i=0;i<dataList.length;i++)
   {
@@ -819,10 +810,7 @@ bool trick18(){
 }
 
 //thatsall
-<<<<<<< HEAD:Algorithm/algortihm.dart
-=======
 
->>>>>>> c94b762f597c3cba6da5dc9caea33b9f594369b5:Algorithm/algorithm.dart
 
 
 String firstQuestion() {
@@ -980,10 +968,6 @@ String otherQuestion(){
     }
 
   //thats all
-<<<<<<< HEAD:Algorithm/algortihm.dart
-=======
-    
->>>>>>> c94b762f597c3cba6da5dc9caea33b9f594369b5:Algorithm/algorithm.dart
 }
 
 otherQuestionEvaluator(String answer){
@@ -1243,12 +1227,12 @@ otherQuestionEvaluator(String answer){
     }
   }
 
-<<<<<<< HEAD:Algorithm/algortihm.dart
-//thats all
 
-=======
+
+
+
   //thats all
->>>>>>> c94b762f597c3cba6da5dc9caea33b9f594369b5:Algorithm/algorithm.dart
+
 
   for(int i=0;i<dataList.length;i++){
     print("${dataList[i].name} - ${dataList[i].clas} \n" );
