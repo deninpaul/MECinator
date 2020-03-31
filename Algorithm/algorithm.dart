@@ -6,7 +6,6 @@ int nrep, nhostel, nplace, nregion, nhouse,nschool, nrel, ngen, nclas, nds, nspe
 int fcount, chaar=0;
 int nrep, nhostel, nplace, nregion, nhouse,nschool, nrel, ngen, nclas, nds, nspecs, nsinger, ndancer, nprogrammer;
 int fcount,chaar=0;
->>>>>>> c94b762f597c3cba6da5dc9caea33b9f594369b5:Algorithm/algorithm.dart
 String row, lastrow, lastvalue, value, da, regg;
 bool firstQuestionCSA;
 
@@ -1226,11 +1225,6 @@ otherQuestionEvaluator(String answer){
       row="insufff";
     }
   }
-
-
-
-
-
   //thats all
 
 
