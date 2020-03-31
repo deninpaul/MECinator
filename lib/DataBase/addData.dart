@@ -75,12 +75,12 @@ addDb(){
   addRow("Pradeesh Nair", "MH", "M", "CSB", "Pathanamthitta", "n", "A", "hindu","Kendriya Vidyalaya", "n", "n", "y", "n", "y", "n", "n" , "n"  , "n" , "y" , "n" , "n" );
   addRow("Anushree Suresh","Nava Jyoti","F","CSA","Bhopal","n","T","hindu","St Joseph's Convent School","n","y","n","y","n", "y", "n" , "y"  , "n" , "n" , "n" , "n" );
   addRow("Vinayak Sidharth", "MH", "M", "CSB", "Kozhikode", "n", "A", "hindu","Rays Public School", "n", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
-  addRow("Kevin Abraham", "Sky Blue", "M", "CSA", "Ernakulam", "n", "R", "christian","Toc H", "n", "y", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
+  addRow("Kevin Abraham", "Sky Blue", "M", "CSA", "Ernakulam", "n", "R", "christian","Chavara", "n", "y", "n", "y", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
 
 
   //DS
 
-  addRow("Goutham R", "NIL", "M", "CSA", "Ernakulam", "n", "R", "hindu","Saraswathi Vidyanikethan", "y", "n", "n", "n", "n", "n", "y" , "n"  , "n" , "n" , "n" , "n" );
+  addRow("Goutham R", "NIL", "M", "CSA", "Kozhikode", "n", "R", "hindu","Saraswathi Vidyanikethan", "y", "n", "n", "n", "n", "n", "y" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Pranav Jayashankar", "NIL", "M", "CSA", "Ernakulam", "n", "R", "hindu","Bhavan's Vidya Mandir", "y", "n", "y", "n", "y", "y", "n" , "n"  , "y" , "n" , "y" , "y" );
   addRow("Noel Eldho", "NIL", "M", "CSA", "Ernakulam", "n", "T", "christian","St Mary's", "y", "y", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Vishruth S", "NIL", "M", "CSA", "Ernakulam", "n", "S", "hindu","Bhavan's Vidya Mandir", "y", "y", "n", "n", "y", "n", "n" , "n"  , "n" , "y" , "n" , "n" );
@@ -90,7 +90,7 @@ addDb(){
   addRow("Hemanth R", "NIL", "M", "CSA", "Ernakulam", "n", "A", "hindu","Bhavan's Vidya Mandir", "y", "y", "n", "n", "y", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Aneetta Mary Sajan", "NIL", "F", "CSA", "Ernakulam", "n", "R", "christian","Navy Children School ", "y", "y", "n", "n", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Muhammed Abnan M S", "NIL", "M", "CSA", "Ernakulam", "n", "T", "muslim","SAPS", "y", "y", "n", "n", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
-  addRow("Alan Phlipose", "NIL", "M", "CSA", "Ernakulam", "n", "R", "christian","RCJPS", "y", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
+  addRow("Alan Philipose", "NIL", "M", "CSA", "Ernakulam", "n", "R", "christian","RCJPS", "y", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Anagha S Menon", "NIL", "F", "CSA", "Ernakulam", "n", "T", "hindu","Chinmaya Vidyalaya", "y", "n", "n", "n", "n", "n", "n" , "n"  , "y" , "n" , "n" , "n" );
   addRow("Elizabeth Mary Mathew", "NIL", "F", "CSA", "Ernakulam", "n", "D", "christian","Chinmaya Vidyalaya", "y", "n", "n", "n", "y", "n", "n" , "n"  , "y" , "y" , "n" , "n" );
   addRow("Ebin Bigi", "NIL", "M", "CSA", "Ernakulam", "n", "T", "christian","Chavara", "y", "y", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
@@ -101,7 +101,7 @@ addDb(){
   addRow("Anitha S Menon", "NIL", "F", "CSA", "Ernakulam", "n", "S", "hindu","Saraswathi Vidyanikethan", "y", "y", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Ashique Ali P S", "NIL", "M", "CSA", "Ernakulam", "n", "D", "muslim","Sacred Heart CMI Public School", "y", "y", "n", "n", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Arjun Sudheer", "NIL", "M", "CSA", "Ernakulam", "n", "T", "hindu","Choice School", "y", "y", "n", "n", "n", "n", "y" , "n"  , "n" , "n" , "n" , "n" );
-  addRow("Jabira Farhath", "NIL", "F", "CSA", "Ernakulam", "n", "D", "muslim","SNDP HSS Aluva", "y", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
+  addRow("Jabira Farhath", "NIL", "F", "CSA", "Ernakulam", "n", "D", "muslim","SNDP HSS", "y", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Diya Naushad", "NIL", "F", "CSA", "Ernakulam", "n", "R", "muslim","Bhavan's Vidya Mandir", "y", "n", "n", "y", "n", "n", "n" , "n"  , "y" , "n" , "n" , "n" );
   addRow("PJ Aravind", "NIL", "M", "CSB", "Ernakulam", "y", "R", "hindu","KE", "y", "n", "n", "n", "n", "n", "y" , "n"  , "n" , "n" , "n" , "y" );
   addRow("Gouri Hariharan", "NIL", "F", "CSB", "Ernakulam", "n", "R", "hindu","Gregorian Public School", "y", "n", "n", "y", "n", "n", "n" , "n"  , "n" , "y" , "n" , "n" );
@@ -111,7 +111,7 @@ addDb(){
   addRow("Adarsh R", "NIL", "M", "CSB", "Ernakulam", "n", "D", "hindu","Kendriya Vidyalaya", "y", "n", "n", "n", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Joseph Dominic Mathew", "NIL", "M", "CSB", "Ernakulam", "y", "R", "christian","St. Joseph's HSS Pulicunnu", "y", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Amith Raveendranath", "NIL", "M", "CSB", "Ernakulam", "n", "R", "hindu","Bhavan's Vidya Mandir", "y", "y", "y", "y", "n", "n", "y" , "y"  , "n" , "n" , "y" , "n" );
-  addRow("Nikhil P S", "NIL", "M", "CSB", "Ernakulam", "n", "S", "hindu","SNDPHSS Udayamperoor", "y", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
+  addRow("Nikhil P S", "NIL", "M", "CSB", "Ernakulam", "n", "S", "hindu","SNDP HSS", "y", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Arjun Sarma", "NIL", "M", "CSB", "Ernakulam", "n", "S", "hindu","Toc H", "y", "n", "y", "y", "n", "y", "n" , "n"  , "n" , "n" , "y" , "n" );
   addRow("Steve Sam Jacob", "NIL", "M", "CSB", "Ernakulam", "n", "R", "christian","RCJPS", "y", "n", "y", "n", "n", "y", "n" , "n"  , "n" , "n" , "y" , "y" );
   addRow("Pranoy Santhosh M", "NIL", "M", "CSB", "Ernakulam", "y", "D", "hindu","Saraswathi Vidyanikethan", "y", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
@@ -137,7 +137,7 @@ addDb(){
   addRow("Maria Rachel Joseph","NIL","F","CSA","Ernakulam","n","D","christian","Toc H","y","n","n","n","n", "n", "y" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Anna Simon","NIL","F","CSA","Ernakulam","n","A","christian","Christ Nagar Higher Secondary school","y","y","n","n","n", "n", "n" , "n"  , "n" , "y" , "n" , "n" );
   addRow("Amal Krishna","NIL","M","CSA","Ernakulam","n","S","hindu","SNDP HSS","y","n","n","n","n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
-  addRow("Megha T","NIL","F","CSA","Ernakulam","n","D","hindu","Chinmaya Vidyalaya Vaduthala","y","n","n","y","n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
+  addRow("Megha T","NIL","F","CSA","Ernakulam","n","D","hindu","Chinmaya Vidyalaya","y","n","n","y","n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Megha Mariam KM","NIL","F","CSA","Ernakulam","n","D","christian","Bhavan's","y","n","n","n","n", "n", "n" , "n"  , "n" , "n" , "y" , "n" );
   addRow("Aadhil Farhan","NIL","M","CSA","Ernakulam","n","A","muslim","Rajagiri","y","n","n","n","n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Indrajith Vijayan", "NIL", "M", "CSB", "Ernakulam", "n", "S", "hindu","MTHSS", "y", "n", "n", "n", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );

@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:interference/DataBase/localDBmanager.dart';
 import 'package:interference/creditsPage.dart';
 import 'package:interference/leaderboard.dart';
@@ -43,146 +45,194 @@ class HomeState extends State<Home> {
     wm = MediaQuery.of(context).size.width / 411;
     hm = MediaQuery.of(context).size.height / 822;
 
-    return !isDownloading
-        ? Scaffold(
-            resizeToAvoidBottomPadding: false,
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(0),
-              child: AppBar(
-                backgroundColor: primaryColor,
-                elevation: 0,
+    return WillPopScope(
+      child: !isDownloading
+          ? Scaffold(
+              resizeToAvoidBottomPadding: false,
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(0),
+                child: AppBar(
+                  backgroundColor: primaryColor,
+                  elevation: 0,
+                ),
               ),
-            ),
-            body: !isOffline
-                ? Stack(children: <Widget>[
-                    Container(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/bgm1.png'),
-                                fit: BoxFit.fitWidth))),
+              body: !isOffline
+                  ? Stack(children: <Widget>[
+                      Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/bgm1.png'),
+                                  fit: BoxFit.fitWidth))),
 
-                    //Body
-                    Align(
-                      alignment: AlignmentDirectional.center,
-                      child: Container(
-                        height: 240 * hm,
-                        width: 320 * wm,
-                        margin: EdgeInsets.only(bottom: 280 * hm),
-                        child: Align(
-                          alignment: AlignmentDirectional.bottomCenter,
-                          child: Container(
-                              height: 280 * hm,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/title.png'),
-                                      fit: BoxFit.fitHeight))),
+                      //Body
+                      Align(
+                        alignment: AlignmentDirectional.center,
+                        child: Container(
+                          height: 240 * hm,
+                          width: 320 * wm,
+                          margin: EdgeInsets.only(bottom: 280 * hm),
+                          child: Align(
+                            alignment: AlignmentDirectional.bottomCenter,
+                            child: Container(
+                                height: 280 * hm,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/title.png'),
+                                        fit: BoxFit.fitHeight))),
+                          ),
                         ),
                       ),
-                    ),
 
-                    //butons
-                    Align(
-                        alignment: AlignmentDirectional.bottomCenter,
-                        child: Container(
-                            height: 360 * hm,
-                            width: 280 * wm,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: <Widget>[
-                                Container(
-                                    height: 80 * hm,
-                                    width: 260 * wm,
-                                    child: RaisedButton(
-                                      color: secondaryColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(24 * wm),
-                                      ),
-                                      child: Text("Play Now",
-                                          textScaleFactor: wm,
-                                          style: TextStyle(
-                                              color: primaryColor,
-                                              fontSize: 28,
-                                              fontFamily: 'poppins',
-                                              fontWeight: FontWeight.w700)),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            SlideLeftRoute(
-                                                page: QuestionGenerator()));
-                                      },
-                                    )),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 8 * hm)),
-                                Container(
-                                    height: 80 * hm,
-                                    width: 260 * wm,
-                                    child: RaisedButton(
-                                      color: paccentColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(24 * wm),
-                                      ),
-                                      child: Text("LeaderBoards",
-                                          textScaleFactor: wm,
-                                          style: TextStyle(
-                                              color: Colors.pink[200],
-                                              fontSize: 26,
-                                              fontWeight: FontWeight.w600,
-                                              fontFamily: 'poppins')),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    LeaderBoard()));
-                                      },
-                                    )),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 8 * hm)),
-                                Container(
-                                    height: 70 * hm,
-                                    width: 260 * wm,
-                                    child: OutlineButton(
-                                      borderSide: BorderSide(
-                                        color: Colors.pink[200],
-                                        width: 3
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(24 * wm),
-                                      ),
-                                      child: Text("Our Team",
-                                          textScaleFactor: wm,
-                                          style: TextStyle(
-                                              color: Colors.pink[200],
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w600,
-                                              fontFamily: 'poppins')),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Credits()));
-                                      },
-                                    ))
-                              ],
-                            ))),
-                  ])
-                : noNetwork(),
-          )
-        : Scaffold(
-            backgroundColor: primaryColor,
-            body: Center(
-              child: CircularProgressIndicator(),
+                      //butons
+                      Align(
+                          alignment: AlignmentDirectional.bottomCenter,
+                          child: Container(
+                              height: 360 * hm,
+                              width: 280 * wm,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  Container(
+                                      height: 80 * hm,
+                                      width: 260 * wm,
+                                      child: RaisedButton(
+                                        color: secondaryColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24 * wm),
+                                        ),
+                                        child: Text("Play Now",
+                                            textScaleFactor: wm,
+                                            style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 28,
+                                                fontFamily: 'poppins',
+                                                fontWeight: FontWeight.w700)),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              SlideLeftRoute(
+                                                  page: QuestionGenerator()));
+                                        },
+                                      )),
+                                  Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 8 * hm)),
+                                  Container(
+                                      height: 80 * hm,
+                                      width: 260 * wm,
+                                      child: RaisedButton(
+                                        color: paccentColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24 * wm),
+                                        ),
+                                        child: Text("LeaderBoards",
+                                            textScaleFactor: wm,
+                                            style: TextStyle(
+                                                color: Colors.pink[200],
+                                                fontSize: 26,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily: 'poppins')),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      LeaderBoard()));
+                                        },
+                                      )),
+                                  Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 8 * hm)),
+                                  Container(
+                                      height: 70 * hm,
+                                      width: 260 * wm,
+                                      child: OutlineButton(
+                                        borderSide: BorderSide(
+                                            color: Colors.pink[200], width: 3),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24 * wm),
+                                        ),
+                                        child: Text("Our Team",
+                                            textScaleFactor: wm,
+                                            style: TextStyle(
+                                                color: Colors.pink[200],
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily: 'poppins')),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Credits()));
+                                        },
+                                      ))
+                                ],
+                              ))),
+                    ])
+                  : noNetwork(),
+            )
+          : Scaffold(
+              backgroundColor: primaryColor,
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
-          );
+      onWillPop: () async {
+        _showDialog(context);
+        return false;
+      },
+    );
+  }
+
+  _showDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              backgroundColor: Colors.pink[200],
+              title: Text(
+                "Are you sure you want to exit the Game ?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 20,
+                    fontFamily: "poppins",
+                    fontWeight: FontWeight.w800),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                    color: Colors.pink[200],
+                    onPressed: () => exit(0),
+                    child: Text(
+                      "Yes",
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 16,
+                          fontFamily: "poppins",
+                          fontWeight: FontWeight.w600),
+                    )),
+                  FlatButton(
+                    color: Colors.pink[200],
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "No",
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 16,
+                          fontFamily: "poppins",
+                          fontWeight: FontWeight.w700),
+                    )),
+              ]);
+        });
   }
 }
