@@ -35,6 +35,12 @@ int nrep,
     nprogrammer,
     nsports,
     fcount,
+    nmusical,
+    nmeme,
+    ncreative,
+    ndrawing,
+    nspeaker,
+    nactor,
     chaar = 0;
 String row, lastrow, lastvalue, value, da, regg, question;
 
@@ -52,7 +58,7 @@ String lowNoSpacedText(String text) {
   return newText;
 }
 
-Widget loadingScreen() {
+Widget loadingScreen({String message = "Loading..."}) {
   return Container(
       color: primaryColor,
       child: Center(
@@ -82,7 +88,10 @@ Widget loadingScreen() {
                       valueColor:
                           AlwaysStoppedAnimation<Color>(Colors.pink[200]))),
               Container(
-                child: Text("  Loading",
+                child: Text("  $message",
+                    maxLines: 2,
+                    textScaleFactor: wm,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.pink[200],
                         fontFamily: 'poppins',
@@ -139,7 +148,7 @@ class GoHomeState extends State<GoHome> {
       resizeToAvoidBottomPadding: false,
       appBar: PreferredSize(child: AppBar(), preferredSize: Size.fromHeight(0)),
       body: Container(
-        child: loadingScreen(),
+        child: loadingScreen(message: "Visit \"Our Team\" Page"),
         color: primaryColor,
       ),
     );

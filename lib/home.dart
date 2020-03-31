@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:interference/DataBase/localDBmanager.dart';
+import 'package:interference/creditsPage.dart';
 import 'package:interference/leaderboard.dart';
 import 'game.dart';
 import 'Utils/global.dart';
@@ -132,6 +133,7 @@ class HomeState extends State<Home> {
                                           style: TextStyle(
                                               color: Colors.pink[200],
                                               fontSize: 26,
+                                              fontWeight: FontWeight.w600,
                                               fontFamily: 'poppins')),
                                       onPressed: () {
                                         Navigator.push(
@@ -139,6 +141,36 @@ class HomeState extends State<Home> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     LeaderBoard()));
+                                      },
+                                    )),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 8 * hm)),
+                                Container(
+                                    height: 70 * hm,
+                                    width: 260 * wm,
+                                    child: OutlineButton(
+                                      borderSide: BorderSide(
+                                        color: Colors.pink[200],
+                                        width: 3
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(24 * wm),
+                                      ),
+                                      child: Text("Our Team",
+                                          textScaleFactor: wm,
+                                          style: TextStyle(
+                                              color: Colors.pink[200],
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: 'poppins')),
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Credits()));
                                       },
                                     ))
                               ],

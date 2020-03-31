@@ -101,7 +101,7 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                                   image: AssetImage('assets/bgm2.png'),
                                   fit: BoxFit.fitWidth))),
                       AnimatedOpacity(
-                        child: loadingScreen(),
+                        child: loadingScreen(message: "Drag the card to answer"),
                         duration: Duration(milliseconds: 400),
                         opacity: !isLoaded2 ? 1 : 0,
                       ),

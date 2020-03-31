@@ -50,6 +50,12 @@ initialiser() {
   nprogrammer = 1;
   nsports = 1;
   nschool = 1;
+  nmusical = 1;
+  nmeme = 1;
+  ncreative =1;
+  ndrawing=1;
+  nspeaker= 1;
+  nactor = 1;
   row = "abc";
   lastrow = "xyz";
   lastvalue = "qwe";
@@ -416,6 +422,174 @@ void findrow() {
     }
   }
 
+  //musical
+  {
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].musical == "y") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && nmusical != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "musical";
+        value = "y";
+      }
+    }
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].musical == "n") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && nmusical != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "musical";
+        value = "n";
+      }
+    }
+  }
+
+   //meme
+  {
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].meme == "y") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && nmeme != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "meme";
+        value = "y";
+      }
+    }
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].meme == "n") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && nmeme != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "meme";
+        value = "n";
+      }
+    }
+  }
+
+  //creative writing
+  {
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].creative == "y") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && ncreative != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "creative";
+        value = "y";
+      }
+    }
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].creative == "n") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && ncreative != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "creative";
+        value = "n";
+      }
+    }
+  }
+
+  //drawing
+  {
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].drawing == "y") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && ndrawing != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "drawing";
+        value = "y";
+      }
+    }
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].drawing == "n") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && ndrawing != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "drawing";
+        value = "n";
+      }
+    }
+  }
+
+ //speaker
+  {
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].speaker == "y") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && nspeaker != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "speaker";
+        value = "y";
+      }
+    }
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].speaker == "n") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && nspeaker != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "speaker";
+        value = "n";
+      }
+    }
+  }
+
+  //actor
+  {
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].actor == "y") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && nactor != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "actor";
+        value = "y";
+      }
+    }
+    c = 0;
+    for (j = 0; j < dataList.length; j++) {
+      if (dataList[j].actor == "n") c++;
+    }
+    delta = (half - c).abs();
+    if (delta <= max && nactor != 0) {
+      if (delta < max || randomFlag()) {
+        max = delta;
+        row = "actor";
+        value = "n";
+      }
+    }
+  }
+
   //trick18 --- correct this two if statements (correction 2)
 
   if (max + half == count()) while (!trick18()) chaar++;
@@ -566,6 +740,18 @@ String otherQuestion() {
     return "Is $da a good dancer ?";
   else if (row == "sports")
     return "Is $da good in sports ?";
+  else if (row == "musical")
+    return "Is $da play any musical instruments ?";
+  else if (row == "meme")
+    return "Is $da a trollan/memer ?";
+  else if (row == "creative")
+    return "Is $da good at creative writing ?";
+  else if (row == "drawing")
+    return "Is $da good at drawing?";
+  else if (row == "speaker")
+    return "Is $da good at public speaking?";
+   else if (row == "actor")
+    return "Is $da a good actor?";
   //trick18 (correction 4)
 
   else if (row == "char") {
@@ -579,7 +765,10 @@ String otherQuestion() {
       suffix = "rd";
     else
       suffix = "th";
-    return "Is the person's names $jjj$suffix letter $value?";
+
+    String letter = value;
+    letter = letter.toUpperCase();
+    return "Is the person's names $jjj$suffix letter $letter?";
   }
 
   //thats all
@@ -788,7 +977,93 @@ otherQuestionEvaluator(String answer) {
     } else {
       nsports = 0;
     }
-  } else if (row == "ds") {
+  } else if (row == "musical") {
+    if (answer == 'y') {
+      nmusical = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].musical != 'y') rmp(dataList[i--]);
+      }
+    } else if (answer == 'n') {
+      nrep = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].musical == 'y') rmp(dataList[i--]);
+      }
+    } else {
+      nmusical = 0;
+    }
+  }else if (row == "meme") {
+    if (answer == 'y') {
+      nmeme = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].meme != 'y') rmp(dataList[i--]);
+      }
+    } else if (answer == 'n') {
+      nrep = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].meme == 'y') rmp(dataList[i--]);
+      }
+    } else {
+      nmeme = 0;
+    }
+  }else if (row == "creative") {
+    if (answer == 'y') {
+      ncreative = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].creative != 'y') rmp(dataList[i--]);
+      }
+    } else if (answer == 'n') {
+      nrep = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].creative == 'y') rmp(dataList[i--]);
+      }
+    } else {
+      ncreative = 0;
+    }
+  }else if (row == "drawing") {
+    if (answer == 'y') {
+      ndrawing = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].drawing != 'y') rmp(dataList[i--]);
+      }
+    } else if (answer == 'n') {
+      nrep = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].drawing == 'y') rmp(dataList[i--]);
+      }
+    } else {
+      ndrawing = 0;
+    }
+  }else if (row == "speaker") {
+    if (answer == 'y') {
+      nspeaker = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].speaker != 'y') rmp(dataList[i--]);
+      }
+    } else if (answer == 'n') {
+      nrep = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].speaker == 'y') rmp(dataList[i--]);
+      }
+    } else {
+      nspeaker = 0;
+    }
+  }else if (row == "actor") {
+    if (answer == 'y') {
+      nactor = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].actor != 'y') rmp(dataList[i--]);
+      }
+    } else if (answer == 'n') {
+      nrep = 0;
+      for (int i = 0; i < dataList.length; i++) {
+        if (dataList[i].actor == 'y') rmp(dataList[i--]);
+      }
+    } else {
+      nactor = 0;
+    }
+  }
+  
+  else if (row == "ds") {
     if (answer == 'y') {
       nds = 0;
       for (int i = 0; i < dataList.length; i++) {

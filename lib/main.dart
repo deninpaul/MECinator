@@ -1,8 +1,4 @@
 import 'dart:io';
-
-import 'package:connectivity/connectivity.dart';
-import 'package:flame/flame.dart';
-import 'DataBase/addData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'DataBase/localDBmanager.dart';
@@ -62,34 +58,19 @@ class MyAppState extends State<MyApp> {
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     return MaterialApp(
-      title: 'Interference',
-      theme: ThemeData(
-          primarySwatch: Colors.pink,
-          primaryColor: primaryColor,
-          scaffoldBackgroundColor: primaryColor),
-      home: !isCheckingforNetwork
-          ?  Home()
-          : Scaffold(
-              backgroundColor: primaryColor,
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
-
-      //Uncomment below for Updating Database
-
-      // home: Scaffold(
-      //   body: Container(
-      //       color: Colors.white,
-      //       child: Center(
-      //         child: RaisedButton(
-      //           onPressed: () => onlineDataBaseHandler(),
-      //           color: Colors.blue,
-      //           child: Text("Update online database"),
-      //         ),
-      //       )),
-      // ),
-    );
+        title: 'Interference',
+        theme: ThemeData(
+            primarySwatch: Colors.pink,
+            primaryColor: primaryColor,
+            scaffoldBackgroundColor: primaryColor),
+        home: !isCheckingforNetwork
+            ? Home()
+            : Scaffold(
+                backgroundColor: primaryColor,
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ));
   }
 
   @override
@@ -99,3 +80,45 @@ class MyAppState extends State<MyApp> {
   }
 }
 
+
+//UNCOMMENT BELOW AND COMMENT ABOVE TO ADD DATA TO FIREBASE SERVER
+
+// import 'package:connectivity/connectivity.dart';
+// import 'package:flame/flame.dart';
+// import 'DataBase/addData.dart';
+
+// void main() {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatefulWidget {
+//   @override
+//   MyAppState createState() => new MyAppState();
+// }
+
+// class MyAppState extends State<MyApp> {
+//    @override
+//   Widget build(BuildContext context) {
+//     SystemChrome.setEnabledSystemUIOverlays([]);
+
+//     return MaterialApp(
+//       title: 'Interference',
+//       theme: ThemeData(
+//           primarySwatch: Colors.pink,
+//           primaryColor: primaryColor,
+//           scaffoldBackgroundColor: primaryColor),
+//  home: Scaffold(
+//         body: Container(
+//             color: Colors.white,
+//             child: Center(
+//               child: RaisedButton(
+//                 onPressed: () => onlineDataBaseHandler(),
+//                 color: Colors.blue,
+//                 child: Text("Update online database"),
+//               ),
+//             )),
+//       ),
+//     );
+//   }
+// }

@@ -31,46 +31,51 @@ class LeaderBoardState extends State<LeaderBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return !isOffline ? Scaffold(
-        resizeToAvoidBottomPadding: false,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: AppBar(
-            backgroundColor: primaryColor,
-            elevation: 0,
-          ),
-        ),
-        body: Stack(children: <Widget>[
-          Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/bgm1.png'),
-                      fit: BoxFit.fitWidth))),
-          homeButton(context),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 8 * wm),
-            child: Column(
-              children: <Widget>[
-                title(),
-                Padding(
-                  padding: EdgeInsets.all(16),
-                ),
-                LeaderBoardList()
-              ],
+    return !isOffline
+        ? Scaffold(
+            resizeToAvoidBottomPadding: false,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar(
+                backgroundColor: primaryColor,
+                elevation: 0,
+              ),
             ),
-          )
-        ])): noNetwork();
+            body: Stack(children: <Widget>[
+              Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/bgm1.png'),
+                          fit: BoxFit.fitWidth))),
+              homeButton(context),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8 * wm),
+                child: Column(
+                  children: <Widget>[
+                    title(),
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                    ),
+                    LeaderBoardList()
+                  ],
+                ),
+              )
+            ]))
+        : noNetwork();
   }
 
   homeButton(BuildContext context) {
-    return IconButton(
+    return Padding(
+      padding: EdgeInsets.only(top:24.0*hm),
+      child: FlatButton(
         onPressed: () {
           Navigator.pop(context);
         },
-        padding: EdgeInsets.fromLTRB(16 * wm, 16 * hm, 8 * wm, 8 * hm),
-        icon: Icon(Icons.arrow_back_ios, size: 42 * wm, color: secondaryColor));
+        child: Icon(Icons.arrow_back_ios, size: 42 * wm, color: Colors.pink[200]),
+      ),
+    );
   }
 
   title() {
@@ -82,7 +87,7 @@ class LeaderBoardState extends State<LeaderBoard> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              color: secondaryColor,
+              color: Colors.pink[200],
               child: Text(
                 "LeaderBoards",
                 textScaleFactor: wm,
@@ -104,7 +109,7 @@ class LeaderBoardState extends State<LeaderBoard> {
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                     fontFamily: 'poppins',
-                    color: secondaryColor),
+                    color: Colors.pink[200]),
               ),
             )
           ],

@@ -288,16 +288,6 @@ class EndScreenState extends State<EndScreen>
     );
   }
 
-  goToHome() async {
-    Navigator.push(
-        context,
-        SlideLeftRoute(
-            page: Scaffold(
-          appBar:
-              PreferredSize(child: AppBar(), preferredSize: Size.fromHeight(0)),
-          body: loadingScreen(),
-        )));
-  }
 
   scoreUpdator() async {
     QuerySnapshot queryresult =
