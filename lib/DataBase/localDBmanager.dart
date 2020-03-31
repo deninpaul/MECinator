@@ -23,7 +23,7 @@ dataListImporter() async{
 }
 
 Future<Null> getDataFromOnline() async {
-  int result;
+  int result=0;
   DatabaseHelper helper = DatabaseHelper();
 
   //checking net connectivity
