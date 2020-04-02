@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:interference/DataBase/localDBmanager.dart';
 import 'package:interference/creditsPage.dart';
 import 'package:interference/leaderboard.dart';
@@ -28,6 +27,7 @@ class HomeState extends State<Home> {
         connectionStatus.connectionChange.listen(connectionChanged);
   }
 
+  //checking connection changes
   void connectionChanged(dynamic hasConnection) async {
     setState(() {
       isOffline = !hasConnection;

@@ -45,51 +45,53 @@ class Person {
       this.speaker,
       this.actor});
 
-  Map<String, dynamic> toMap() {
+  Map<String, String> toMap() {
     return {
-      'name': name,
-      'hostel': hostel,
-      'clas': clas,
-      'gen': gen,
-      'place': place,
-      'rep': rep,
-      'house': house,
-      'rel': rel,
-      'school': school,
-      'ds': ds,
-      'specs': specs,
-      'singer': singer,
-      'dancer': dancer,
-      'programmer': programmer,
-      'sports': sports,
-      'musical': musical,
-      'creative': creative,
-      'drawing': drawing,
-      'speaker': speaker,
-      'actor': actor
+      "name": name,
+      "hostel": hostel,
+      "clas": clas,
+      "gen": gen,
+      "place": place,
+      "rep": rep,
+      "house": house,
+      "ds": ds,
+      "rel": rel,
+      "school": school,
+      "specs": specs,
+      "singer": singer,
+      "dancer": dancer,
+      "programmer": programmer,
+      "sports": sports,
+      "musical": musical,
+      "creative": creative,
+      "drawing": drawing,
+      "speaking": speaker,
+      "actor": actor,
+      "meme": meme
     };
   }
 
   Person.fromMapObject(Map<String, dynamic> map) {
-    this.name = map['name'];
-    this.hostel = map['hostel'];
-    this.gen = map['gen'];
-    this.clas = map['clas'];
-    this.place = map['place'];
-    this.rep = map['rep'];
-    this.house = map['house'];
-    this.ds = map['ds'];
-    this.rel = map['rel'];
-    this.school = map['school'];
-    this.specs = map['specs'];
-    this.singer = map['singer'];
-    this.dancer = map['dancer'];
-    this.programmer = map['programmer'];
-    this.sports = map['sports'];
-    this.musical = map['musical'];
-    this.creative = map['creative'];
-    this.drawing = map['drawing'];
-    this.speaker = map['speaker'];
-    this.actor = map['actor'];
+    this.name = map["name"];
+    this.hostel = map["hostel"];
+    this.gen = map["gen"];
+    this.clas = map["clas"];
+    this.place = map["place"];
+    this.rep = map["rep"];
+    this.house = map["house"];
+    this.ds = map["ds"];
+    this.rel = map["rel"];
+    this.school = map["school"];
+    this.specs = map["specs"];
+    this.singer = map["singer"];
+    this.dancer = map["dancer"];
+    this.programmer = map["programmer"];
+    this.sports = map["sports"];
+    this.musical = map["musical"];
+    this.creative = map["creative"];
+    this.drawing = map["drawing"];
+    // this.speaker = map["speaking"];
+    this.actor = map["actor"];
+    this.meme = map["meme"];
   }
 }

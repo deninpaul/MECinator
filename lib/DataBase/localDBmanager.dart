@@ -1,10 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
+import 'package:http/http.dart';
 import '../Utils/global.dart';
 import 'package:sqflite/sqflite.dart';
 import '../Utils/model.dart';
 import 'package:interference/DataBase/database_helper.dart';
+
+var url = "https://mecinatorapi.herokuapp.com/persons/";
 
 dataListImporter() async{
   dataList = null;
@@ -24,7 +27,6 @@ dataListImporter() async{
 
 Future<Null> getDataFromOnline() async {
   int result=0;
-  DatabaseHelper helper = DatabaseHelper();
 
   //checking net connectivity
   try {
@@ -40,33 +42,20 @@ Future<Null> getDataFromOnline() async {
 
   //trying to import data from OnlineDB to LocalDB
   if (connectedToNet) {
-    QuerySnapshot queryresult =
-        await Firestore.instance.collection('list').getDocuments();
-    print(queryresult.documents.length);
 
+    //requesting api to give data
+    var response = await get(Uri.encodeFull(url), headers: {"Accept":"application/json"});
+    var map = json.decode(response.body);
+    
     //deleting existing data and replacing with new
+    DatabaseHelper helper = DatabaseHelper();
     Database db = await helper.database;
     var deleteresult = await db.delete('dataTable');
     print('Delete Result: $deleteresult');
 
-    //entering
-    for (int i = 0; i < queryresult.documents.length; i++) {
-      Person per = new Person();
-      per.name = queryresult.documents[i].data['name'];
-      per.hostel = queryresult.documents[i].data['hostel'];
-      per.gen = queryresult.documents[i].data['gen'];
-      per.clas = queryresult.documents[i].data['clas'];
-      per.place = queryresult.documents[i].data['place'];
-      per.rep = queryresult.documents[i].data['rep'];
-      per.house = queryresult.documents[i].data['house'];
-      per.ds = queryresult.documents[i].data['ds'];
-      per.rel = queryresult.documents[i].data['rel'];
-      per.school = queryresult.documents[i].data['school'];
-      per.specs = queryresult.documents[i].data['specs'];
-      per.singer = queryresult.documents[i].data['singer'];
-      per.dancer = queryresult.documents[i].data['dancer'];
-      per.programmer = queryresult.documents[i].data['programmer'];
-      per.sports = queryresult.documents[i].data['sports'];
+    //adding to local table
+    for (int i = 0; i < map.length; i++) {
+      Person per = Person.fromMapObject(map[i]);
 
       if (per.place == "Kasargode" ||
           per.place == "Kannur" ||

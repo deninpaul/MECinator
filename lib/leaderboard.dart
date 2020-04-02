@@ -1,7 +1,7 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'Utils/global.dart';
 import 'services/connectivity_Handler.dart';
 
@@ -68,12 +68,13 @@ class LeaderBoardState extends State<LeaderBoard> {
 
   homeButton(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top:24.0*hm),
+      padding: EdgeInsets.only(top: 24.0 * hm),
       child: FlatButton(
         onPressed: () {
           Navigator.pop(context);
         },
-        child: Icon(Icons.arrow_back_ios, size: 42 * wm, color: Colors.pink[200]),
+        child:
+            Icon(Icons.arrow_back_ios, size: 42 * wm, color: Colors.pink[200]),
       ),
     );
   }
@@ -125,7 +126,8 @@ class LeaderBoardList extends StatefulWidget {
 }
 
 class LeaderBoardListState extends State<LeaderBoardList> {
-  Stream snapshot;
+  bool isLoading = true;
+  List<Map<String, dynamic>> dataMap = List<Map<String, dynamic>>();
 
   @override
   void initState() {
@@ -135,89 +137,91 @@ class LeaderBoardListState extends State<LeaderBoardList> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: snapshot,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Container(
-              height: (550) * hm,
-              child: NotificationListener<OverscrollIndicatorNotification>(
-                onNotification: (overscroll) {
-                  overscroll.disallowGlow();
-                  return true;
-                },
-                child: ListView.builder(
-                    itemCount: snapshot.data.documents.length ?? 0,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16 * wm)),
-                        color: Color(0xcc210c45),
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(
-                              24 * wm, 16 * hm, 28 * wm, 16 * hm),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                width: 240 * wm,
-                                child: Text(
-                                  " ${snapshot.data.documents[index].data['name']}",
-                                  overflow: TextOverflow.ellipsis,
+    return !isLoading
+        ? Container(
+            height: (550) * hm,
+            child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (overscroll) {
+                overscroll.disallowGlow();
+                return true;
+              },
+              child: ListView.builder(
+                  itemCount: dataMap.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16 * wm)),
+                      color: Color(0xcc210c45),
+                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(
+                            24 * wm, 16 * hm, 28 * wm, 16 * hm),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              width: 240 * wm,
+                              child: Text(
+                                " ${dataMap[index]["name"]}",
+                                overflow: TextOverflow.ellipsis,
+                                textScaleFactor: wm,
+                                style: TextStyle(
+                                    fontFamily: "poppins",
+                                    fontSize: 22,
+                                    color: Colors.pink[200],
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  height: 40 * hm,
+                                  width: 3,
+                                  margin: EdgeInsets.symmetric(horizontal: 20),
+                                  color: Colors.pink[200],
+                                ),
+                                Text(
+                                  "${dataMap[index]["score"]}",
                                   textScaleFactor: wm,
                                   style: TextStyle(
                                       fontFamily: "poppins",
-                                      fontSize: 22,
+                                      fontSize: 24,
                                       color: Colors.pink[200],
-                                      fontWeight: FontWeight.w500),
+                                      fontWeight: FontWeight.w600),
                                 ),
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Container(
-                                    height: 40 * hm,
-                                    width: 3,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    color: Colors.pink[200],
-                                  ),
-                                  Text(
-                                    "${snapshot.data.documents[index].data['score']}",
-                                    textScaleFactor: wm,
-                                    style: TextStyle(
-                                        fontFamily: "poppins",
-                                        fontSize: 24,
-                                        color: Colors.pink[200],
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                          ],
                         ),
-                      );
-                    }),
-              ),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+                      ),
+                    );
+                  }),
+            ),
+          )
+        : Center(
+            child: CircularProgressIndicator(),
+          );
   }
 
   listRetriever() async {
-    var result = await Firestore.instance
-        .collection('leaderboard')
-        .orderBy('score', descending: true)
-        .getDocuments()
-        .asStream();
+    var url = "https://mecinatorapi.herokuapp.com/leaderboard/";
+    Response response =
+        await get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
+    var map = json.decode(response.body);
+    print("${response.statusCode}.");
+
+    for (int i = 0; i<map.length; i++) {
+      Map<String, dynamic> newValue = {
+        "name": map[i]["name"],
+        "score": map[i]["score"],
+      };
+      dataMap.add(newValue);
+    }
+
     setState(() {
-      snapshot = result;
+      dataMap.sort((a, b) => (b["score"]).compareTo(a["score"]));
+      isLoading = false;
     });
   }
 }

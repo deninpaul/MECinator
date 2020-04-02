@@ -10,8 +10,7 @@ import 'services/connectivity_Handler.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   getDataFromOnline().then((_) async {
-    ConnectionStatusSingleton connectionStatus =
-        ConnectionStatusSingleton.getInstance();
+    ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
     connectionStatus.initialize();
     BGM.attachWidgetBindingListener();
     await BGM.add('bgm.mp3');
@@ -38,21 +37,6 @@ class MyAppState extends State<MyApp> {
     BGM.play(0);
   }
 
-  checkNet() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        setState(() {
-          isOffline = false;
-        });
-      }
-    } on SocketException catch (_) {
-      setState(() {
-        isOffline = true;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -73,52 +57,24 @@ class MyAppState extends State<MyApp> {
               ));
   }
 
+  checkNet() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isOffline = false;
+        });
+      }
+    } on SocketException catch (_) {
+      setState(() {
+        isOffline = true;
+      });
+    }
+  }
+
   @override
   void dispose() async {
     await BGM.stop();
     super.dispose();
   }
 }
-
-
-//UNCOMMENT BELOW AND COMMENT ABOVE TO ADD DATA TO FIREBASE SERVER
-
-// import 'package:connectivity/connectivity.dart';
-// import 'package:flame/flame.dart';
-// import 'DataBase/addData.dart';
-
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatefulWidget {
-//   @override
-//   MyAppState createState() => new MyAppState();
-// }
-
-// class MyAppState extends State<MyApp> {
-//    @override
-//   Widget build(BuildContext context) {
-//     SystemChrome.setEnabledSystemUIOverlays([]);
-
-//     return MaterialApp(
-//       title: 'Interference',
-//       theme: ThemeData(
-//           primarySwatch: Colors.pink,
-//           primaryColor: primaryColor,
-//           scaffoldBackgroundColor: primaryColor),
-//  home: Scaffold(
-//         body: Container(
-//             color: Colors.white,
-//             child: Center(
-//               child: RaisedButton(
-//                 onPressed: () => onlineDataBaseHandler(),
-//                 color: Colors.blue,
-//                 child: Text("Update online database"),
-//               ),
-//             )),
-//       ),
-//     );
-//   }
-// }

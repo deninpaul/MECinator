@@ -23,7 +23,7 @@ class _CreditsState extends State<Credits> {
                 image: DecorationImage(
                     image: AssetImage("assets/bgm1.png"), fit: BoxFit.cover)),
           ),
-          Column(children: <Widget>[
+          ListView(children: <Widget>[
             Container(
                 padding: EdgeInsets.fromLTRB(14 * wm, 24 * hm, 14 * wm, 0),
                 //decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/bgm1.png"), fit: BoxFit.cover)),
@@ -90,7 +90,7 @@ class _CreditsState extends State<Credits> {
                   callToActionButtons(
                       Colors.pink[200], "Buy Us a Drink ", context)
                 ]))
-          ])
+          ]),
         ]));
   }
 }
@@ -194,7 +194,9 @@ _showDialog(BuildContext context) {
                       Icons.content_copy,
                       color: primaryColor,
                     ),
-                    SizedBox(width: 4,),
+                    SizedBox(
+                      width: 4,
+                    ),
                     Text(
                       "Copy",
                       style: TextStyle(
@@ -255,8 +257,7 @@ Widget profile(name, image, dept, url, {col = const Color(0xcc210c45)}) {
                   textScaleFactor: wm,
                   style: TextStyle(
                       color: tertiaryCol,
-                      fontSize: col == Color(0xcc210c45) ?
-                          13: 13,
+                      fontSize: col == Color(0xcc210c45) ? 13 : 13,
                       fontFamily: "poppins",
                       fontWeight: col == Color(0xcc210c45)
                           ? FontWeight.w500

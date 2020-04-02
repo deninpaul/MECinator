@@ -36,7 +36,7 @@ class DatabaseHelper {
 
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        'CREATE TABLE dataTable (name TEXT, hostel TEXT, clas TEXT, gen TEXT, place TEXT, rep TEXT,house TEXT, region TEXT, ds TEXT, rel TEXT, school TEXT, specs TEXT, singer TEXT, dancer TEXT, programmer TEXT, sports TEXT, musical TEXT, meme TEXT, creative TEXT, drawing TEXT, speaker TEXT, actor TEXT)');
+        'CREATE TABLE dataTable (name TEXT, hostel TEXT, clas TEXT, gen TEXT, place TEXT, rep TEXT,house TEXT, region TEXT, ds TEXT, rel TEXT, school TEXT, specs TEXT, singer TEXT, dancer TEXT, programmer TEXT, sports TEXT, musical TEXT, meme TEXT, creative TEXT, drawing TEXT, speaking TEXT, actor TEXT)');
   }
 
   Future<List<Map<String, dynamic>>> getDataMapList() async {

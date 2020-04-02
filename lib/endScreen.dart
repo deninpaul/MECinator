@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:scratcher/scratcher.dart';
@@ -10,6 +10,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'game.dart';
 import 'Utils/global.dart';
 import 'services/connectivity_Handler.dart';
+
+import 'package:http/http.dart';
+
+var url = "https://mecinatorapi.herokuapp.com/leaderboard/";
+int count = 1;
 
 class EndScreen extends StatefulWidget {
   @override
@@ -23,7 +28,6 @@ class EndScreenState extends State<EndScreen>
   Animation _animation;
   AnimationStatus _animationStatus = AnimationStatus.dismissed;
   bool isScratchOver = false;
-  QuerySnapshot leaderboardSnap;
   StreamSubscription _connectionChangeStream;
 
   @protected
@@ -288,24 +292,24 @@ class EndScreenState extends State<EndScreen>
     );
   }
 
-
   scoreUpdator() async {
-    QuerySnapshot queryresult =
-        await Firestore.instance.collection('leaderboard').getDocuments();
+    var response =
+        await get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
+    var map = json.decode(response.body);
 
-    for (int i = 0; i < queryresult.documents.length; i++) {
-      if (queryresult.documents[i].data['name'] == dataList[0].name) {
+    for (int i = 0; i < map.length; i++) {
+      if (map[i]["name"] == dataList[0].name) {
         //Checking user did this before
         var result = await localDataBaseCheck() ?? 1;
         if (result == 0) return 0;
         //updating to firebase collection
-        var score = queryresult.documents[i].data['score'];
+        var score = map[i]["score"];
         if (score != null) {
           Map<String, dynamic> newValues = {
-            'name': queryresult.documents[i].data['name'],
-            'score': score + 1
+            "name": map[i]["name"],
+            "score": score + 1
           };
-          updateLeaderBoard(queryresult.documents[i].documentID, newValues);
+          updateLeaderBoard(map[i]["id"], newValues);
           return 0;
         }
       }
@@ -313,9 +317,9 @@ class EndScreenState extends State<EndScreen>
 
     var result = await localDataBaseCheck() ?? 1;
     if (result == 0) return 0;
-    //adding to firebase collection
-    Map<String, dynamic> newValues = {'name': dataList[0].name, 'score': 1};
-    createLeaderBoard(newValues);
+    //adding to leaderboardDB
+    Map<String, dynamic> newMap = {"name": dataList[0].name, "score": 1};
+    createLeaderBoard(newMap);
     return 0;
   }
 
@@ -343,19 +347,26 @@ class EndScreenState extends State<EndScreen>
     }
   }
 
-  updateLeaderBoard(selectedDoc, newValues) {
-    return Firestore.instance
-        .collection('leaderboard')
-        .document(selectedDoc)
-        .updateData(newValues)
-        .catchError((e) {
-      print(e);
-    });
+  updateLeaderBoard(id, newValues) async{
+    var response = await put(
+      "$url$id/",
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(newValues),
+    );
+    print('Response status: ${response.statusCode}. Updated Score');
   }
+  
 
-  createLeaderBoard(entryJson) {
-    Firestore.instance.collection('leaderboard').add(entryJson).catchError((e) {
-      print(e);
-    });
+  createLeaderBoard(entryJson) async {
+    var response = await post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(entryJson),
+    );
+    print('Response status: ${response.reasonPhrase}. Updated Score');
   }
 }

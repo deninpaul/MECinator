@@ -1,23 +1,23 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+import 'package:http/http.dart';
 import '../Utils/model.dart';
 import 'dart:async';
 
-int count=1; int errors=1;
+var url = "https://mecinatorapi.herokuapp.com/persons/";
+int count = 1;
 
-onlineDataBaseHandler() async{
-  count=1;
-  print("Started");
-  await addDb();
-  print("Succesfully Added $count entries");
-  return 0;
+main(List<String> args) async{
+  deleteAll().then((_){
+    addDb();
+  }
+  );
 }
 
+addDb() async{
+  print("Started");
 
-bool noerrors = true;
-
-addDb(){
   //Hostelers
- addRow("Deon Joshy", "Aneeta", "M", "CSA", "Ernakulam", "n", "T", "christian","St.George HSS", "n", "n", "y", "y", "n", "y", "n" , "n"  , "n" , "n" , "n" , "y" );
+  addRow("Deon Joshy", "Aneeta", "M", "CSA", "Ernakulam", "n", "T", "christian","St.George HSS", "n", "n", "y", "y", "n", "y", "n" , "n"  , "n" , "n" , "n" , "y" );
   addRow("Tom Vempala", "Aneeta", "M", "CSA", "Kottayam", "n", "T", "christian","Kendriya Vidyalaya", "n", "n", "n", "n", "y", "n", "n" , "y"  , "n" , "n" , "n" , "n" );
   addRow("Karthika R", "Vimala", "F", "CSA", "Kottayam", "n", "R", "hindu","SFS Public School", "n", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Poorab Shenoy", "MH", "M", "CSA", "Kannur", "n", "A", "hindu","Chinmaya Vidyalaya", "n", "n", "n", "n", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
@@ -39,8 +39,8 @@ addDb(){
   addRow("Tiss Joseph", "YMCA", "F", "CSB", "Kottayam", "n", "D", "christian","Placid", "n", "n", "n", "y", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Anjali Rajendran ", "Udaya", "F", "CSA", "Kannur", "n", "D", "hindu","Chavara", "n", "n", "n", "n", "n", "n", "y" , "n"  , "y" , "n" , "y" , "y" );
   addRow("Shweta Jayan", "YMCA", "F", "CSA", "Thiruvananthapuram", "y", "T", "hindu","St. Thomas", "n", "n", "y", "y", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
-  addRow("Arun Sojan", "Some other PG", "M", "CSB", "Kottayam", "n", "S", "christian","Good Shepherd", "n", "y", "n", "n", "y", "n", "n" , "n"  , "y" , "n" , "n" , "n" );
-  addRow("Anjali Parapattu", "YMCA", "F", "CSB", "Ernakulam", "n", "A", "christian","Mar Athanasius", "n", "n", "n", "n", "n", "n", "n" , "n"  , "y" , "n" , "y" , "n" );
+  addRow("Arun Sojan", "NIL", "M", "CSB", "Kottayam", "n", "S", "christian","Good Shepherd", "n", "y", "n", "n", "y", "n", "n" , "n"  , "y" , "n" , "n" , "n" );
+  addRow("Anjali Parapattu", "YMCA", "F", "CSB", "Ernakulam", "n", "A", "christian","Mar Athanasius", "y", "n", "n", "n", "n", "n", "n" , "n"  , "y" , "n" , "y" , "n" );
   addRow("Bharath Raj R", "Shamla", "M", "CSA", "Kollam", "n", "S", "hindu","SAPS", "n", "y", "y", "n", "n", "n", "y" , "n"  , "n" , "y" , "n" , "n" );
   addRow("Denin Paul", "Aneeta", "M", "CSB", "Thrissur", "n", "T", "christian","CMI", "n", "y", "n", "n", "y", "n", "n" , "y"  , "y" , "n" , "n" , "n" );
   addRow("George Sabu", "Aneeta", "M", "CSB", "Kottayam", "n", "T", "christian","Kendriya Vidyalaya", "n", "n", "n", "n", "y", "y", "n" , "y"  , "n" , "n" , "n" , "n" );
@@ -84,7 +84,7 @@ addDb(){
   addRow("Pranav Jayashankar", "NIL", "M", "CSA", "Ernakulam", "n", "R", "hindu","Bhavan's Vidya Mandir", "y", "n", "y", "n", "y", "y", "n" , "n"  , "y" , "n" , "y" , "y" );
   addRow("Noel Eldho", "NIL", "M", "CSA", "Ernakulam", "n", "T", "christian","St Mary's", "y", "y", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Vishruth S", "NIL", "M", "CSA", "Ernakulam", "n", "S", "hindu","Bhavan's Vidya Mandir", "y", "y", "n", "n", "y", "n", "n" , "n"  , "n" , "y" , "n" , "n" );
-  addRow("Joel Joseph Jude", "NIL", "M", "CSA", "Ernakulam", "n", "T", "christian","St Sebastian's hss, palluruthi", "y", "n", "n", "n", "n", "y", "y" , "n"  , "n" , "y" , "y" , "n" );
+  addRow("Joel Joseph Jude", "NIL", "M", "CSA", "Ernakulam", "n", "T", "christian","St Sebastian's HSS", "y", "n", "n", "n", "n", "y", "y" , "n"  , "n" , "y" , "y" , "n" );
   addRow("Gokul Sagar", "NIL", "M", "CSA", "Ernakulam", "n", "T", "hindu","KE", "y", "n", "n", "n", "n", "n", "n" , "y"  , "n" , "n" , "n" , "n" );
   addRow("Khushi Shah", "NIL", "F", "CSA", "Gujarat", "n", "S", "hindu","Navy Children School", "y", "n", "n", "n", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Hemanth R", "NIL", "M", "CSA", "Ernakulam", "n", "A", "hindu","Bhavan's Vidya Mandir", "y", "y", "n", "n", "y", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
@@ -134,7 +134,7 @@ addDb(){
   addRow("Arti Bhatia","NIL","F","CSA","Haryana","n","T","hindu","Kendriya Vidyalaya", "y", "n", "n", "y", "y", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Thomas SJ","NIL","M","CSA","Ernakulam","n","R","christian","Saraswathi Vidyanikethan", "y", "y", "n", "n", "n", "n", "y" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Aneeta Mary Sajan","NIL","F","CSA","Ernakulam","n","R","christian","Navy Children School","y","y","n","n","y", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
-  addRow("Maria Rachel Joseph","NIL","F","CSA","Ernakulam","n","D","christian","Toc H","y","n","n","n","n", "n", "y" , "n"  , "n" , "n" , "n" , "n" );
+  addRow("Maria Rachel Joseph","NIL","F","CSA","Ernakulam","n","D","christian","Toc H","y","n","n","n","n", "n", "y" , "n"  , "n" , "n" , "y" , "n" );
   addRow("Anna Simon","NIL","F","CSA","Ernakulam","n","A","christian","Christ Nagar Higher Secondary school","y","y","n","n","n", "n", "n" , "n"  , "n" , "y" , "n" , "n" );
   addRow("Amal Krishna","NIL","M","CSA","Ernakulam","n","S","hindu","SNDP HSS","y","n","n","n","n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Megha T","NIL","F","CSA","Ernakulam","n","D","hindu","Chinmaya Vidyalaya","y","n","n","y","n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
@@ -148,24 +148,40 @@ addDb(){
 } 
 
 
-Future<void> addRow(String name, String hostel, String gen, String clas, String place, String rep, String house, String rel, String school, String ds, String specs, String singer, String dancer, String programmer,String sports, String musical, String meme, String creative , String drawing, String speaker, String actor) async{
-  int temp=errors;
+addRow(String name, String hostel, String gen, String clas, String place, String rep, String house, String rel, String school, String ds, String specs, String singer, String dancer, String programmer,String sports, String musical, String meme, String creative , String drawing, String speaker, String actor) async {
   Person entry = Person(name: name, hostel: hostel, gen: gen, clas: clas, place: place, rep: rep, house:  house,rel:  rel,school:  school, ds: ds, specs: specs,singer:  singer,dancer:  dancer, programmer: programmer, sports: sports, musical: musical, meme: meme, creative: creative , drawing: drawing, speaker: speaker, actor: actor);
   var entryJson = entry.toMap();
-  Firestore.instance.collection('list').add(entryJson).catchError((e){
-    print(e);
-    errors ++;
-  }).then((_){
-    if(temp==errors) print("Added Entry: $count");
-    count++;
-  });
-  
+  Response response = await addtoDb(entryJson);
+  print('Response status: ${response.reasonPhrase}. Added Entry: ${count++}');
 }
 
-Future<void> deleteCollection() async{
-    Firestore.instance.collection('list').getDocuments().then((snapshot) {
-    for(DocumentSnapshot doc in snapshot.documents){
-      doc.reference.delete();
-    }
-  });
+Future<Response> addtoDb(Map<String,String> json){
+  return post(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(json),
+  );
+}
+
+
+deleteAll() async{
+List<int> ids = List<int> ();
+var response = await get(Uri.encodeFull(url), headers: {"Accept":"application/json"});
+var map = json.decode(response.body);
+
+for(int i=0;i<map.length;i++){
+  ids.add(map[i]["id"]);
+}
+for(int i=0;i<map.length;i++){
+  deleteRowFromDB(ids, i);
+}
+
+count =1;
+}
+
+deleteRowFromDB(List<int> ids, int i) async{
+  Response response = await delete("$url${ids[i]}/");
+  print("${response.statusCode}. Deleted Entry no: ${count++}");
 }
