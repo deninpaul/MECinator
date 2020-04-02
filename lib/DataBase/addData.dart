@@ -8,9 +8,12 @@ int count = 1;
 
 main(List<String> args) async{
   deleteAll().then((_){
-    addDb();
+    Future.delayed(Duration(seconds: 10)).then((_){
+      addDb();
+      }
+    );
   }
-  );
+);
 }
 
 addDb() async{
@@ -45,7 +48,7 @@ addDb() async{
   addRow("Denin Paul", "Aneeta", "M", "CSB", "Thrissur", "n", "T", "christian","CMI", "n", "y", "n", "n", "y", "n", "n" , "y"  , "y" , "n" , "n" , "n" );
   addRow("George Sabu", "Aneeta", "M", "CSB", "Kottayam", "n", "T", "christian","Kendriya Vidyalaya", "n", "n", "n", "n", "y", "y", "n" , "y"  , "n" , "n" , "n" , "n" );
   addRow("Abiram P", "Some other PG", "M", "CSB", "Kozhikode", "n", "A", "hindu","St Thomas", "n", "n", "n", "n", "n", "n", "n" , "n"  , "y" , "n" , "n" , "n" );
-  addRow("Joel Joshua", "MH", "M", "CSA", "Kasargode", "n", "A", "christian", "Chavara", "n", "y", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
+  addRow("Joel Joshua", "MH", "M", "CSA", "Kasargode", "n", "A", "christian", "Chavara", "n", "y", "n", "n", "n", "n", "n" , "n" , "n" , "n" , "n" , "n" );
   addRow("Neeraj Hari", "Some other PG", "M", "CSA", "Alapuzha", "n", "T", "hindu","Kendriya Vidyalaya", "n", "y", "n", "n", "y", "n", "y" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Akhil Prem", "Some other PG", "M", "CSB", "Kannur", "y", "D", "hindu","Bharatiya Vidya Bhavan", "n", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Jomey J James", "MH", "M", "CSB", "Thiruvananthapuram", "n", "A", "christian","KE", "n", "y", "n", "n", "n", "y", "n" , "n"  , "n" , "n" , "n" , "n" );
@@ -77,9 +80,7 @@ addDb() async{
   addRow("Vinayak Sidharth", "MH", "M", "CSB", "Kozhikode", "n", "A", "hindu","Rays Public School", "n", "n", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Kevin Abraham", "Sky Blue", "M", "CSA", "Ernakulam", "n", "R", "christian","Chavara", "n", "y", "n", "y", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
 
-
   //DS
-
   addRow("Goutham R", "NIL", "M", "CSA", "Kozhikode", "n", "R", "hindu","Saraswathi Vidyanikethan", "y", "n", "n", "n", "n", "n", "y" , "n"  , "n" , "n" , "n" , "n" );
   addRow("Pranav Jayashankar", "NIL", "M", "CSA", "Ernakulam", "n", "R", "hindu","Bhavan's Vidya Mandir", "y", "n", "y", "n", "y", "y", "n" , "n"  , "y" , "n" , "y" , "y" );
   addRow("Noel Eldho", "NIL", "M", "CSA", "Ernakulam", "n", "T", "christian","St Mary's", "y", "y", "n", "n", "n", "n", "n" , "n"  , "n" , "n" , "n" , "n" );
@@ -152,7 +153,7 @@ addRow(String name, String hostel, String gen, String clas, String place, String
   Person entry = Person(name: name, hostel: hostel, gen: gen, clas: clas, place: place, rep: rep, house:  house,rel:  rel,school:  school, ds: ds, specs: specs,singer:  singer,dancer:  dancer, programmer: programmer, sports: sports, musical: musical, meme: meme, creative: creative , drawing: drawing, speaker: speaker, actor: actor);
   var entryJson = entry.toMap();
   Response response = await addtoDb(entryJson);
-  print('Response status: ${response.reasonPhrase}. Added Entry: ${count++}');
+  print('Response status: ${response.reasonPhrase}. Added Entry: ${count++}. $name');
 }
 
 Future<Response> addtoDb(Map<String,String> json){

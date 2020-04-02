@@ -337,7 +337,7 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                   (BuildContext context, List<String> incoming, List rejected) {
                 return Container(
                     width: 300 * wm,
-                    height: 78 * hm,
+                    height: 90 * hm,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage('assets/dontknow.png'),
@@ -369,6 +369,11 @@ class QuestionGeneratorState extends State<QuestionGenerator> {
                       insufficientData = true;
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => EndScreen()));
+                    } else if(currentQuestion == "Is $da a $regg ?"){
+                        dataList[0] = rithasha;
+                        print("You guessed ${dataList[0].name}");   
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => EndScreen()));
                     }
                   } else {
                     question = dataList[0].name;
@@ -466,6 +471,8 @@ class QuestionCardState extends State<QuestionCard>
         question = firstQuestion();
         print(question);
       }
+
+      currentQuestion = question;
     });
 
     _animationController =

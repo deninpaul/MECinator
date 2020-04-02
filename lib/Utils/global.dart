@@ -13,6 +13,7 @@ bool isOffline = false;
 double wm;
 double hm;
 int battery = 3;
+String currentQuestion;
 
 List<Person> dataList;
 List<String> idk;
@@ -233,3 +234,7 @@ Widget noNetwork() {
         )
       ]));
 }
+
+
+//Easter Eggs
+Person rithasha = Person(name: "Ritasha Flemys");
