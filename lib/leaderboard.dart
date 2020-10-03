@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'Utils/global.dart';
 import 'services/connectivity_Handler.dart';
 
@@ -148,6 +149,7 @@ class LeaderBoardListState extends State<LeaderBoardList> {
               child: ListView.builder(
                   itemCount: dataMap.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
+                    String imageUrl = lowNoSpacedText(dataMap[index]["name"]);
                     return Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16 * wm)),
@@ -160,8 +162,35 @@ class LeaderBoardListState extends State<LeaderBoardList> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
+                            CircleAvatar(
+                              backgroundColor: primaryColor,
+                              maxRadius: 22 * wm,
+                              child: CircleAvatar(
+                                backgroundColor: primaryColor,
+                                maxRadius: 20 * wm,
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      "https://projectinterference.000webhostapp.com/$imageUrl.jpeg",
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      new Icon(
+                                    Icons.person_outline,
+                                    size: 80,
+                                  ),
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover)),
+                                  ),
+                                ),
+                              ),
+                            ),
                             Container(
-                              width: 240 * wm,
+                              width: 210 * wm,
                               child: Text(
                                 " ${dataMap[index]["name"]}",
                                 overflow: TextOverflow.ellipsis,
@@ -211,7 +240,7 @@ class LeaderBoardListState extends State<LeaderBoardList> {
     var map = json.decode(response.body);
     print("${response.statusCode}.");
 
-    for (int i = 0; i<map.length; i++) {
+    for (int i = 0; i < map.length; i++) {
       Map<String, dynamic> newValue = {
         "name": map[i]["name"],
         "score": map[i]["score"],
