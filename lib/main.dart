@@ -8,13 +8,13 @@ import 'services/bgm.dart';
 import 'home.dart';
 import 'services/connectivity_Handler.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ConnectionStatusSingleton connectionStatus =
       ConnectionStatusSingleton.getInstance();
   connectionStatus.initialize();
   BGM.attachWidgetBindingListener();
-  BGM.add('bgm.mp3');
+  await BGM.add('bgm.mp3');
   runApp(MyApp());
 }
 
