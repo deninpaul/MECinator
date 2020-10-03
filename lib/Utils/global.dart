@@ -18,7 +18,6 @@ String currentQuestion;
 List<Person> dataList;
 List<String> idk;
 List<String> cA;
-String player = "Denin";
 
 int nrep,
     nhostel,
@@ -234,7 +233,6 @@ Widget noNetwork() {
         )
       ]));
 }
-
 
 //Easter Eggs
 Person rithasha = Person(name: "Ritasha Flemys");
