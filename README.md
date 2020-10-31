@@ -8,30 +8,30 @@ Akinator, except it's just of the Computer Science students of the 2023 batch, M
 
 ## Home Page
 
-<img src="./screenshots/homeScreen.png" alt="Home Screen">
+![Home Screen](screenshots/homeScreen.png)
 <br/>
 
 ## Game Page
 
-<img src="./screenshots/gameScreen.png" alt="Game Screen">
+![Game Screen](screenshots/gameScreen.png)
 <br/>
 
 ## Answer Page
 
-<img src="./screenshots/answerScreen.png" alt="Answer Screen">
+![Answer Screen](screenshots/answerScreen.png)
 <br/>
 
 ## Leaderboards page
 
-<img src="./screenshots/leaderboards.png" alt="Leaderboards Screen">
+![Leaderboards Screen](screenshots/leaderboards.png)
 <br/>
 
 ## Loading Screen
 
-<img src="./screenshots/loading-screen.png" alt="Loading Screen">
+![Loading Screen](screenshots/loading-screen.png)
 <br/>
 
 ## Team Page
 
-<img src="./screenshots/teamPage.png" alt="Team Page">
+![Team Page](screenshots/teamPage.png)
 <br/>
