@@ -1,37 +1,38 @@
 # MECinator
 
-Akinator, except its just of the Computer Science students from 2023 batch - MEC
-
-## Screenshots
+Akinator, except it's just of the Computer Science students of the 2023 batch, MEC
 
 <hr/>
 
-## Home Page
+## Screenshots:
 
-![Home Screen](screenshots/homeScreen.png)
+
+### Home Page
+
+<img src="screenshots/homeScreen.png" alt="Home Screen" width="250" >
 <br/>
 
-## Game Page
+### Game Page
 
-![Game Screen](screenshots/gameScreen.png)
+<img src="screenshots/gameScreen.png" alt="Game Screen" width="250">
 <br/>
 
-## Answer Page
+### Answer Page
 
-![Answer Screen](screenshots/answerScreen.png)
+<img src="screenshots/answerScreen.png" alt="Answer Screen" width="250">
 <br/>
 
-## Leaderboards page
+### Leaderboards page
 
-![Leaderboards Screen](screenshots/leaderboards.png)
+<img src="screenshots/leaderboards.png" alt="Leaderboards Screen" width="250">
 <br/>
 
-## Loading Screen
+### Loading Screen
 
-![Loading Screen](screenshots/loading-screen.png)
+<img src="screenshots/loading-screen.png" alt="Loading Screen" width="250">
 <br/>
 
-## Team Page
+### Team Page
 
-![Team Page](screenshots/teamPage.png)
+<img src="screenshots/teamPage.png" alt="Team Page" width="250">
 <br/>
