@@ -1,6 +1,6 @@
 # MECinator
 
-Akinator, except its just of the Computer Science students from 2023 batch, MEC
+Akinator, except its just the Computer Science students from 2023 batch, MEC. Made with ❤ using Flutter and Django
 
 ## Screenshots:
 
