@@ -1,6 +1,6 @@
 # MECinator
 
-Akinator, except it's just of the Computer Science students of the 2023 batch, MEC
+Akinator, except it's just of the Computer Science students from 2023 batch - MEC
 
 ## Screenshots
 
