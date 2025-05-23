@@ -4,76 +4,16 @@ Akinator, except its just the Computer Science students from 2023 batch, MEC. Ma
 
 ## Screenshots:
 
-<div style="display: flex; flex-wrap: wrap;">
-  <div style="margin-right: 30px">
-  <h3>Home Page</h3>
+### App Walkthrough
 
-<img
-    src="screenshots/homeScreen.png"
-    alt="Home Screen"
-    width="350"
-    height="650"
-  />
+> https://github.com/user-attachments/assets/30ae7fa8-235f-410b-a45a-506cfb684edc
 
-  </div>
 
-  <div style="margin-right: 30px">
-  <h3>Game Page</h3>
 
-<img
-    src="screenshots/gameScreen.png"
-    alt="Game Screen"
-    width="350"
-    height="650"
-  />
+### Gameplay screens
 
-  </div>
+![Frame 8](https://github.com/user-attachments/assets/ba736daa-4160-4c13-8964-bf5401333152)
 
-  <div style="margin-right: 30px">
-  <h3>Answer Page</h3>
+### Other screens
 
-<img
-    src="screenshots/answerScreen.png"
-    alt="Answer Screen"
-    width="350"
-    height="650"
-  />
-
-  </div>
-
-  <div style="margin-right: 30px">
-  <h3>Leaderboards</h3>
-
-<img
-    src="screenshots/leaderboards.png"
-    alt="Leaderboards Screen"
-    width="350"
-    height="650"
-  />
-
-  </div>
-
-  <div style="margin-right: 30px">
-  <h3>Loading Screen</h3>
-
-<img
-    src="screenshots/loading-screen.png"
-    alt="Loading Screen"
-    width="350"
-    height="650"
-  />
-
-  </div>
-
-  <div style="margin-right: 30px">
-  <h3>Team Page</h3>
-
-<img
-    src="screenshots/teamPage.png"
-    alt="Team Page"
-    width="350"
-    height="650"
-  />
-
-  </div>
-</div>
+![Frame 9](https://github.com/user-attachments/assets/af30cb30-82d6-4974-8266-6af8b4593bae)
